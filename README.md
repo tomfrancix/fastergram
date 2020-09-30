@@ -1,7 +1,7 @@
 # VortexApp2
 A new version that I am working on with PHP.
 
-I was asked in an interview how to build instagram. I thought I would try it properly.
+I was asked in an interview how to build instagram. I thought I would try it properly. (and modestly haha - a small scale version))
 
 The best social media project I have done so far was Streamnote - but too many features made it far too complex.
 
