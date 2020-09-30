@@ -24,7 +24,7 @@
                 <a href="camera.php" ><span class="glyphicon glyphicon-camera"></span></a>
             </div>
             <div style="width:25%;text-align:center;float:left;">
-                <a href="profile.php" ><span class="glyphicon glyphicon-user"></span></a>
+                <a href="admin/index.php" ><span class="glyphicon glyphicon-user"></span></a>
             </div>
 </div> 
     <!-- /.container -->

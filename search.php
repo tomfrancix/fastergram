@@ -39,9 +39,9 @@ include "includes/navigation.php";
                 <!-- First Blog Post -->
                 
                         
-                            <div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;">
-                                <img src="images/artdog.jpg" style="min-width:100%;min-height:100%;max-width:100%;">
-                            </div>
+                            <a href="post.php?id=<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;background-image:url('images/<?php echo $content_image; ?>');background-size:cover;">
+                               
+                            </div></a>
                        
                         
                     

@@ -1,5 +1,7 @@
-
+<?php ob_start(); ?>
+<?php include "../includes/db.php"; ?>
 <?php include "functions.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +16,14 @@
     <title>Vortex</title>
 
     <!-- Bootstrap Core CSS -->
-<!--    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="./css/blog-home.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="/admin/css/sb-adminstyle.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,4 +34,5 @@
 
 </head>
 
-<body style="height:95vh;width:100vw;overflow-x:hidden;margin-top:-25px;">
+<body>
+    <div id="wrapper">
