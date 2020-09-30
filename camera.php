@@ -21,6 +21,9 @@ include "includes/navigation.php";
         <button class="btn btn-default" style="color:black;width:80%;padding:25px 10px 25px 0;" onclick="download()">Stop <i style="color:red" class="glyphicon glyphicon-stop"></i></button>
     </div>
  </div>
+        <div class="row" style="padding:20px;">
+            <a class="btn btn-info" href="admin/posts.php?source=add_post">Upload from device...</a>
+        </div>
 
                     </div>
                 

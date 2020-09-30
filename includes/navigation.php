@@ -1,9 +1,9 @@
  <div class="nav-wrapper" style="height:10px;width:100%;margin:0;">
-     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;">
+     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" onclick="location.href='camera.php'" class="navbar-toggle" style="padding:5px;">
+                <button type="button" onclick="location.href='camera.php'" class="navbar-toggle" style="padding:5px;border:none;">
                     <span class="glyphicon glyphicon-camera" style="font-size:15pt; color:lightgrey;"></span>
                     
                 </button>

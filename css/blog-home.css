@@ -18,7 +18,9 @@ footer {
   bottom: 0;
   width: 100%;
 }
-
+a {
+    color:black;
+}
 .bottom-navbar a {
   float: left;
   display: block;
