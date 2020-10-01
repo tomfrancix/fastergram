@@ -301,9 +301,21 @@ if(isset($_POST['edit_profile'])) {
     $user_image_temp = $_FILES['user_image']['tmp_name'];   
     $user_bio = $_POST['user_bio'];
     $user_mobile = $_POST['user_mobile'];
-    $role = $_POST['role'];
     
     move_uploaded_file($user_image_temp, "../images/$user_image" );
+    
+        
+    $query = "SELECT randSalt FROM users";
+    $select_randsalt_query = mysqli_query($connection, $query);
+    if(!$select_randsalt_query) {
+        die("QUERY FAILED." . mysqli_error($connection));
+    } else {
+    
+    $row = mysqli_fetch_array($select_randsalt_query);  
+    $salt = $row['randSalt'];
+    
+    $password = crypt($password, $salt);
+    
     
     $query = "UPDATE users SET ";
     $query .= "username = '{$username}', ";
@@ -311,8 +323,7 @@ if(isset($_POST['edit_profile'])) {
     $query .= "password = '{$password}', ";
     $query .= "user_image = '{$user_image}', ";
     $query .= "user_bio = '{$user_bio}', ";
-    $query .= "user_mobile = '{$user_mobile}', ";
-    $query .= "role = '{$role}' ";
+    $query .= "user_mobile = '{$user_mobile}' ";
     $query .= "WHERE user_id = '{$user_id}' ";
     
 //    if(empty($user_image)) {
@@ -323,7 +334,15 @@ if(isset($_POST['edit_profile'])) {
 
     $update_user_query = mysqli_query($connection, $query);
     confirmQuery($update_user_query);
+    
+    
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
+        $_SESSION['bio'] = $user_bio;
+        $_SESSION['image'] = $user_image;
+    
     header("Location:index.php");
+    }
 }
 }
 }

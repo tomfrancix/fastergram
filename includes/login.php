@@ -38,6 +38,8 @@ if(isset($_POST['login'])) {
         
     }
     
+    $password = crypt($password, $db_password);
+    
     if($username !== $db_username && $password !== $db_password ) {
         header("Location: ../login.php");
     } 

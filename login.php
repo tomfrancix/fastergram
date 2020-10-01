@@ -86,7 +86,7 @@
                             <br>
                             <fieldset class="fieldset" style="background-color:white;padding:0;">
                                 <legend style="border:none;width:auto;">Password</legend>
-                                        <input type="password" id="password" name="password" style="border:none;max-width:100%;min-width:100%;margin:0;">
+                                        <input type="password" id="key" name="password" style="border:none;max-width:100%;min-width:100%;margin:0;">
                             </fieldset>
                             <br>
                             <input class="btn btn-primary" name="login" type="submit" value="Login" style="float:right;background-color:rgba(09,58,57,1);">

@@ -24,47 +24,40 @@ while($row = mysqli_fetch_assoc($select_users_by_id)) {
     $user_bio = $row['user_bio'];
     $user_mobile = $row['user_mobile'];
     $role = $row['role'];
+    $salt = $row['randSalt'];
 }
-
+$password = crypt($salt, $password)                     
+    
 ?>
 
 
-<img src="../images/<?php echo $user_image ?>" style="width:100%;">
+<img src="../images/<?php echo $user_image ?>" style="width:100%;margin-bottom:8px;">
 
 
 <form action="" method="POST" enctype="multipart/form-data">
-<div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" class="form-control" name="email" value="<?php echo $email ?>">
-</div>
-<div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" name="username" value="<?php echo $username ?>">
-</div>
-<div class="form-group">
-    <label for="password">Password</label>
-    <input type="text" class="form-control" name="password" value="<?php echo $password ?>">
-</div>
-<div class="form-group">
-    <label for="user_mobile">Mobile</label>
-    <input type="text" class="form-control" name="password" value="<?php echo $user_mobile ?>">
-</div>
 <div class="form-group">
     <label for="user_image">Profile Picture</label>
     <input type="file" name="user_image">
 </div>
 <div class="form-group">
-    <label for="user_bio">Bio</label>
-    <input type="text" class="form-control" name="user_bio" value="<?php echo $user_bio ?>">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
 </div>
 <div class="form-group">
-    <label for="role">Role</label>
-    <select name="role" id="role">
-        
-       <option value="Normal" selected>Normal User</option>
-       <option value="Administrator">Administrator</option>
-    
-    </select>
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+</div>
+<div class="form-group">
+    <label for="user_mobile">Mobile</label>
+    <input type="text" class="form-control" name="mobile" value="<?php echo $user_mobile; ?>">
+</div>
+<div class="form-group">
+    <label for="user_bio">Bio</label>
+    <input type="text" class="form-control" name="user_bio" value="<?php echo $user_bio; ?>">
+</div>
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="key" name="password" placeholder="Enter your password to continue...">
 </div>
       
 <div class="form-group">

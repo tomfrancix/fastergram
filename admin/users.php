@@ -2,13 +2,19 @@
 //include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-if($_SESSION['role'] !== "Administrator") {
-   
-        header("Location: index.php");
-    
-}
 ?>
-    
+<?php
+    $sessionid = $_SESSION['id'];
+    $query = "SELECT * FROM users WHERE user_id = {$sessionid} ";
+    $select_all_users_query = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($select_all_users_query)) {
+        $role = $row['role'];
+    }
+    if($role != "Administrator") {
+         header("Location: index.php");
+    } else {
+?>  
 
         
 
@@ -93,5 +99,5 @@ switch($source) {
 
    <?php 
 include "includes/footer.php";
-
+    }
 ?>

@@ -8,7 +8,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header ta-c" style="margin-bottom:0;">
                             
-                            <img src="../images/<?php echo $_SESSION['image']; ?> " style="width:80px;border-radius:50%;margin:8px;">
+                            <img src="../images/<?php echo $_SESSION['image']; ?>" style="width:80px;border-radius:50%;margin:8px;">
                             
                              @<?php echo $_SESSION['username']; ?> 
                         </h1>
