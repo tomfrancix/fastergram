@@ -7,7 +7,7 @@
                     <span class="glyphicon glyphicon-camera" style="font-size:15pt; color:lightgrey;"></span>
                     
                 </button>
-                <a class="navbar-brand" href="index.php">Instagram</a>
+                <a class="navbar-brand" href="index.php">Vortex</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
