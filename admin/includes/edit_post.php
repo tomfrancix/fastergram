@@ -2,8 +2,8 @@
    edit_post();
 ?><?php
  
-if(isset($_GET['id'])) {
-    $the_post_id = $_GET['id'];
+if(isset($_GET['edit_post'])) {
+    $the_post_id = $_GET['edit_post'];
 }
 $query = "SELECT * FROM content WHERE content_id = {$the_post_id} ";
 $select_content_by_id = mysqli_query($connection, $query);
@@ -44,6 +44,6 @@ while($row = mysqli_fetch_assoc($select_content_by_id)) {
     </select>
 </div>
 <div class="form-group">
-    <input class="btn btn-primary" type="submit" name="create_post" value="Submit">
+    <input class="btn btn-primary" type="submit" name="edit_post" value="Submit">
 </div>
 </form>

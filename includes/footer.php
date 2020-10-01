@@ -13,7 +13,7 @@
         </footer>
 
     </div>
-<div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(09,58,57,1);padding-top:5px;">
+<div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(09,58,57,1);padding-top:5px;z-index:200;">
             <a href="index.php" style="width:25%;text-align:center;float:left;">
                 <span class="glyphicon glyphicon-home"></span>
             </a>

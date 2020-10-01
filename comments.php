@@ -2,9 +2,15 @@
 include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-
+if(!isset($_SESSION['role'])) {
+   
+        header("Location: login.php");
+    
+}
 ?>
-
+ <?php
+   create_comment();
+?>
     <!-- Page Content -->
     <div class="container" style="padding:0 15px;;height:100%;width:100%;overflow-x:hidden;">
 
@@ -136,29 +142,9 @@ include "includes/navigation.php";
                             
                        <?php } ?>
                                                               
- <?php
-   create_comment();
-?>
 
-<div class="container">
 
-<form action="" method="POST" enctype="multipart/form-data">
-     <div class="container" style="padding:8px 10px;">
-        <div class="row">
-            <div class="w-20" style="width:30px;float:left;">
-                <img src="images/profile.JPG" style="width:100%;border-radius:50%;">
-            </div>
-            <div class="w-80" style="min-width:85%;width:80%;float:left;padding:5px;">
-                <textarea type="text" style="border:none;width:100%;" name="comment_text" placeholder="Add a comment..."></textarea>
-            </div>
-            <input type="hidden" name="comment_content_id" value="<?php echo $content_id; ?>">
-            <input type="hidden" name="comment_user_id" value="<?php echo $content_user_id; ?>">
-            <input type="hidden" name="comment_reply_user_id" value="0">
-        </div>    
-    </div>
-    <input class="btn btn-primary" style="width:100%;background-color:charcoal" type="submit" name="create_comment" value="Submit">
 
-</form> </div>
                                                           <?php  } ?>
                         
 
@@ -182,6 +168,25 @@ include "includes/navigation.php";
                 </ul>
 
             </div>
+            <div class="container" style="width:100%;position:fixed;bottom:50px;padding:10px;background-color:white;border-top:1px solid lightgrey;z-index:100;">
+
+<form action="" method="POST" enctype="multipart/form-data">
+     <div class="container" style="padding:8px 10px;">
+        <div class="row">
+            <div class="w-20" style="width:30px;float:left;">
+                <img src="images/profile.JPG" style="width:100%;border-radius:50%;">
+            </div>
+            <div class="w-80" style="min-width:85%;width:80%;float:left;padding:5px;">
+                <textarea type="text" style="border:none;width:100%;" name="comment_text" placeholder="Add a comment..."></textarea>
+            </div>
+            <input type="hidden" name="comment_content_id" value="<?php echo $content_id; ?>">
+            <input type="hidden" name="comment_user_id" value="<?php echo $content_user_id; ?>">
+            <input type="hidden" name="comment_reply_user_id" value="0">
+        </div>    
+    </div>
+    <input class="btn btn-primary" style="width:100%;background-color:charcoal" type="submit" name="create_comment" value="Submit">
+
+</form> </div>
 
 <?php      
 include "includes/sidebar.php"; 

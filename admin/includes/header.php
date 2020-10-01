@@ -1,6 +1,22 @@
-<?php ob_start(); ?>
-<?php include "../includes/db.php"; ?>
+<?php ob_start();  ?>
+<?php session_start();  
+include "../includes/db.php"; 
+if(isset($_SESSION['username'])) {
+   
+        $dbusername = $_SESSION['username'];
+    
+} ?>
+
 <?php include "functions.php"; ?>
+<?php 
+
+if(!isset($_SESSION['role'])) {
+   
+        header("Location: ../login.php");
+    
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

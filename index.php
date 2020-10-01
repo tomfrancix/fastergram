@@ -7,7 +7,7 @@ include "includes/navigation.php";
 
     <!-- Page Content -->
     <div class="container" style="padding:0 15px;;height:100%;width:100%;overflow-x:hidden;">
-
+<a href="login.php">login</a>
         <div class="row">
 
             <!-- Blog Entries Column -->

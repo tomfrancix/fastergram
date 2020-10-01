@@ -2,7 +2,11 @@
 include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-
+if(!isset($_SESSION['role'])) {
+   
+        header("Location: login.php");
+    
+}
 ?>
 
     <!-- Page Content -->

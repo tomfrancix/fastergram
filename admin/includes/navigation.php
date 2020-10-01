@@ -108,7 +108,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -121,6 +121,12 @@
                     </li>
                     <li>
                         <a href="posts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Posts</a>
+                    </li>
+                    <li>
+                        <a href="comments.php"><i class="fa fa-comment"></i> Comments</a>
+                    </li>
+                    <li>
+                        <a href="users.php"><i class="fa fa-users"></i> Users</a>
                     </li>
                     <li>
                         <a href="followers.php"><i class="fa fa-users"></i> Followers</a>

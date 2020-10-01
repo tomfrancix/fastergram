@@ -45,7 +45,7 @@
                                     <td>
                                     
                                     <input type="hidden" class="form-control" name="content_id" value="<?php echo $hash_id ?>">
-                                    <a class="btn btn-default" href="?source=edit_post&id=<?php echo $content_id; ?>" style="padding:0 8px;width:100%;opacity:0.5;">Edit</a>
+                                    <a class="btn btn-default" href="?source=edit_post&edit_post=<?php echo $content_id; ?>" style="padding:0 8px;width:100%;opacity:0.5;">Edit</a>
                                     
                                         
                                     </td>

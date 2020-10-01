@@ -23,9 +23,18 @@ if(isset($_POST['create_comment'])) {
         if(!$create_comment_query) {
             die('QUERY FAILED' . mysqli_error($connection));
         } else {
+             $query = "UPDATE content SET content_comment_count = content_comment_count + 1 ";
+    $query .= "WHERE content_id = $comment_content_id ";
+    
+    $update_comment_count = mysqli_query($connection, $query);
+            header("Location: comments.php?id={$comment_content_id}");
         }
     
+   
+    
+    
 }
+   
 }
 
 function delete_comment() {
