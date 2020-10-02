@@ -4,6 +4,7 @@ include "includes/header.php";
 include "includes/navigation.php"; 
 delete_like();
 like();
+unfollow_hashtags();
 ?>
 
 <!-- Page Content -->
@@ -18,8 +19,34 @@ like();
     if(isset($_SESSION['id'])) {
         $thisid = $_SESSION['id'];
     }
+ $total = 0;
+      $allowed = array();        
+      $allowedf = array();        
+           $query = "SELECT * FROM subscriptions WHERE sub_user_id = $thisid ";
+$select_all_subscriptions_query = mysqli_query($connection, $query);
 
-        $query = "SELECT * FROM content ORDER BY content_datetime DESC limit 27 ";
+        while($row = mysqli_fetch_assoc($select_all_subscriptions_query)) {
+            $sub_hash_id = $row['sub_hash_id'];
+            $status = $row['status'];
+            if($status == "Subscribed") {
+            array_push($allowed,$sub_hash_id);
+            }
+        }
+          $query = "SELECT * FROM following WHERE follow_user_id = $thisid ";
+$select_all_following_query = mysqli_query($connection, $query);
+
+        while($row = mysqli_fetch_assoc($select_all_following_query)) {
+            $follow_to_user_id = $row['follow_to_user_id']; 
+            array_push($allowedf,$follow_to_user_id); 
+            
+        }
+//    echo implode(', ', $allowed);
+//    echo "<br>";
+//    echo implode(', ', $allowedf);
+         
+        
+        $select_all_content_query = mysqli_query($connection, $query);
+        $query = "SELECT * FROM content ORDER BY content_datetime DESC";
 
         $select_all_content_query = mysqli_query($connection, $query);
 
@@ -35,9 +62,22 @@ like();
             $content_comment_count = $row['content_comment_count'];
             $content_likes_count = $row['content_likes_count'];
                 
-            
+            $pass = false;
+            $passf = false;
             $content_text = substr($content_text, 0, 90);
-
+    foreach($allowed as $item) {
+            if($item == $content_hash_id) {
+            $pass = true;
+            }
+    }
+        foreach($allowedf as $item) {
+            if($item == $content_user_id) {
+                $passf = true;
+            }
+        }
+        if($pass == true || $passf == true) {
+            if($total < 27) {
+            $total++;
        $query_user = "SELECT * FROM users WHERE user_id = {$content_user_id}";                     
 
         $select_user_query = mysqli_query($connection, $query_user);
@@ -55,7 +95,42 @@ like();
                 </div>
                 <div class="w-80" style="width:200px;float:left;padding:5px;">
                     <span class="username"><a href="profile.php?id=<?php echo $content_user_id; ?>"><b><?php echo $ausername; ?></b></a></span><br>
-                    <span class="hashtag" style="font-size:8pt;">#freediving</span>
+               <?php 
+$query_hash = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id}";                     
+
+$select_hash_query = mysqli_query($connection, $query_hash);
+while($row = mysqli_fetch_assoc($select_hash_query)) {
+$hash_title = $row['hash_title'];
+?>  <span class="hashtag" style="font-size:8pt;margin:-5px 0 5px 5px;">#<?php echo $hash_title; ?></span> 
+<?php
+$query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id}";                     
+
+$select_sub_query = mysqli_query($connection, $query_sub);
+$count = 0; 
+while($row = mysqli_fetch_assoc($select_sub_query)) {
+$sub_id = $row['sub_id'];
+$sub_status = $row['status'];
+$sub_user_id = $row['sub_user_id'];
+    $count++;
+if($sub_user_id == $thisid && $sub_status == "Subscribed") {
+   
+                                ?><span class="hashtag"><button class="btn btn-blue" style="font-size:8pt;padding:0 5px;">Subscribed <span style="font-size:7pt;opacity:0.5;"><a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>&page=1">[Undo]</a></span></button></span> <?php
+} 
+else {
+    ?><span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>&page=1" class="btn btn-danger" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
+}}
+if($count < 1) {
+    
+    ?>
+    <form method="post" action="" style="display:inline;">
+                <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                
+                <input type="hidden" name="sub_user_id" value="<?php echo $thisid; ?>"> 
+             <span class="hashtag"><button type="submit" name="followinit" class="btn btn-danger" style="display:inline-block;font-size:8pt;padding:0 5px;">Subscribe</button></span> 
+    </form>    
+                               
+
+    <?php
+}}?>
                 </div>
             </div>
             <div class="row">
@@ -161,17 +236,13 @@ like();
 
     </div>
     <hr style="margin:0;">
-<?php }} ?>
+<?php }
+        }
+        }
 
-    <!-- Pager -->
-    <ul class="pager">
-        <li class="previous">
-            <a href="#">&larr; Older</a>
-        </li>
-        <li class="next">
-            <a href="#">Newer &rarr;</a>
-        </li>
-    </ul>
+   }
+        
+     ?>
 
 </div>
 

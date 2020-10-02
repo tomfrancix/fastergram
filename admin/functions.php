@@ -10,12 +10,16 @@ function confirmQuery($result) {
 //HASHTAGS
 function create_hashtags() {
     global $connection;
+    $thestatus = "Subscribed";
 if(isset($_POST['submit'])) {
 
     $hash_title = $_POST['hash_title'];
+    $sub_user_id = $_POST['sub_user_id'];
+    
     if($hash_title == "" || empty($hash_title)) {
         echo "<span style='color:red;font-size:10pt;'>Please enter a hashtag...</span>";
     } else {
+        
         $query = "INSERT INTO hashtags(hash_title)";
         $query .= "VALUE('{$hash_title}')";
 
@@ -23,17 +27,33 @@ if(isset($_POST['submit'])) {
 
         if(!$create_hashtag_query) {
             die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+            
+        $queryd = "SELECT * FROM hashtags WHERE hash_title = '$hash_title' ";
+        $query_hashid = mysqli_query($connection, $queryd);
+        
+        while($row = mysqli_fetch_assoc($query_hashid)) {
+        $sub_hash_id = $row['hash_id'];
+        
+         
+                       
+        
+        
+        $querys = "INSERT INTO subscriptions(sub_hash_id, sub_user_id, status)";
+        $querys .= "VALUE('{$sub_hash_id}','{$sub_user_id}','{$thestatus}')";
         }
-    }
+        $create_sub_query = mysqli_query($connection, $querys);
+        
+    } }
 }
 }
 
 function delete_hashtags() {
     global $connection;
 if(isset($_GET['delete'])) {
-    $the_hash_id = $_GET['delete'];
+    $the_sub_id = $_GET['delete'];
 
-    $query = "DELETE FROM hashtags WHERE hash_id = {$the_hash_id} ";
+    $query = "DELETE FROM subscriptions WHERE sub_id = {$the_sub_id} ";
     $delete_query = mysqli_query($connection, $query);
     header("Location:hashtags.php");
 }
@@ -42,10 +62,12 @@ if(isset($_GET['delete'])) {
 function unfollow_hashtags() {
     global $connection;
 if(isset($_POST['unfollow'])) {
-  $hash_id = $_POST['hash_id'];
-    $query = "UPDATE hashtags SET status = 'unsubscribed' WHERE hash_id = {$hash_id} ";
+  $sub_id = $_POST['sub_id'];
+    
+    $query = "UPDATE subscriptions SET status='Unsubscribed' WHERE sub_id=$sub_id ";
 
     $update_query = mysqli_query($connection, $query);
+    
     if(!$update_query) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
@@ -55,18 +77,16 @@ if(isset($_POST['unfollow'])) {
 
 function follow_hashtags() {
     global $connection;
-if(isset($_POST['follow'])) {
-  $hash_id = $_POST['hash_id'];
-    $query = "UPDATE hashtags SET status = 'following' WHERE hash_id = {$hash_id} ";
+if(isset($_GET['follow'])) {
+  $sub_id = $_GET['follow'];
+    
+    $query = "UPDATE subscriptions SET status = 'Subscribed' WHERE sub_id = $sub_id ";
 
     $update_query = mysqli_query($connection, $query);
-    if(!$update_query) {
-        die("QUERY FAILED" . mysqli_error($connection));
-    }
-    header("Location:hashtags.php");
+    
+//    header("Location:hashtags.php");
 }
 }
-
 //POSTS
 function create_post() {
     global $connection;

@@ -10,6 +10,9 @@ if(!isset($_SESSION['role'])) {
 ?>
  <?php
 like();
+follow_hashtags();
+initial_follow_hashtags();
+unfollow_hashtags();
    create_comment();
 if(isset($_GET['id'])) {
                         $pid = $_GET['id'];
@@ -62,7 +65,42 @@ if(isset($_GET['id'])) {
                             </div>
                             <div class="w-80" style="width:200px;float:left;padding:5px;">
                                 <span class="username"><a style="color:black;" href="user.php?id=<?php echo $user_id ?>"><b>tomfrancix</b></a></span><br>
-                                <span class="hashtag" style="font-size:7pt;">@freediving</span>
+<?php 
+$query_hash = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id}";                     
+
+$select_hash_query = mysqli_query($connection, $query_hash);
+while($row = mysqli_fetch_assoc($select_hash_query)) {
+$hash_title = $row['hash_title'];
+?>  <span class="hashtag" style="font-size:8pt;margin:-5px 0 5px 5px;">#<?php echo $hash_title; ?></span> 
+<?php
+$query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id}";                     
+
+$select_sub_query = mysqli_query($connection, $query_sub);
+$count = 0; 
+while($row = mysqli_fetch_assoc($select_sub_query)) {
+$sub_id = $row['sub_id'];
+$sub_status = $row['status'];
+$sub_user_id = $row['sub_user_id'];
+    $count++;
+if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
+   
+                                ?><span class="hashtag"><button class="btn btn-blue" style="font-size:8pt;padding:0 5px;">Subscribed <span style="font-size:7pt;opacity:0.5;"><a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>">[Undo]</a></span></button></span> <?php
+} 
+else {
+    ?><span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-danger" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
+}}
+if($count < 1) {
+    
+    ?>
+    <form method="post" action="" style="display:inline;">
+                <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                
+                <input type="hidden" name="sub_user_id" value="<?php echo $sessionid; ?>"> 
+             <span class="hashtag"><button type="submit" name="followinit" class="btn btn-danger" style="display:inline-block;font-size:8pt;padding:0 5px;">Subscribe</button></span> 
+    </form>    
+                               
+
+    <?php
+}}?>
                             </div>
                         </div>
                         <div class="row">

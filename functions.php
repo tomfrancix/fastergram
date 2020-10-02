@@ -238,4 +238,72 @@ if(isset($_POST['edit_comment'])) {
     header("Location:post.php?id={$comment_content_id}");
 }
 }
+function initial_follow_hashtags() {
+    global $connection;
+if(isset($_POST['followinit'])) {
+  $sub_hash_id = $_POST['sub_hash_id'];
+  $sub_user_id = $_POST['sub_user_id'];
+  $thestatus="Subscribed";
+    
+     $querys = "INSERT INTO subscriptions(sub_hash_id, sub_user_id, status)";
+        $querys .= "VALUE('{$sub_hash_id}','{$sub_user_id}','{$thestatus}')";
+        
+        $create_sub_query = mysqli_query($connection, $querys);
+    
+    
+   header("Location:post.php?id=11");
+}
+}
+
+function follow_hashtags() {
+    global $connection;
+if(isset($_GET['follow'])) {
+  $sub_id = $_GET['follow'];
+    
+    $query = "UPDATE subscriptions SET status='Subscribed' WHERE sub_id=$sub_id ";
+
+    $update_query = mysqli_query($connection, $query);
+    
+    if(!$update_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    }
+    if(isset($_GET['postid'])) {
+  $postid = $_GET['postid']; 
+        if(isset($_GET['page'])) {
+        $page = $_GET['page']; 
+    header("Location:index.php#$postid");
+         } else {
+    header("Location:post.php?id=$postid");
+         }
+    } else 
+    header("Location:index.php");
+}
+}
+
+function unfollow_hashtags() {
+    global $connection;
+if(isset($_GET['unfollow'])) {
+  $sub_id = $_GET['unfollow'];
+    
+    $query = "UPDATE subscriptions SET status='Unsubscribed' WHERE sub_id=$sub_id ";
+
+    $update_query = mysqli_query($connection, $query);
+    
+    if(!$update_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    }
+    if(isset($_GET['postid'])) {
+  $postid = $_GET['postid']; 
+         if(isset($_GET['page'])) {
+        $page = $_GET['page']; 
+    header("Location:index.php#$postid");
+         } else {
+    header("Location:post.php?id=$postid");
+         }
+    } else 
+    header("Location:index.php");
+}
+        
+}
+
 ?>
