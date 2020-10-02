@@ -2,8 +2,8 @@
 <a href="?source=view_your_comments">View your comments</a>
                          <?php
                     
-//                    $query = "SELECT * FROM comments WHERE comment_content_id = {$content_id}";
-                    $querytwo = "SELECT * FROM comments";
+                     $sessionid = $_SESSION['id'];
+                    $querytwo = "SELECT * FROM comments WHERE comment_to_user = {$sessionid} ";
                     $select_all_comments_query = mysqli_query($connection, $querytwo);
                    
                     while($row = mysqli_fetch_assoc($select_all_comments_query)) {
@@ -24,7 +24,7 @@
 //                    }
                         
                     ?>
-                       
+                       <hr style="margin:5px 0;">
                         <div class="row" style="padding:5px;padding-bottom:0;">
                             <div class="container" style="padding:0;">
                             <div class="w-20" style="width:40px;float:left;">

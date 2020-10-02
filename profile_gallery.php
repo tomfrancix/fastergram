@@ -53,7 +53,7 @@ $uid = $_GET['id'];
                     <div class="container">
                         <div class="row" style="padding:5px;">
                             <div class="w-20" style="width:50px;float:left;">
-                                <img src="images/profile.JPG" style="width:100%;border-radius:50%;">
+                                <img src="images/<?php echo $aimage; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-80" style="width:200px;float:left;padding:5px;">
                                 <span class="username"><a href="profile.php?id=<?php echo $content_user_id; ?>"><b><?php echo $ausername; ?></b></a></span><br>

@@ -3,10 +3,25 @@ include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
 delete_like();
+unfollow();
+follow();
 like();
 
- if(isset($_GET['id'])) {
+ if(isset($_GET['id']) || isset($_GET['username'])) {
+    
+     if(isset($_GET['id'])) {
 $uid = $_GET['id'];
+     $user= "";
+     }
+     else if(isset($_GET['username'])) {
+         $uid = 0;
+        $user = $_GET['username'];
+          $qquery = "SELECT * FROM users WHERE username = '$user'";
+                    $select_quser_query = mysqli_query($connection, $qquery);
+          while($row = mysqli_fetch_assoc($select_quser_query)) {
+                        $uid = $row['user_id'];
+          }
+     }
  ?>
 
     <!-- Page Content -->
@@ -14,12 +29,19 @@ $uid = $_GET['id'];
       <div class="row">
           
 <?php
-                    if(isset($_GET['id'])) {
+                    if(isset($_GET['id']) || isset($_GET['username'])) {
+                        if(isset($_GET['id'])) {
                         $uid = $_GET['id'];
+                             
                     
                       $queryu = "SELECT * FROM users WHERE user_id = {$uid}";
                     $select_user_query = mysqli_query($connection, $queryu);
-                   
+                   }
+                             else if(isset($_GET['username'])){
+                                $user = $_GET['username']; 
+                      $queryu = "SELECT * FROM users WHERE username = '$user'";
+                    $select_user_query = mysqli_query($connection, $queryu);
+                             }
                     while($row = mysqli_fetch_assoc($select_user_query)) {
                         $user_id = $row['user_id'];
                         $user_image = $row['user_image'];  
@@ -30,6 +52,7 @@ $uid = $_GET['id'];
                         $first_name = $row['first_name'];  
                         $last_name = $row['last_name'];  
                     ?>
+          
             <div class="container-fluid">
 
                 <!-- Page Heading -->
@@ -68,16 +91,45 @@ if(isset($_SESSION['id'])) {
 
 $dbuserid = $_SESSION['id'];
 
-    if(!$dbuserid == $uid) { ?>
+    if($dbuserid == $uid) { ?>
         <div style="margin-top:5px;text-align:center;width:100%;" class="btn btn-default">
                     <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Edit profile</a>
                 </div>
    <?php } else { ?>
     <div class="container" style="padding-bottom:1px;text-align:center;width:105%;margin:0 -10px 0 -10px;padding:0;">
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">
-            <div style="text-align:center;width:100%;" class="btn btn-primary">
-                <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Follow</a>
-            </div>
+        <?php
+                 $query_follow = "SELECT * FROM following WHERE follow_user_id = {$dbuserid}";                     
+
+        $follow_query = mysqli_query($connection, $query_follow);
+                $follow_to_user_id = 0;
+           
+            while($row = mysqli_fetch_assoc($follow_query)) {
+            $follow_id = $row['follow_id'];
+            $follow_to_user_id = $row['follow_to_user_id'];
+            
+            }
+        if($follow_to_user_id > 0) {
+            if($follow_to_user_id == $user_id) {  ?>
+              
+                    <a href="profile.php?unfollow=<?php echo $follow_id; ?>" type="submit" name="unfollow"  style="text-align:center;width:100%;" class="btn btn-warning">Unfollow</a>
+               
+              <?php } else {
+            ?> 
+                <form method="post" action="" >
+                    <input type="hidden" name="follow_user_id" value="<?php echo $dbuserid; ?>">
+                    <input type="hidden" name="follow_to_user_id" value="<?php echo $user_id; ?>">
+                    <button type="submit" name="follow"  style="text-align:center;width:100%;" class="btn btn-primary">Follow</button>
+                </form>
+            <?php
+            }
+        } else { ?>
+                <form method="post" action="" >
+                    <input type="hidden" name="follow_user_id" value="<?php echo $dbuserid; ?>">
+                    <input type="hidden" name="follow_to_user_id" value="<?php echo $user_id; ?>">
+                    <button type="submit" name="follow"  style="text-align:center;width:100%;" class="btn btn-primary">Follow</button>
+                </form>
+             <?php }  ?>
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">
             <div style="text-align:center;width:100%;" class="btn btn-default">
@@ -86,7 +138,7 @@ $dbuserid = $_SESSION['id'];
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">
             <div style="text-align:center;width:100%;" class="btn btn-default">
-                <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Email</a>
+                <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Favourites</a>
             </div>
         </div>
         </div>
@@ -120,7 +172,7 @@ $dbuserid = $_SESSION['id'];
                     </div>
             <!-- /.container-fluid -->
 <br><br><br>
-       <?php } ?>
+       <?php }  ?>
      
 
             <script>

@@ -102,7 +102,7 @@ if(isset($_POST['submit'])) {
           die("QUERY FAILED." . mysqli_error($connection) . ' ' . mysqli_errno($connection));
       }
         
-    $message = $password . "Your Registration has been submitted";
+    $message = "Your Registration has been submitted";
     }
         
     } else {

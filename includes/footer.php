@@ -4,8 +4,8 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Thomas Fahey 2014</p>
+                <div class="col-lg-12 ta-c">
+                    <p style="text-align:center;opacity:0.2">Copyright &copy; Thomas Fahey 2014</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

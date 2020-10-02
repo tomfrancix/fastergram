@@ -10,8 +10,8 @@
                             </thead>
                             <tbody>
                     <?php
-                    
-                    $query = "SELECT * FROM content";
+                    $sessionid = $_SESSION['id'];
+                    $query = "SELECT * FROM content WHERE content_user_id = {$sessionid} ";
                     $select_all_content_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {

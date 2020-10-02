@@ -38,12 +38,12 @@ if(isset($_POST['login'])) {
         
     }
     
-    $password = crypt($password, $db_password);
+    $hash_password = crypt($password, $db_password);
     
-    if($username !== $db_username && $password !== $db_password ) {
+    if($username !== $db_username && $hash_password !== $db_password ) {
         header("Location: ../login.php");
     } 
-    else if ($username == $db_username && $password == $db_password) 
+    else if ($username == $db_username && $hash_password == $db_password) 
     {
         //ASSIGN USER TO A UNIQUE SESSION
         $_SESSION['id'] = $db_id;
