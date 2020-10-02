@@ -10,12 +10,15 @@ if(!isset($_SESSION['role'])) {
 ?>
  <?php
    create_comment();
+if(isset($_GET['id'])) {
+                        $pid = $_GET['id'];
+}
 ?>
     <!-- Page Content -->
-    <div class="container" style="padding:0 15px;;height:100%;width:100%;overflow-x:hidden;">
-<div class="row" style="text-align:center;">
-                            <span style="float:left;padding:5px 10px;"><a href="index.php#<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
-                            <span style="float:none;padding:8px 10px 2px 10px;margin-top:18px;font-weight:bold;font-size:16pt;">View Post</span>
+    <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;">
+<div class="row" style="text-align:center;padding-top:3px;">
+                            <span style="float:left;padding:5px 10px;"><a href="index.php#<?php echo $pid; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <span style="float:none;display:inline-block;padding:3px 10px 2px 10px;margin-top:0;font-weight:bold;font-size:16pt;">View Post</span>
                             <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
                         </div>
         <div class="row">

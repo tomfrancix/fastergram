@@ -37,6 +37,39 @@ if(isset($_POST['create_comment'])) {
    
 }
 
+function like() {
+    global $connection;
+
+if(isset($_POST['like'])) {
+
+    $like_user_id = $_POST['like_user_id'];
+    $like_content_id = $_POST['like_content_id'];
+    
+    
+    
+        $query = "INSERT INTO likes(like_user_id, like_content_id)";
+    
+        $query .= "VALUES('{$like_user_id}','{$like_content_id}' )";
+
+        $create_like_query = mysqli_query($connection, $query);
+
+        if(!$create_like_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+             $queryc = "UPDATE content SET content_like_count = content_like_count + 1 ";
+    $queryc .= "WHERE content_id = $like_content_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc);
+            header("Location: index.php#{$like_content_id}");
+        }
+    
+   
+    
+    
+}
+   
+}
+
 function delete_comment() {
     global $connection;
 if(isset($_GET['delete_comment'])) {
@@ -47,7 +80,16 @@ if(isset($_GET['delete_comment'])) {
     header("Location:index.php");
 }
 }
+function delete_like() {
+    global $connection;
+if(isset($_GET['delete_like'])) {
+    $the_like_id = $_GET['delete_like'];
 
+    $query = "DELETE FROM likes WHERE like_id = {$the_like_id} ";
+    $delete_like_query = mysqli_query($connection, $query);
+    header("Location:index.php#{$the_like_id}");
+}
+}
 function edit_comment() {
     global $connection;
 if(isset($_POST['edit_comment'])) {

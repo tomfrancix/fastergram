@@ -125,6 +125,7 @@
                     <li>
                         <a href="comments.php"><i class="fa fa-comment"></i> Comments</a>
                     </li>
+                    
                     <li>
                         <a href="users.php"><i class="fa fa-users"></i> Users</a>
                     </li>

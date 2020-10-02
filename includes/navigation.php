@@ -1,4 +1,4 @@
- <div class="nav-wrapper" style="height:10px;width:100%;margin:0;">
+ <div class="nav-wrapper" style="height:10px;width:100%;margin:0;margin-bottom:-2px;">
      <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->

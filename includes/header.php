@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <title>Vortex</title>
 
@@ -27,7 +28,18 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style>
+    .btn.btn-primary {
+        background-color:rgba(09,58,57,1);
+        color:white;
+    }
+    body {
+        background-color:rgba(245,245,245,1);
+    }
+    .btn.btn-primary a {
+        color:white;
+    }
+    </style>
 </head>
 
 <body style="height:95vh;width:100vw;overflow-x:hidden;margin-top:-25px;">

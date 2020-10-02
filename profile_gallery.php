@@ -4,10 +4,13 @@ include "includes/header.php";
 include "includes/navigation.php"; 
 delete_like();
 like();
-?>
+if(isset($_GET['id'])) {
+$uid = $_GET['id'];
+ ?>
+
 
     <!-- Page Content -->
-    <div class="container" style="padding:0 15px;;height:100%;width:100%;overflow-x:hidden;">
+    <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;">
 
         <div class="row">
 
@@ -20,7 +23,7 @@ like();
 //                        $query = "SELECT * FROM content WHERE content_user_id = {$thisid} limit 27";
                    
                    
-                    $query = "SELECT * FROM content limit 27";
+                    $query = "SELECT * FROM content WHERE content_user_id = {$uid} limit 27";
                     
                     $select_all_content_query = mysqli_query($connection, $query);
                    
@@ -37,7 +40,7 @@ like();
                         $content_likes_count = $row['content_likes_count'];
                         
                     
-                   $query_user = "SELECT * FROM users WHERE user_id = {$content_user_id}";                     
+                   $query_user = "SELECT * FROM users WHERE user_id = {$uid}";                     
                     
                     $select_user_query = mysqli_query($connection, $query_user);
                         while($row = mysqli_fetch_assoc($select_user_query)) {
@@ -172,7 +175,7 @@ like();
 
             </div>
 
-<?php      
+<?php    }  
 include "includes/sidebar.php"; 
 ?>
         </div>
