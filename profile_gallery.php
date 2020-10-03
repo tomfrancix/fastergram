@@ -1,16 +1,128 @@
 <?php 
 include "includes/db.php";
-include "includes/header.php";
-include "includes/navigation.php"; 
-delete_like();
+
+?>
+
+<?php include "functions.php"; ?>
+<?php session_start();  ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <title>Fastergram</title>
+
+    <!-- Bootstrap Core CSS -->
+<!--    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="./css/blog-home.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+    .btn.btn-primary {
+        background-color:rgba(09,58,57,1);
+        color:white;
+    }
+    body {
+        background-color:white;
+    }
+    .btn.btn-primary a {
+        color:white;
+    }
+    </style>
+</head>
+
+<body id="top" style="height:100vh;width:100vw;max-width:100vw;overflow-x:hidden;margin-top:0;">
+    <?php
+    delete_like();
 like();
 if(isset($_GET['id'])) {
 $uid = $_GET['id'];
+    $query_user = "SELECT * FROM users WHERE user_id = {$uid}";                     
+         $ausername = "";           
+                    $select_user_query = mysqli_query($connection, $query_user);
+                        while($row = mysqli_fetch_assoc($select_user_query)) {
+                        $ausername = $row['username'];
+                        }
  ?>
+ <div class="nav-wrapper" style="height:20px;width:100%;margin:0;margin-bottom:-40px;">
+     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="text-align:center;padding:0 0 0 10px;">
+                <a type="button" href="profile.php?id=<?php echo $uid; ?>" class="navbar-toggle" style="float:left;padding:5px;border:none;">
+                    <span class="glyphicon glyphicon-arrow-left" style="font-size:15pt; color:lightgrey;"></span>
+                    
+                </a>
+                <a   class="navbar-brand" href="index.php" style="font-family: 'Parisienne', cursive;font-size:18pt;text-align:center;color:white;display:inline-block;float:none;"><?php  echo $ausername;  ?></a>
+                 <button type="button" onclick="location.href='camera.php'" class="navbar-toggle" style="float:right;padding:5px;border:none;">
+                    <span class="fa fa-paper-plane" style="font-size:15pt; color:lightgrey;"></span>
+                    
+                </button>
+                <script>
+$(window).scroll(function() {
+    var height = $(window).scrollTop();
+    if (height > 100) {
+        $('#back2Top').fadeIn();
+    } else {
+        $('#back2Top').fadeOut();
+    }
+});
+$(document).ready(function() {
+    $("#back2Top").click(function(event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
 
+});
+</script>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    
+                    <?php
+                    
+                    $query = "SELECT * FROM sections";
+                    $select_all_sections_query = mysqli_query($connection, $query);
+                    
+                    while($row = mysqli_fetch_assoc($select_all_sections_query)) {
+                        $section_title = $row['section_title'];
+                        
+                        echo "<li><a href='#'>{$section_title}</a></li>";
+                    }
+                    
+                    ?>
+                    
+                    <li>
+                        <a href="#">Profile</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+     </div>
 
     <!-- Page Content -->
-    <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;">
+    <div class="container" style="padding:0 15px;margin:0;height:105%;width:100%;overflow-x:hidden;">
 
         <div class="row">
 
@@ -165,15 +277,7 @@ $uid = $_GET['id'];
                 <hr style="margin:0;">
             <?php }} ?>
 
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+               
 
             </div>
 
@@ -181,6 +285,21 @@ $uid = $_GET['id'];
 include "includes/sidebar.php"; 
 ?>
         </div>
-<?php      
-include "includes/footer.php"; 
-?>   
+
+
+
+     
+
+    </div>
+
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html> 

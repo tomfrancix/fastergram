@@ -7,12 +7,12 @@
                     $select_all_comments_query = mysqli_query($connection, $querytwo);
                    
                     while($row = mysqli_fetch_assoc($select_all_comments_query)) {
-                        $comment_id = $row['comment_id'];
-                        $comment_content_id = $row['comment_content_id'];
-                        $comment_text = $row['comment_text'];
-                        $comment_user_id = $row['comment_user_id'];
-                        $comment_reply_user_id = $row['comment_reply_user_id'];
-                        $comment_reply_id = $row['comment_reply_user_id'];
+                        $comment_id = escape($row['comment_id']);
+                        $comment_content_id = escape($row['comment_content_id']);
+                        $comment_text = escape($row['comment_text']);
+                        $comment_user_id = escape($row['comment_user_id']);
+                        $comment_reply_user_id = escape($row['comment_reply_user_id']);
+                        $comment_reply_id = escape($row['comment_reply_user_id']);
                         
                       
 //                    $contentquery = "SELECT * FROM content WHERE hash_id = {$content_hash_id} ";

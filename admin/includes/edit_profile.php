@@ -30,8 +30,9 @@ $password = crypt($salt, $password)
     
 ?>
 
-
-<img src="../images/<?php echo $user_image ?>" style="width:100%;margin-bottom:8px;">
+<div class="row" style="padding:10px 50px;">
+<img src="../images/<?php echo $user_image ?>" style="width:100%;margin-bottom:8px;border-radius:50%;margin-top:10px;">
+</div>
 
 
 <form action="" method="POST" enctype="multipart/form-data">

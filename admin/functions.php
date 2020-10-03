@@ -7,14 +7,18 @@ function confirmQuery($result) {
     }
 }
 
+function escape($string) {
+    global $connection;
+    return mysqli_real_escape_string($connection, trim($string));
+}
 //HASHTAGS
 function create_hashtags() {
     global $connection;
     $thestatus = "Subscribed";
 if(isset($_POST['submit'])) {
 
-    $hash_title = $_POST['hash_title'];
-    $sub_user_id = $_POST['sub_user_id'];
+    $hash_title = escape($_POST['hash_title']);
+    $sub_user_id = escape($_POST['sub_user_id']);
     
     if($hash_title == "" || empty($hash_title)) {
         echo "<span style='color:red;font-size:10pt;'>Please enter a hashtag...</span>";
@@ -33,7 +37,7 @@ if(isset($_POST['submit'])) {
         $query_hashid = mysqli_query($connection, $queryd);
         
         while($row = mysqli_fetch_assoc($query_hashid)) {
-        $sub_hash_id = $row['hash_id'];
+        $sub_hash_id = escape($row['hash_id']);
         
          
                        
@@ -51,7 +55,7 @@ if(isset($_POST['submit'])) {
 function delete_hashtags() {
     global $connection;
 if(isset($_GET['delete'])) {
-    $the_sub_id = $_GET['delete'];
+    $the_sub_id = escape($_GET['delete']);
 
     $query = "DELETE FROM subscriptions WHERE sub_id = {$the_sub_id} ";
     $delete_query = mysqli_query($connection, $query);
@@ -62,7 +66,7 @@ if(isset($_GET['delete'])) {
 function unfollow_hashtags() {
     global $connection;
 if(isset($_POST['unfollow'])) {
-  $sub_id = $_POST['sub_id'];
+  $sub_id = escape($_POST['sub_id']);
     
     $query = "UPDATE subscriptions SET status='Unsubscribed' WHERE sub_id=$sub_id ";
 
@@ -78,7 +82,7 @@ if(isset($_POST['unfollow'])) {
 function follow_hashtags() {
     global $connection;
 if(isset($_GET['follow'])) {
-  $sub_id = $_GET['follow'];
+  $sub_id = escape($_GET['follow']);
     
     $query = "UPDATE subscriptions SET status = 'Subscribed' WHERE sub_id = $sub_id ";
 
@@ -92,9 +96,9 @@ function create_post() {
     global $connection;
 if(isset($_POST['create_post'])) {
 
-    $content_text = $_POST['content_text'];
-    $content_user_id = $_POST['content_user_id'];
-    $content_hash_id = $_POST['content_hash_id'];
+    $content_text = escape($_POST['content_text']);
+    $content_user_id = escape($_POST['content_user_id']);
+    $content_hash_id = escape($_POST['content_hash_id']);
     $content_image = $_FILES['content_image']['name'];
     $content_image_temp = $_FILES['content_image']['tmp_name'];        
     $content_datetime = date('d-m-y H-i-s');
@@ -118,7 +122,7 @@ if(isset($_POST['create_post'])) {
 function delete_post() {
     global $connection;
 if(isset($_GET['delete'])) {
-    $the_post_id = $_GET['delete'];
+    $the_post_id = escape($_GET['delete']);
 
     $query = "DELETE FROM content WHERE content_id = {$the_post_id} ";
     $delete_query = mysqli_query($connection, $query);
@@ -131,12 +135,12 @@ function edit_post() {
     global $connection;
     if(isset($_GET['edit_post'])) {
     
-    $content_id = $_GET['edit_post'];
+    $content_id = escape($_GET['edit_post']);
     
 if(isset($_POST['edit_post'])) {
     
-    $content_text = $_POST['content_text'];
-    $content_hash_id = $_POST['content_hash_id'];  
+    $content_text = escape($_POST['content_text']);
+    $content_hash_id = escape($_POST['content_hash_id']);  
     
     $query = "UPDATE content SET ";
     $query .= "content_id = '{$content_id}', ";
@@ -151,9 +155,9 @@ if(isset($_POST['edit_post'])) {
 }
 
 if(isset($_POST['edit'])) {
-    $content_id = $_POST['content_id'];
-    $content_text = $_POST['content_text'];
-    $content_hash_id = $_POST['content_hash_id'];  
+    $content_id = escape($_POST['content_id']);
+    $content_text = escape($_POST['content_text']);
+    $content_hash_id = escape($_POST['content_hash_id']);  
     $query = "UPDATE content SET status = 'unsubscribed' WHERE content_id = {$content_id} ";
 
     $update_query = mysqli_query($connection, $query);
@@ -167,8 +171,8 @@ if(isset($_POST['edit'])) {
 function edit_comment() {
     global $connection;
 if(isset($_POST['edit_comment'])) {
-    $comment_id = $_POST['comment_id'];
-    $comment_text = $_POST['comment_text'];    
+    $comment_id = escape($_POST['comment_id']);
+    $comment_text = escape($_POST['comment_text']);    
     
     $query = "UPDATE comments SET comment_text = '{$comment_text}' WHERE comment_id = {$comment_id} ";
 
@@ -183,7 +187,7 @@ if(isset($_POST['edit_comment'])) {
 function delete_comment() {
     global $connection;
 if(isset($_GET['delete'])) {
-    $the_comment_id = $_GET['delete'];
+    $the_comment_id = escape($_GET['delete']);
 
     $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id} ";
     $delete_comment_query = mysqli_query($connection, $query);
@@ -195,14 +199,14 @@ function create_user() {
     global $connection;
 if(isset($_POST['create_user'])) {
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $user_image = $_FILES['user_image']['name'];
-    $user_image_temp = $_FILES['user_image']['tmp_name'];   
-    $user_bio = $_POST['user_bio'];
-    $user_mobile = $_POST['user_mobile'];
-    $role = $_POST['role'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
+    $user_image = escape($_FILES['user_image']['name']);
+    $user_image_temp = escape($_FILES['user_image']['tmp_name']);   
+    $user_bio = escape($_POST['user_bio']);
+    $user_mobile = escape($_POST['user_mobile']);
+    $role = escape($_POST['role']);
     
         
     move_uploaded_file($user_image_temp, "../images/$user_image" );
@@ -226,7 +230,7 @@ if(isset($_POST['create_user'])) {
 function delete_user() {
     global $connection;
 if(isset($_GET['delete'])) {
-    $the_user_id = $_GET['delete'];
+    $the_user_id = escape($_GET['delete']);
 
     $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
     $delete_query = mysqli_query($connection, $query);
@@ -239,7 +243,7 @@ function change_role_admin() {
     
 if(isset($_GET['change_role_admin'])) {
     
-    $user_id = $_GET['change_role_admin'];
+    $user_id = escape($_GET['change_role_admin']);
     
     $query = "UPDATE users SET role = 'Administrator' WHERE user_id = {$user_id} ";
 
@@ -254,7 +258,7 @@ function change_role_subscriber() {
     
 if(isset($_GET['change_role_subscriber'])) {
     
-    $user_id = $_GET['change_role_subscriber'];
+    $user_id = escape($_GET['change_role_subscriber']);
     
     $query = "UPDATE users SET role = 'Subscriber' WHERE user_id = {$user_id} ";
 
@@ -268,18 +272,18 @@ function edit_user() {
     global $connection;
 if(isset($_GET['edit_user'])) {
     
-    $user_id = $_GET['edit_user'];
+    $user_id = escape($_GET['edit_user']);
     
 if(isset($_POST['edit_user'])) {
     
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $user_image = $_FILES['user_image']['name'];
-    $user_image_temp = $_FILES['user_image']['tmp_name'];   
-    $user_bio = $_POST['user_bio'];
-    $user_mobile = $_POST['user_mobile'];
-    $role = $_POST['role'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
+    $user_image = escape($_FILES['user_image']['name']);
+    $user_image_temp = escape($_FILES['user_image']['tmp_name']);   
+    $user_bio = escape($_POST['user_bio']);
+    $user_mobile = escape($_POST['user_mobile']);
+    $role = escape($_POST['role']);
     
     move_uploaded_file($user_image_temp, "../images/$user_image" );
     
@@ -310,17 +314,17 @@ function edit_profile() {
     global $connection;
 if(isset($_GET['edit_profile'])) {
     
-    $user_id = $_GET['edit_profile'];
+    $user_id = escape($_GET['edit_profile']);
     
 if(isset($_POST['edit_profile'])) {
     
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
     $user_image = $_FILES['user_image']['name'];
     $user_image_temp = $_FILES['user_image']['tmp_name'];   
-    $user_bio = $_POST['user_bio'];
-    $user_mobile = $_POST['user_mobile'];
+    $user_bio = escape($_POST['user_bio']);
+    $user_mobile = escape($_POST['user_mobile']);
     
     move_uploaded_file($user_image_temp, "../images/$user_image" );
     
@@ -332,7 +336,7 @@ if(isset($_POST['edit_profile'])) {
     } else {
     
     $row = mysqli_fetch_array($select_randsalt_query);  
-    $salt = $row['randSalt'];
+    $salt = escape($row['randSalt']);
     
     $password = crypt($password, $salt);
     

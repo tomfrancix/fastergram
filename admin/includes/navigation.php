@@ -1,121 +1,28 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:rgba(09,58,57,1);">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:transparent;">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="background-color:rgba(09,58,57,1);border:none;">
+            <div class="navbar-header" style="text-align:center;padding:0 0 0 10px;background-color:rgba(10,10,10,1);">
+                <button type="button" onclick="location.href='camera.php'" class="navbar-toggle" style="float:left;padding:5px;border:none;">
+                    <span class="glyphicon glyphicon-camera" style="font-size:15pt; color:lightgrey;"></span>
+                </button>
+<?php if(isset($_SESSION['username'])) {
+
+$dbusername = $_SESSION['username']; ?>
+<a   class="navbar-brand" href="index.php" style="font-family: 'Parisienne', cursive;font-size:18pt;text-align:center;color:white;display:inline-block;float:none;">@<?php echo $dbusername; ?></a> <?php
+} ?>
+              
+                 
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="background-color:rgba(10,10,10,1);float:right;border:none;">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Your Account</a>
             </div>
             <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Thomas Fahey <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="index.php"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
+            <div class="collapse navbar-collapse navbar-ex1-collapse" style="padding:40px;margin-top:0px;">
+                <ul class="nav navbar-nav side-nav" style="background-color:rgba(20,20,20,0.9);border-radius:20px;text-align:center;padding:10px;margin-top:-20px;">
                     <li>
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Your Profile</a>
                     </li>
@@ -125,24 +32,21 @@
                     <li>
                         <a href="comments.php"><i class="fa fa-comment"></i> Comments</a>
                     </li>
-                    
+                    <?php if(isset($_SESSION['role'])) {
+    if($_SESSION['role'] == "Administrator") {
+?> 
                     <li>
                         <a href="users.php"><i class="fa fa-users"></i> Users</a>
                     </li>
-                    <li>
-                        <a href="followers.php"><i class="fa fa-users"></i> Followers</a>
-                    </li>
-                    <li>
-                        <a href="following.php"><i class="fa fa-users"></i> Following</a>
-                    </li>
-                    <li>
-                        <a href="hashtags.php"><i class="fa fa-tag"></i> Hashtags</a>
-                    </li>
-                    <li>
-                        <a href="editprofile.php"><i class="fa fa-wrench"></i> Settings</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"> <i class="fa fa-info"> </i>  <span>  </span>   About <i class="fa fa-fw fa-caret-down"></i></a>
+                    <?php } } ?>
+                    <li style="padding:0;">
+                            <a href="edit_profile.php" class="btn btn-warning" style="color:black;margin:0;"><i class="fa fa-fw fa-power-off"></i><b> Settings</b></a>
+                        </li>
+                        <li style="padding:0;">
+                            <a href="../includes/logout.php" class="btn btn-danger" style="color:black;margin:0;"><i class="fa fa-fw fa-power-off"></i><b> Log Out</b></a>
+                        </li>
+                    <li style="padding:0;">
+                        <a href="javascript:;" class="btn btn-info" data-toggle="collapse" data-target="#demo" style="color:black;margin:0;"> <i class="fa fa-info"> </i>  <span>  </span>   <b>About</b> <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">Disclaimer</a>

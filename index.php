@@ -18,7 +18,7 @@ unfollow_hashtags();
     <?php
     if(isset($_SESSION['id'])) {
         $thisid = $_SESSION['id'];
-    }
+    } 
  $total = 0;
       $allowed = array();        
       $allowedf = array();        

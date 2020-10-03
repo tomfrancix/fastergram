@@ -15,14 +15,14 @@
                     $select_all_users_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_users_query)) {
-                        $user_id = $row['user_id'];
-                        $username = $row['username'];
-                        $email = $row['email'];
-                        $password = $row['password'];
-                        $user_image = $row['user_image'];
-                        $user_bio = $row['user_bio'];
-                        $user_mobile = $row['user_mobile'];
-                        $role = $row['role'];
+                        $user_id = escape($row['user_id']);
+                        $username = escape($row['username']);
+                        $email = escape($row['email']);
+                        $password = escape($row['password']);
+                        $user_image = escape($row['user_image']);
+                        $user_bio = escape($row['user_bio']);
+                        $user_mobile = escape($row['user_mobile']);
+                        $role = escape($row['role']);
                          
                     ?>
                     

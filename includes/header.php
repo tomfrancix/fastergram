@@ -34,7 +34,7 @@
         color:white;
     }
     body {
-        background-color:rgba(245,245,245,1);
+        background-color:white;
     }
     .btn.btn-primary a {
         color:white;

@@ -3,26 +3,26 @@
 ?><?php
  
 if(isset($_GET['edit_user'])) {
-    $the_user_id = $_GET['edit_user'];
+    $the_user_id = escape($_GET['edit_user']);
 }
 $query = "SELECT * FROM users WHERE user_id = {$the_user_id} ";
 $select_users_by_id = mysqli_query($connection, $query);
 
 while($row = mysqli_fetch_assoc($select_users_by_id)) {
   
-    $username = $row['username'];
-    $email = $row['email'];
-    $password = $row['password'];
-    $user_image = $row['user_image'];
-    $user_bio = $row['user_bio'];
-    $user_mobile = $row['user_mobile'];
-    $role = $row['role'];
+    $username = escape($row['username']);
+    $email = escape($row['email'];
+    $password = escape($row['password']);
+    $user_image = escape($row['user_image']);
+    $user_bio = escape($row['user_bio']);
+    $user_mobile = escape($row['user_mobile']);
+    $role = escape($row['role']);
 }
 
 ?>
 
 
-<img src="../images/<?php echo $user_image ?>" style="width:100%;">
+<img src="../images/<?php echo $user_image ?>" style="width:100%;margin-top:10px;border-radius:50%;">
 
 
 <form action="" method="POST" enctype="multipart/form-data">

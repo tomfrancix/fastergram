@@ -5,10 +5,13 @@
  */
 
 /* Global Styles */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Parisienne&display=swap');
 body {
-    margin-top: 100px;
-    background-color: #222;
+    margin-top: 50px;
+    background-color: rgba(22,22,22,1);
+    color:grey;
+    font-family: 'Montserrat', sans-serif;
 }
 .bottom-navbar {
   overflow: hidden;
@@ -53,9 +56,13 @@ body {
 #page-wrapper {
     width: 100%;
     padding: 0;
-    background-color: #fff;
+    color:rgba(22,22,22,1);
+    color:white;
 }
-
+a { color:white;}
+hr {
+    color:rgba(100,100,100,0.3) !important;
+}
 .huge {
     font-size: 50px;
     line-height: normal;
@@ -109,11 +116,17 @@ body {
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: 100vh;
+}
 .top-nav>.open>.dropdown-menu>li>a {
     white-space: normal;
 }
-
+input, text-area, input.form-control {
+    background-color:rgba(10,10,10,1);
+    color:white;
+    border:none;
+}
 ul.message-dropdown {
     padding: 0;
     max-height: 250px;
@@ -144,7 +157,7 @@ ul.alert-dropdown {
 @media(min-width:768px) {
     .side-nav {
         position: fixed;
-        top: 51px;
+        top: 0;
         left: 225px;
         width: 225px;
         margin-left: -225px;
@@ -164,7 +177,12 @@ ul.alert-dropdown {
         background-color: #000 !important;
     }
 }
-
+.side-nav li {
+    padding:5px;
+    margin:5px;
+    background-color:rgba(10,10,10,1);
+    border-radius:10px;
+}
 .side-nav>li>ul {
     padding: 0;
 }

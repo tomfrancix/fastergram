@@ -15,17 +15,17 @@
                     $select_all_content_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
-                        $content_id = $row['content_id'];
-                        $content_text = $row['content_text'];
-                        $content_image = $row['content_image'];
-                        $content_hash_id = $row['content_hash_id'];
+                        $content_id = escape($row['content_id']);
+                        $content_text = escape($row['content_text']);
+                        $content_image = escape($row['content_image']);
+                        $content_hash_id = escape($row['content_hash_id']);
                         
                       
                     $hashquery = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id} ";
                     $select_all_hashcontent_query = mysqli_query($connection, $hashquery);
                     $hash_title = "";
                     while($row = mysqli_fetch_assoc($select_all_hashcontent_query)) {
-                        $hash_title = $row['hash_title'];
+                        $hash_title = escape($row['hash_title']);
                         
                     }
                         

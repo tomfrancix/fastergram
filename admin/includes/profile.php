@@ -28,23 +28,43 @@
                 </div>
                 
                <span style="font-size:9pt"><?php echo $_SESSION['bio']; ?></span><br>
-                <div style="margin-top:5px;text-align:center;width:100%;border:1px dashed rgba(100,100,100,0.4);" class="btn btn-default">
-                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:grey;">Edit profile</a>
+                <div class="row" style="padding:0 8px;">
+                <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px dashed rgba(100,100,100,0.4);" class="btn btn-default">
+                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Edit profile</a>
+                </div>
+                </div>
+                <div class="row" style="padding:0 8px;">
+                    <div style="width:33%;float:left;padding:0 3px;">
+                        <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
+                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Messages</a>
+                        </div>
+                    </div>
+                    <div style="width:33%;float:left;padding:0 3px;">
+                        <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
+                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Insights</a>
+                        </div>
+                    </div>
+                    <div style="width:33%;float:left;padding:0 3px;">
+                        <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
+                            <a href="hashtags.php" style="color:white;">Subscriptions</a>
+                        </div>
+                    </div>
+                
                 </div>
                 
                 
 
-                <hr style="margin:5px 0 2px 0;">
+                <hr style="margin:5px 0 2px 0;border-color:rgba(100,100,100,0.3);">
                 
                 <div class="row">
                     <div style="width:50%;float:left;text-align:center;padding:5px 5px 0px 5px;background-color:rgba()">
-                        <span style="color:purple;font-size:14pt;" class="glyphicon glyphicon-picture"></span>
+                        <span style="color:white;font-size:14pt;" class="glyphicon glyphicon-picture"></span>
                     </div>
-                    <div style="width:50%;float:left;text-align:center;padding:5px 5px 0px 5px;border-left:1px solid rgba(100,100,100,0.1);">
-                        <span style="color:black;font-size:16pt;" class="glyphicon glyphicon-star"></span>
+                    <div style="width:50%;float:left;text-align:center;padding:5px 5px 0px 5px;border-left:1px solid rgba(100,100,100,0.3);">
+                        <span style="color:white;font-size:16pt;" class="glyphicon glyphicon-star"></span>
                     </div>
                 </div>
-                <hr style="margin:5px 0 2px 0;">
+                <hr style="margin:5px 0 2px 0;border-color:rgba(100,100,100,0.2);">
         
             </div>
             <div class="container" style="padding:0; margin:0;">
@@ -55,11 +75,11 @@
                     $select_all_content_query = mysqli_query($connection, $query);
                     
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
-                        $content_id = $row['content_id'];
-                        $content_image = $row['content_image'];
+                        $content_id = escape($row['content_id']);
+                        $content_image = escape($row['content_image']);
                         
                     ?>
-                            <a href="../post.php?id=<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;background-image:url('../images/<?php echo $content_image; ?>');background-size:cover;">
+                            <a href="../post.php?id=<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid rgba(20,20,20,0.7);background-image:url('../images/<?php echo $content_image; ?>');background-size:cover;">
                                
                             </div></a>
                 
