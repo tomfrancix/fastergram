@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <link href="admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <title>Vortex</title>
+    <title>Fastergram</title>
 
     <!-- Bootstrap Core CSS -->
 <!--    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
@@ -42,4 +42,4 @@
     </style>
 </head>
 
-<body style="height:95vh;width:100vw;overflow-x:hidden;margin-top:-25px;">
+<body id="top" style="height:95vh;width:100vw;max-width:100vw;overflow-x:hidden;margin-top:-25px;">

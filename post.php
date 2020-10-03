@@ -51,7 +51,15 @@ if(isset($_GET['id'])) {
                         $content_video = $row['content_video'];
                         $content_comment_count = $row['content_comment_count'];
                         $content_likes_count = $row['content_likes_count'];
-                        
+                        $ausername = "";
+                        $aimage = "";
+                        $query_user = "SELECT * FROM users WHERE user_id = {$content_user_id}";                     
+
+                        $select_user_query = mysqli_query($connection, $query_user);
+                            while($row = mysqli_fetch_assoc($select_user_query)) {
+                            $ausername = $row['username'];
+                            $aimage = $row['user_image'];
+                            }
                     ?>
                                         
 
@@ -61,10 +69,10 @@ if(isset($_GET['id'])) {
                     <div class="container">
                         <div class="row" style="padding:5px;">
                             <div class="w-20" style="width:50px;float:left;">
-                                <img src="images/profile.JPG" style="width:100%;border-radius:50%;">
+                                <img src="images/<?php echo $aimage ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-80" style="width:200px;float:left;padding:5px;">
-                                <span class="username"><a style="color:black;" href="user.php?id=<?php echo $user_id ?>"><b>tomfrancix</b></a></span><br>
+                                <span class="username"><a href="profile.php?id=<?php echo $content_user_id; ?>"><b><?php echo $ausername; ?></b></a></span><br>
 <?php 
 $query_hash = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id}";                     
 
@@ -157,7 +165,7 @@ if($count < 1) {
                         </div>
                         <?php } ?>
                         <div class="row" style="padding:8px 12px;padding-top:0;">
-                            <span class="likes" style="font-size:10pt;"><a style="color:black;" href="user.php?id=<?php echo $user_id ?>"><b>tomfrancix </b> </a> <span style="font-size:10pt;"><?php echo $content_text; ?>  </span></span>
+                            <span class="likes" style="font-size:10pt;"><a style="color:black;" href="profile.php?id=<?php echo $content_user_id ?>"><b><?php echo $ausername; ?> </b> </a> <span style="font-size:10pt;"><?php echo $content_text; ?>  </span></span>
                         </div>
                 <div class="row" style="padding:0px 10px;">
                             <span style="color:grey;font-size:10pt;">11 hours ago</span>

@@ -14,7 +14,7 @@ likeincomments();
    create_comment();
 ?>
     <!-- Page Content -->
-    <div class="container" style="padding:0 15px;;height:100%;width:100%;overflow-x:hidden;background-color:white;">
+    <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
 
         <div class="row">
 
@@ -47,7 +47,8 @@ likeincomments();
                 <div class="post" style="margin-bottom:10px;">
                     <div class="container">
                         <div class="row" style="text-align:center;">
-                            <span style="float:left;padding:5px 10px;"><a href="post.php?id=<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <?php $urlq = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
+                            <span style="float:left;padding:5px 10px;"><a href="<?php echo $urlq; ?>#<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
                             <span style="float:none;padding:8px 10px 2px 10px;margin-bottom:-5px;font-weight:bold;font-size:16pt;">Comments</span>
                             <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
                         </div>
@@ -67,7 +68,7 @@ likeincomments();
                                 <img src="images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-80" style="width:82%;float:left;padding:5px;">
-                                <span class="username"><a style="color:black;" href="user.php?id=<?php echo $user_id ?>">
+                                <span class="username"><a style="color:black;" href="profile.php?id=<?php echo $user_id ?>">
                                
                                     
                                 <b><?php echo $username; ?>  </b>  </a></span><span style="font-size:10pt;"><?php echo $content_text; ?> <span>more</span> </span><br>

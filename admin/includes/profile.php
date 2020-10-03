@@ -28,12 +28,22 @@
                 </div>
                 
                <span style="font-size:9pt"><?php echo $_SESSION['bio']; ?></span><br>
-                <div style="margin-top:5px;text-align:center;width:100%;" class="btn btn-default">
-                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Edit profile</a>
+                <div style="margin-top:5px;text-align:center;width:100%;border:1px dashed rgba(100,100,100,0.4);" class="btn btn-default">
+                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:grey;">Edit profile</a>
                 </div>
                 
                 
 
+                <hr style="margin:5px 0 2px 0;">
+                
+                <div class="row">
+                    <div style="width:50%;float:left;text-align:center;padding:5px 5px 0px 5px;background-color:rgba()">
+                        <span style="color:purple;font-size:14pt;" class="glyphicon glyphicon-picture"></span>
+                    </div>
+                    <div style="width:50%;float:left;text-align:center;padding:5px 5px 0px 5px;border-left:1px solid rgba(100,100,100,0.1);">
+                        <span style="color:black;font-size:16pt;" class="glyphicon glyphicon-star"></span>
+                    </div>
+                </div>
                 <hr style="margin:5px 0 2px 0;">
         
             </div>

@@ -65,46 +65,48 @@ $uid = $_GET['id'];
                                 <img src="images/<?php echo $content_image; ?>" style="width:100%;">
                             </div>
                         </div>
-                        <div class="row">
-                            <?php
-                           
-                    $query_likes = "SELECT * FROM likes WHERE like_content_id = {$content_id}";                     
-                    
-                    $like_query = mysqli_query($connection, $query_likes);
-                           $count = 0; 
-                          
-                        while($row = mysqli_fetch_assoc($like_query)) {
-                        $likeid = $row['like_id'];
-                        $like_user_id = $row['like_user_id'];
-                        $like_content_id = $row['like_user_id'];
-                        
-                        if($like_user_id == $thisid) { ?>
-                            
-                            <a href="index.php?delete_like=<?php echo $likeid; ?>"><span class="glyphicon glyphicon-heart" style="font-size:15pt;float:left;padding:10px 12px;color:orangered;"></span></a>
-                           
-                            <?php $count++; break; 
-                            } 
-                            
-                    ?>
-                            
-                            
-                        <?php } 
-                        if($count == 0) { ?>
-                             <?php
-   
+            <div class="row" style="background-color:white;">
+                <?php
+               if(isset($_SESSION['id'])) {
+        $query_likes = "SELECT * FROM likes WHERE like_content_id = {$content_id}";                     
+
+        $like_query = mysqli_query($connection, $query_likes);
+               $count = 0; 
+
+            while($row = mysqli_fetch_assoc($like_query)) {
+            $likeid = $row['like_id'];
+            $like_user_id = $row['like_user_id'];
+            $like_content_id = $row['like_user_id'];
+
+            if($like_user_id == $thisid) { ?>
+
+                <a href="index.php?delete_like=<?php echo $likeid; ?>"><span class="glyphicon glyphicon-heart" style="font-size:16pt;float:left;padding:10px 12px;color:orangered;"></span></a>
+
+                <?php $count++; break; 
+                } 
+
+        ?>
+
+
+            <?php } 
+            if($count == 0) { ?>
+                 <?php
+
 ?>
-                            <form method="post" action="" style="display:inline;float:left;">
-                                <input type="hidden" name="like_user_id" value="<?php echo $thisid; ?>">
-                                <input type="hidden" name="like_content_id" value="<?php echo $content_id; ?>">
-                                <button type="submit" name="like" style="padding:0;margin:0;border:none;background-color:white"><span class="glyphicon glyphicon-heart" style="font-size:15pt;float:left;padding:10px 12px;"></span></button>
-                            </form>
-                          <?php }
-                            
-                            ?>
-                        
-                            <a href="post.php?id=<?php echo $content_id; ?>"><span class="glyphicon glyphicon-comment" style="font-size:15pt;float:left;padding:10px 12px;"></span></a>
-                            <span class="glyphicon glyphicon-retweet" style="font-size:15pt;float:left;padding:10px 12px;"></span>
-                        </div>
+                <form method="post" action="" style="display:inline;float:left;">
+                    <input type="hidden" name="like_user_id" value="<?php echo $thisid; ?>">
+                    <input type="hidden" name="like_content_id" value="<?php echo $content_id; ?>">
+                    <button type="submit" name="like" style="padding:0;margin:0;border:none;background-color:white"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></button>
+                </form>
+              <?php }
+               } else { ?>
+                    <a href="login.php"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></span></a>
+              <?php }
+                ?>
+
+                <a href="comments.php?id=<?php echo $content_id; ?>"><img src="images/comment.svg"  style="width:45px;float:left;padding:10px 12px;"></a>
+                <a href="comments.php?id=<?php echo $content_id; ?>"><img src="images/star.svg"  style="width:45px;float:left;padding:10px 12px;"></a>
+            </div>
                         <?php if ($content_likes_count > 0) { ?>
                         <div class="row" style="padding:4px 12px;">
                             <span class="likes" style="font-size:8pt;"><b><?php echo $content_likes_count; ?> likes</b></span>

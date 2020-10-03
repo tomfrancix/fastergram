@@ -59,7 +59,8 @@ $uid = $_GET['id'];
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="row" style="text-align:center;padding-top:5px;">
-                            <span style="float:left;padding:5px 10px;"><a href="post.php?id=<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                             <?php $url = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
+                            <span style="float:left;padding:5px 10px;"><a href="<?php echo $url; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
                             <span style="float:none;display:inline-block;margin-top:2px;padding:0;font-weight:bold;font-size:16pt;"><?php echo $first_name; ?> <?php echo $last_name; ?></span>
                             <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
                         </div>
@@ -133,7 +134,7 @@ $dbuserid = $_SESSION['id'];
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">
             <div style="text-align:center;width:100%;" class="btn btn-default">
-                <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>">Message</a>
+                <a href="chat.php?id=<?php echo $user_id; ?>">Message</a>
             </div>
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">

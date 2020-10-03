@@ -3,9 +3,11 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Parisienne&display=swap');
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    font-family: 'Montserrat', sans-serif;
 }
 
 footer {
@@ -20,6 +22,9 @@ footer {
 }
 a {
     color:black;
+}
+hr {
+    color:grey;
 }
 .bottom-navbar a {
   float: left;
