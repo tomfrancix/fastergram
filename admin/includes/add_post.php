@@ -16,7 +16,6 @@ $thisid = $_SESSION['id']; ?>
     while($row = mysqli_fetch_assoc($select_all_hashtags_query)) {
         $hash_id = $row['hash_id'];
         $hash_title = $row['hash_title'];
-        $hash_status = $row['status'];
         
         echo "<option  value='{$hash_id}'>#{$hash_title}</options>";
     }

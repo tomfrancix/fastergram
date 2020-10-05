@@ -113,6 +113,12 @@ if(isset($_POST['create_post'])) {
         if(!$create_content_query) {
             die('QUERY FAILED' . mysqli_error($connection));
         } else {
+            
+     $query = "UPDATE hashtags SET content_count = content_count + 1 ";
+    $query .= "WHERE hash_id = $content_hash_id ";
+    
+    $update_count = mysqli_query($connection, $query);
+            
             header("Location:posts.php");
         }
     

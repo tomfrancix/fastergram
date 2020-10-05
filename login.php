@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Vortex</title>
+    <title>Fastergram</title>
 
     <!-- Bootstrap Core CSS -->
 <!--    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
@@ -39,38 +39,17 @@
                     Sign Up
                     
                 </a>
-                <a class="navbar-brand" href="index.php">Vortex</a>
+                <a class="navbar-brand" href="index.php">Fastergram</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    
-                    <?php
-                    
-                    $query = "SELECT * FROM sections";
-                    $select_all_sections_query = mysqli_query($connection, $query);
-                    
-                    while($row = mysqli_fetch_assoc($select_all_sections_query)) {
-                        $section_title = $row['section_title'];
-                        
-                        echo "<li><a href='#'>{$section_title}</a></li>";
-                    }
-                    
-                    ?>
-                    
-                    <li>
-                        <a href="#">Profile</a>
-                    </li>
-                    
-                </ul>
-            </div>
+            
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
     <div class="container" style="text-align:center;">
          <div class="row" style="margin-top:10vh;margin-bottom:10vh;">
-            <h1 STYLE="COLOR:RGBA(09,58,57,1);"><b>VORTEX</b></h1>
+            <h1 STYLE="COLOR:RGBA(09,58,57,1);font-family: 'Montserrat', sans-serif;"><b>Fastergram</b></h1>
         </div>
         <div class="row">
             <form action="includes/login.php" method="post" >

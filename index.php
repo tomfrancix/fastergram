@@ -18,7 +18,7 @@ unfollow_hashtags();
     <?php
     if(isset($_SESSION['id'])) {
         $thisid = $_SESSION['id'];
-    } 
+    }
  $total = 0;
       $allowed = array();        
       $allowedf = array();        
@@ -230,7 +230,9 @@ if($count < 1) {
             </section>
             <?php } }?>
             <div class="row" style="padding:4px 10px;">
-                <span style="color:grey;font-size:8pt;">11 hours ago</span>
+                <span class="dater" id="<?php echo $content_datetime; ?>" style="color:grey;font-size:8pt;">asdfa</span>
+            
+                   
             </div>
         </div>
 

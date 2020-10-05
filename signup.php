@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Vortex</title>
+    <title>Fastergram</title>
 
     <!-- Bootstrap Core CSS -->
 <!--    <link href="./css/bootstrap.min.css" rel="stylesheet">-->
@@ -39,7 +39,7 @@
                     Login
                     
                 </a>
-                <a class="navbar-brand" href="index.php">Vortex</a>
+                <a class="navbar-brand" href="index.php">Fastergram</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

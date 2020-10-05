@@ -11,7 +11,7 @@ $select_users_by_id = mysqli_query($connection, $query);
 while($row = mysqli_fetch_assoc($select_users_by_id)) {
   
     $username = escape($row['username']);
-    $email = escape($row['email'];
+    $email = escape($row['email']);
     $password = escape($row['password']);
     $user_image = escape($row['user_image']);
     $user_bio = escape($row['user_bio']);

@@ -269,7 +269,7 @@ $(document).ready(function() {
                         </section>
                         <?php } }?>
                         <div class="row" style="padding:4px 10px;">
-                            <span style="color:grey;font-size:8pt;">11 hours ago</span>
+                            <span class="dater" id="<?php echo $content_datetime; ?>" style="color:grey;font-size:8pt;"></span>
                         </div>
                     </div>
                 
@@ -285,7 +285,42 @@ $(document).ready(function() {
 include "includes/sidebar.php"; 
 ?>
         </div>
+<script>
+    
+    function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
 
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years ago";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " months ago";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " days ago";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hours ago";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes ago";
+  }
+  return Math.floor(seconds) + " seconds ago";
+}
+    var x = document.getElementsByClassName("dater");
+    var i;
+    for (i = 0; i < x.length; i++) {
+    var jsdate = new Date(x[i].id); 
+    jsdate = timeSince(jsdate);
+    x[i].innerHTML = jsdate;
+    }
+</script>
 
 
      

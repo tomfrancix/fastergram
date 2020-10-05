@@ -11,7 +11,42 @@
             </div>
             <!-- /.row -->
         </footer>
+<script>
+    
+    function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
 
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years ago";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " months ago";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " days ago";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hours ago";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes ago";
+  }
+  return Math.floor(seconds) + " seconds ago";
+}
+    var x = document.getElementsByClassName("dater");
+    var i;
+    for (i = 0; i < x.length; i++) {
+    var jsdate = new Date(x[i].id); 
+    jsdate = timeSince(jsdate);
+    x[i].innerHTML = jsdate;
+    }
+</script>
     </div>
 <div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(09,58,57,1);padding-top:0;padding-bottom:0;z-index:200;">
             <a href="index.php" style="width:20%;text-align:center;float:left;padding:18px;">

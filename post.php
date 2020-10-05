@@ -168,7 +168,7 @@ if($count < 1) {
                             <span class="likes" style="font-size:10pt;"><a style="color:black;" href="profile.php?id=<?php echo $content_user_id ?>"><b><?php echo $ausername; ?> </b> </a> <span style="font-size:10pt;"><?php echo $content_text; ?>  </span></span>
                         </div>
                 <div class="row" style="padding:0px 10px;">
-                            <span style="color:grey;font-size:10pt;">11 hours ago</span>
+                            <span class="dater" id="<?php echo $content_datetime; ?>" style="color:grey;font-size:8pt;">asdfa</span>
                         
                         <div class="row" style="padding:8px 12px;padding-top:10px;text-align:center;">
                             <span class="likes" style="font-size:10pt;color:grey;"><a href="comments.php?id=<?php echo $content_id ?>">~View comments~</a></span>
