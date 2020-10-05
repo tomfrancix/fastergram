@@ -1,4 +1,4 @@
- <div class="nav-wrapper" style="height:10px;width:100%;margin:0;margin-bottom:-2px;">
+ <div class="nav-wrapper" style="height:10px;width:100vw;max-width:100%;margin:0;margin-bottom:-2px;">
      <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,10 +8,10 @@
                     
                 </button>
                 <a   class="navbar-brand" href="index.php" style="font-family: 'Parisienne', cursive;font-size:18pt;text-align:center;color:white;display:inline-block;float:none;">Fastergram</a>
-                 <button type="button" onclick="location.href='camera.php'" class="navbar-toggle" style="float:right;padding:5px;border:none;">
+                 <a href="admin/messages.php" class="navbar-toggle" style="float:right;padding:5px;border:none;">
                     <span class="fa fa-paper-plane" style="font-size:15pt; color:lightgrey;"></span>
                     
-                </button>
+                </a>
                 <script>
 $(window).scroll(function() {
     var height = $(window).scrollTop();

@@ -58,8 +58,25 @@
             <a href="camera.php" style="width:20%;text-align:center;float:left;padding:18px;">
                <span class="glyphicon glyphicon-camera"></span>
             </a>
-            <a href="camera.php" style="width:20%;text-align:center;float:left;padding:18px;">
-               <span class="glyphicon glyphicon-heart"></span>
+    
+            <a href="notifications.php" style="width:20%;text-align:center;float:left;padding:18px;">
+              <?php if(isset($_SESSION['id'])) {
+                        $sessionid = $_SESSION['id'];
+                    $query = "SELECT * FROM notifications WHERE note_to_user_id = '{$sessionid}' ORDER BY note_id DESC";
+                    $select_all_notificationsa_query = mysqli_query($connection, $query);
+                    $countnotificationsa = 0;
+                    while($row = mysqli_fetch_assoc($select_all_notificationsa_query)) {
+                        $note_status = $row['note_status'];
+                    if($note_status == "Unchecked") {
+                        $countnotificationsa++;
+                    }
+                    }
+                    if($countnotificationsa > 0) { ?>
+                        <span class="glyphicon glyphicon-heart"></span><br>
+        <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -25px -1px;padding:0;"></span>
+                   <?php } else { ?>
+                  <span class="glyphicon glyphicon-heart"></span>
+                   <?php } } ?>
             </a>
     <?php if(isset($_SESSION['image'])) {
     ?>

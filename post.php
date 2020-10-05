@@ -21,7 +21,7 @@ if(isset($_GET['id'])) {
     <!-- Page Content -->
     <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
 <div class="row" style="text-align:center;padding-top:3px;">
-                            <span style="float:left;padding:5px 10px;"><a href="index.php#<?php echo $pid; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <span style="float:left;padding:5px 10px;"><a href="javascript:history.back(1)"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
                             <span style="float:none;display:inline-block;padding:3px 10px 2px 10px;margin-top:0;font-weight:bold;font-size:16pt;">View Post</span>
                             <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
                         </div>
@@ -92,10 +92,11 @@ $sub_user_id = $row['sub_user_id'];
     $count++;
 if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
    
-                                ?><span class="hashtag"><button class="btn btn-blue" style="font-size:8pt;padding:0 5px;">Subscribed <span style="font-size:7pt;opacity:0.5;"><a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>">[Undo]</a></span></button></span> <?php
+                                ?><span class="hashtag"><button class="btn btn-danger" style="display:inline-block;font-size:8pt;padding:0 5px;">Subscribed <span style="font-size:7pt;opacity:0.5;"><a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>">[Undo]</a></span></button></span> <?php
 } 
 else {
-    ?><span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-danger" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
+    ?>
+                                <span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
 }}
 if($count < 1) {
     
@@ -103,7 +104,7 @@ if($count < 1) {
     <form method="post" action="" style="display:inline;">
                 <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                
                 <input type="hidden" name="sub_user_id" value="<?php echo $sessionid; ?>"> 
-             <span class="hashtag"><button type="submit" name="followinit" class="btn btn-danger" style="display:inline-block;font-size:8pt;padding:0 5px;">Subscribe</button></span> 
+             <span class="hashtag"><button type="submit" name="followinit" class="btn btn-default"  style="font-size:8pt;padding:0 5px;">Subscribe</button></span> 
     </form>    
                                
 

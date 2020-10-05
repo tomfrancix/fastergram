@@ -36,7 +36,7 @@
                 <div class="row" style="padding:0 8px;">
                     <div style="width:33%;float:left;padding:0 3px;">
                         <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
-                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Messages</a>
+                            <a href="messages.php" style="color:white;">Messages</a>
                         </div>
                     </div>
                     <div style="width:33%;float:left;padding:0 3px;">

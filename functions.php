@@ -25,10 +25,16 @@ if(isset($_POST['create_comment'])) {
         if(!$create_comment_query) {
             die('QUERY FAILED' . mysqli_error($connection));
         } else {
-             $query = "UPDATE content SET content_comment_count = content_comment_count + 1 ";
-    $query .= "WHERE content_id = $comment_content_id ";
-    
-    $update_comment_count = mysqli_query($connection, $query);
+        
+        $query = "UPDATE content SET content_comment_count = content_comment_count + 1 ";
+        $query .= "WHERE content_id = $comment_content_id ";
+        $update_comment_count = mysqli_query($connection, $query);
+          
+            
+        $queryn = "INSERT INTO notifications(note_to_user_id, note_from_user_id, note_content, note_content_id, note_status)";
+        $queryn .= "VALUES('{$comment_to_user}','{$comment_user_id}','{$comment_text}','{$comment_content_id}', 'Unchecked' )";
+        $create_notification_query = mysqli_query($connection, $queryn);
+            
             header("Location: comments.php?id={$comment_content_id}");
         }
     
@@ -44,6 +50,7 @@ function like() {
 
 if(isset($_POST['like'])) {
 
+    $content_user_id = $_POST['content_user_id'];
     $like_user_id = $_POST['like_user_id'];
     $like_content_id = $_POST['like_content_id'];
     
@@ -60,8 +67,13 @@ if(isset($_POST['like'])) {
         } else {
              $queryc = "UPDATE content SET content_likes_count = content_likes_count + 1 ";
     $queryc .= "WHERE content_id = $like_content_id ";
-    
     $update_like_count = mysqli_query($connection, $queryc);
+    
+        $queryn = "INSERT INTO notifications(note_to_user_id, note_from_user_id, note_content, note_content_id, note_status)";
+        $queryn .= "VALUES('{$content_user_id}','{$like_user_id}','liked your post','{$like_content_id}', 'Unchecked' )";
+            
+    $update_note_count = mysqli_query($connection, $queryn);
+    
             header("Location: index.php#{$like_content_id}");
         }
     
@@ -71,6 +83,40 @@ if(isset($_POST['like'])) {
 }
    
 }
+function likecomment() {
+    global $connection;
+
+if(isset($_POST['likecomment'])) {
+    
+    $like_user_id = $_POST['comlike_user_id'];
+    $like_content_id = $_POST['comlike_content_id'];
+    $like_comment_id = $_POST['comlike_comment_id'];
+    
+    
+    
+        $query = "INSERT INTO comlikes(comlike_user_id, comlike_comment_id)";
+    
+        $query .= "VALUES('{$like_user_id}','{$like_comment_id}' )";
+
+        $create_like_query = mysqli_query($connection, $query);
+
+        if(!$create_like_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+             $queryc = "UPDATE comments SET com_like_count = com_like_count + 1 ";
+    $queryc .= "WHERE comment_id = $like_comment_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc);
+            header("Location: comments.php?id={$like_content_id}");
+        }
+    
+   
+    
+    
+}
+   
+}
+
 
 function follow() {
     global $connection;
@@ -222,6 +268,31 @@ if(isset($_GET['remove_like'])) {
 }
 }
 
+
+function deletecomlike() {
+    global $connection;
+if(isset($_GET['deletecomlike'])) {
+    $the_like_id = $_GET['deletecomlike'];
+
+   if(isset($_GET['postcom'])) {
+    $like_content_id = $_GET['postcom'];
+    
+    if(isset($_GET['commentid'])) {
+    $like_comment_id = $_GET['commentid'];
+     $queryc = "UPDATE comments SET com_like_count = com_like_count - 1 ";
+    $queryc .= "WHERE comment_id = $like_comment_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc);
+    
+    $query = "DELETE FROM comlikes WHERE comlike_id = {$the_like_id} ";
+    $delete_like_query = mysqli_query($connection, $query);
+    
+    
+    header("Location:comments.php?id=$like_content_id");
+   }}
+}
+} //WORKS
+
 function edit_comment() {
     global $connection;
 if(isset($_POST['edit_comment'])) {
@@ -238,6 +309,7 @@ if(isset($_POST['edit_comment'])) {
     header("Location:post.php?id={$comment_content_id}");
 }
 }
+
 function initial_follow_hashtags() {
     global $connection;
 if(isset($_POST['followinit'])) {
@@ -306,4 +378,20 @@ if(isset($_GET['unfollow'])) {
         
 }
 
+function check_notification() {
+    global $connection;
+if(isset($_GET['check'])) {
+    $note_id = $_GET['check'];      
+    
+    $query = "UPDATE notifications SET note_status = 'Checked' WHERE note_id = {$note_id} ";
+    
+    $update_query = mysqli_query($connection, $query);
+    
+    if(!$update_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    }
+    
+    header("Location:notifications.php");
+}
+}
 ?>

@@ -3,6 +3,13 @@ include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
 
+if(isset($_GET['hashtag'])) { 
+$hashtag_id = $_GET['hashtag']; ?>
+    <script>
+        window.onload = function() {
+        chooseaValue(<?php echo $hashtag_id; ?>);
+        }</script>
+<?php }
 ?>
 
     <!-- Page Content -->
@@ -19,7 +26,7 @@ include "includes/navigation.php";
            style="width:100%;padding:2px;border-radius:5px;font-size:10pt;min-width:100%;border:none;display:inline-block;max-width:100%;">
 <hr style="margin:0">
     <ul id="mySideIndustryList">
-        <?php 
+        <?php
                     $query = "SELECT * FROM hashtags ORDER BY content_count DESC";
                     $select_all_hashtag_query = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_all_hashtag_query)) {
