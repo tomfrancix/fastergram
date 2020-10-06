@@ -1,7 +1,6 @@
 <?php 
 include "includes/db.php";
 include "includes/header.php";
-include "includes/navigation.php"; 
 check_notification();
 if(!isset($_SESSION['role'])) {
    
@@ -13,13 +12,12 @@ if(!isset($_SESSION['role'])) {
     <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
         <div class="row">
             <div class="col-md-8" style="padding:0;">
-                <div class="post" style="margin-bottom:5px;margin-top:8px;">
+                <div class="post" style="margin-bottom:5px;margin-top:8px;position:fixed;top:0;">
                     <div class="container">
-                        <div class="row" style="text-align:center;">
-                            <?php $urlq = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
-                            <span style="float:left;padding:5px 10px;"><a href="javascript:history.back(1)"><span style="font-size:14pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
-                            <span style="float:none;padding:8px 10px 2px 10px;margin-bottom:-5px;font-weight:bold;font-size:14pt;">Notifications</span>
-                            <span style="float:right;padding:5px 10px;"><span style="font-size:14pt;visibility:hidden;"class="glyphicon glyphicon-retweet"></span></span>
+                        <div class="row" style="text-align:center;align-items:center;">
+                            <span style="float:left;padding:5px 10px;"><a href="index.php"><span style="font-size:14pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <span style="position:fixed;left: 50%;font-family: 'Parisienne', cursive;font-size:18pt;
+    transform: translate(-50%, 0);padding:8px 10px 2px 10px;margin-top:-5px;font-weight:bold;font-size:16pt;">Notifications</span>
                         </div>
                     </div>
                 </div>
@@ -37,7 +35,7 @@ if(!isset($_SESSION['role'])) {
                         $note_content = $row['note_content'];
                         $note_content_id = $row['note_content_id'];
                         $note_status = $row['note_status'];
-                        
+                     if($note_from_user_id !== $sessionid) {
                         if($note_status == "Unchecked") {
                     ?>
                 <!-- First Blog Post -->
@@ -75,7 +73,7 @@ if(!isset($_SESSION['role'])) {
                            <?php } ?>
                 
                 </div>
-            <?php } if($note_status == "Checked" && $countnotifications < 10 ) {
+            <?php } else if($note_status == "Checked" && $countnotifications < 10 ) {
                     ?>
                 <!-- First Blog Post -->
                 <div class="post">
@@ -111,7 +109,7 @@ if(!isset($_SESSION['role'])) {
                            <?php  $countnotifications++; } ?>
                 
                 </div>
-            <?php }  } ?> 
+            <?php } } } ?> 
 
                 
 

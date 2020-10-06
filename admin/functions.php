@@ -376,4 +376,35 @@ if(isset($_POST['edit_profile'])) {
 }
 }
 }
+
+function create_message() {
+    global $connection;
+if(isset($_POST['create_message'])) {
+
+    $message_to_user_id = escape($_POST['message_to_user_id']);
+    $message_from_user_id = escape($_POST['message_from_user_id']);
+    $message_content = escape($_POST['message_content']);
+    $message_status = escape($_POST['message_status']);
+//        $message_image = $_FILES['message_image']['name'];
+//        $message_image_temp = $_FILES['message_image']['tmp_name'];        
+//    $content_datetime = date('d-m-y H-i-s');
+        
+//    move_uploaded_file($content_image_temp, "../images/$content_image" );
+    
+        $query = "INSERT INTO messages(message_to_user_id, message_from_user_id, message_content, message_status)";
+        $query .= "VALUES('{$message_to_user_id}','{$message_from_user_id}','{$message_content}','{$message_status}')";
+
+        $create_message_query = mysqli_query($connection, $query);
+
+        if(!$create_message_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+            
+  
+            
+            header("Location:messages.php?source=chat&id={$message_to_user_id}");
+        }
+    
+}
+}
 ?>

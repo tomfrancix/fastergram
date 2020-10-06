@@ -134,7 +134,7 @@ $dbuserid = $_SESSION['id'];
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">
             <div style="text-align:center;width:100%;" class="btn btn-default">
-                <a href="chat.php?id=<?php echo $user_id; ?>">Message</a>
+                <a href="admin/messages.php?source=chat&id=<?php echo $user_id; ?>">Message</a>
             </div>
         </div>
         <div style="text-align:center;padding:0 2px;margin-top:5px;width:33%;float:left;">

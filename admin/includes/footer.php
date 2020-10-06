@@ -56,7 +56,8 @@
                     $countnotificationsa = 0;
                     while($row = mysqli_fetch_assoc($select_all_notificationsa_query)) {
                         $note_status = $row['note_status'];
-                    if($note_status == "Unchecked") {
+                    $note_from_user_id = $row['note_from_user_id'];
+                    if($note_status == "Unchecked" && $note_from_user_id !== $sessionid) {
                         $countnotificationsa++;
                     }
                     }
@@ -70,7 +71,7 @@
     <?php if(isset($_SESSION['image'])) {
     ?>
     <a href="index.php" style="width:20%;text-align:center;float:left;background-color:transparent;padding-top:10px;">
-               <span style="display:inline-block;border-radius:50%;border:1px solid white;"><img src="../images/profile.jpg" style="width:30px;border-radius:50%;border:1px solid black;"></span><br>
+               <span style="display:inline-block;border-radius:50%;border:1px solid white;"><img src="../images/<?php echo $_SESSION['image']; ?>" style="width:30px;height:30px;border-radius:50%;border:1px solid black;"></span><br>
         <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -35px -2px;padding:0;"></span>
             </a>
     <?php

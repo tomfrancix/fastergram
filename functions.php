@@ -35,7 +35,7 @@ if(isset($_POST['create_comment'])) {
         $queryn .= "VALUES('{$comment_to_user}','{$comment_user_id}','{$comment_text}','{$comment_content_id}', 'Unchecked' )";
         $create_notification_query = mysqli_query($connection, $queryn);
             
-            header("Location: comments.php?id={$comment_content_id}");
+            header("Location: comments.php?id={$comment_content_id}#tobottom");
         }
     
    
@@ -103,11 +103,11 @@ if(isset($_POST['likecomment'])) {
         if(!$create_like_query) {
             die('QUERY FAILED' . mysqli_error($connection));
         } else {
-             $queryc = "UPDATE comments SET com_like_count = com_like_count + 1 ";
+        $queryc = "UPDATE comments SET com_like_count = com_like_count + 1 ";
     $queryc .= "WHERE comment_id = $like_comment_id ";
-    
     $update_like_count = mysqli_query($connection, $queryc);
-            header("Location: comments.php?id={$like_content_id}");
+            
+            header("Location: comments.php?id={$like_content_id}#comment{$like_comment_id}");
         }
     
    
@@ -242,7 +242,7 @@ if(isset($_GET['delete_like'])) {
     $delete_like_query = mysqli_query($connection, $query);
     
     
-    header("Location:index.php#{$the_like_id}");
+    header("Location:index.php#{$like_content_id}");
 }
 }
 function remove_like() {

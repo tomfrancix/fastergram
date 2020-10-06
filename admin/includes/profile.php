@@ -9,17 +9,17 @@
                         <ol style="text-align:center;list-style:none;width:100%;padding:0;">
                             <li style="float:left;width:24%;margin:0;padding:0;border:none;border-radius:7px;">
                                  <img src="../images/<?php echo $_SESSION['image']; ?>" style="width:80px;border-radius:50%;margin:0;margin-bottom:10px;"><br>
-                                <span style="font-weight:bold;font-size:10pt;margin:0 0 8px -12px;">@<?php echo $_SESSION['username']; ?> </span>
+                                <span style="font-weight:bold;font-size:10pt;margin:0 0 8px 0;">@<?php echo $_SESSION['username']; ?> </span>
                                 
                             </li>
-                            <li style="float:left;width:24%;margin:1px;padding:10px;border-radius:7px;">
-                                <span style="font-size:10pt;">27</span><br><i class="fa fa-camera"></i>  <br><a href="index.html">Uploads</a>
+                            <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
+                                <span>27</span><br><i class="fa fa-camera"></i>  <br><a href="index.html" style="font-size:8pt;">Uploads</a>
                             </li>
-                            <li style="float:left;width:24%;margin:1px;padding:10px;border-radius:7px;">
-                                <span style="font-size:10pt;"><?php echo $_SESSION['follower']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html">Followers</a>
+                            <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
+                                <span><?php echo $_SESSION['follower']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html" style="font-size:8pt;">Followers</a>
                             </li>
-                            <li style="float:left;width:24%;margin:1px;padding:10px;border-radius:7px;">
-                                <span style="font-size:10pt;"><?php echo $_SESSION['following']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html">Following</a>
+                            <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
+                                <span><?php echo $_SESSION['following']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html" style="font-size:8pt;">Following</a>
                             </li>
                         </ol>
                        
@@ -28,25 +28,25 @@
                 </div>
                 
                <span style="font-size:9pt"><?php echo $_SESSION['bio']; ?></span><br>
-                <div class="row" style="padding:0 8px;">
+                <div class="row" style="padding:8px 8px 0 8px;">
                 <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px dashed rgba(100,100,100,0.4);" class="btn btn-default">
-                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Edit profile</a>
+                    <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:grey;">Edit profile</a>
                 </div>
                 </div>
                 <div class="row" style="padding:0 8px;">
                     <div style="width:33%;float:left;padding:0 3px;">
                         <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
-                            <a href="messages.php" style="color:white;">Messages</a>
+                            <a href="messages.php" style="color:grey;font-size:10pt;">Messages</a>
                         </div>
                     </div>
                     <div style="width:33%;float:left;padding:0 3px;">
                         <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
-                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:white;">Insights</a>
+                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:grey;font-size:10pt;">Insights</a>
                         </div>
                     </div>
                     <div style="width:33%;float:left;padding:0 3px;">
                         <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
-                            <a href="hashtags.php" style="color:white;">Subscriptions</a>
+                            <a href="hashtags.php" style="color:grey;font-size:8pt;">Subscriptions</a>
                         </div>
                     </div>
                 

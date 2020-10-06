@@ -1,4 +1,5 @@
 <?php
+create_message();
 $otheruser = 0;
  if(isset($_GET['id'])) {
     $otheruser = $_GET['id'];
@@ -36,7 +37,7 @@ $image = $row['user_image'];
             </div>
         </nav>    
 <div id="page-wrapper">
-<div class="container" style="padding:0 15px;height:100%;margin:0;width:100%;max-width:100vw;overflow-x:hidden;background-color:rgba(22,22,22,1);">
+<div class="container" id="messagecontainer"  style="padding:0 15px;height:100%;margin:0;width:100%;max-width:100vw;overflow-x:hidden;background-color:rgba(22,22,22,1);">
 
 <div class="row">
 
@@ -46,47 +47,73 @@ $image = $row['user_image'];
         <div class="container">
            
     <hr style="margin:0;opacity:0.1;" >
+       <?php $query_messages = "SELECT * FROM messages WHERE message_to_user_id = $sessionid AND message_from_user_id = $otheruser OR message_to_user_id = $otheruser AND message_from_user_id = $sessionid";                     
+
+$select_messages_query = mysqli_query($connection, $query_messages);
+       $lastmessage = "";
+while($row = mysqli_fetch_assoc($select_messages_query)) {
+$message_id = $row['message_id'];
+$message_to_user_id = $row['message_to_user_id'];
+$message_from_user_id = $row['message_from_user_id'];
+$message_content = $row['message_content'];
+$message_status = $row['message_status'];
+
+$query_user = "SELECT * FROM users WHERE user_id = $message_from_user_id ";                     
+
+$select_user_query = mysqli_query($connection, $query_user);
+while($row = mysqli_fetch_assoc($select_user_query)) {
+$mimage = $row['user_image'];
+  
+   
+            
+if($message_to_user_id == $otheruser) {  
+            
+     $lastmessage = "sent";
+            
+            ?>
             <div class="row" style="padding:5px;padding-bottom:0;">
             <div style="width:100%;">
                 <div style="width:20%;text-align:right;padding:8px;float:left;margin:0;display:inline-block;">
-                    <img src="../images/profile.jpg" style="width:30px;border-radius:50%;">
+                    <img src="../images/<?php echo $mimage; ?>" style="width:30px;height:30px;border-radius:50%;">
                 </div>    
                 <div style="width:80%;float:left;margin:0;display:inline-block;padding:8px;">
                     <div style="border:1px solid rgba(100,100,100,0.5);background-color:rgba(10,10,10,0.7);border-radius:12px;padding:8px;width:100%;">
-                        <span style="color:lightgrey;line-height:17pt;">Hey man, you about?</span>
+                        
+                        <span style="color:chartreuse;line-height:17pt;"><?php echo $message_content; ?></span>
                     </div>
                 </div>
             </div>
-            </div> 
+            </div>
+            <?php } else if($message_to_user_id == $sessionid) { 
             
+            $lastmessage = "Received"; ?>
             <div class="row" style="padding:5px;padding-bottom:0;">
             <div style="width:100%;">
                    
                 <div style="width:80%;float:left;margin:0;display:inline-block;padding:8px;">
                     <div style="border:1px solid rgba(100,100,100,0.5);background-color:rgba(10,10,10,0.7);border-radius:12px;padding:8px;width:100%;">
-                        <span style="color:lightgrey;line-height:17pt;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose.
+                        <span style="color:lightgrey;line-height:17pt;"><?php echo $message_content; ?>
 </span>
                     </div>
                 </div>
                 <div style="width:20%;text-align:left;padding:8px;float:left;margin:0;display:inline-block;">
-                    <img src="../images/person11.jpg" style="width:30px;border-radius:50%;">
+                    <img src="../images/<?php echo $mimage; ?>" style="width:30px;height:30px;border-radius:50%;">
                 </div> 
             </div>
             </div>
+            <?php
+            if($lastmessage == "Received") {
+            $queryq = "UPDATE messages SET message_status = 'Checked' WHERE message_id = {$message_id} ";
+            $update_messages_query = mysqli_query($connection, $queryq);
+            }
+ } } } 
             
-            <div class="row" style="padding:5px;padding-bottom:0;">
-            <div style="width:100%;">
-                <div style="width:20%;text-align:right;padding:8px;float:left;margin:0;display:inline-block;">
-                    <img src="../images/profile.jpg" style="width:30px;border-radius:50%;">
-                </div>    
-                <div style="width:80%;float:left;margin:0;display:inline-block;padding:8px;">
-                    <div style="border:1px solid rgba(100,100,100,0.5);background-color:rgba(10,10,10,0.7);border-radius:12px;padding:8px;width:100%;">
-                        <span style="color:lightgrey;line-height:17pt;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose.
-</span>
-                    </div>
-                </div>
-            </div>
-            </div> 
+            
+            
+            
+            ?>
+
+
             
             
         </div> 
@@ -103,52 +130,24 @@ $image = $row['user_image'];
 <form action="" method="POST" enctype="multipart/form-data">
      <div class="container" style="padding:8px 10px;">
         <div class="row">
-            <div class="w-20" style="width:30px;float:left;">
-                <img src="../images/profile.JPG" style="width:100%;border-radius:50%;">
+            <div class="w-20" style="width:30px;height:30px;float:left;">
+                <img src="../images/<?php echo $_SESSION['image']; ?>" style="width:100%;height:100%;border-radius:50%;">
             </div>
             <div class="w-80" style="min-width:85%;width:85%;float:left;padding:0 5px 5px 10px;">
-                <textarea type="text" style="border:none;width:100%;background-color:rgba(22,22,22,1);color:white;" name="comment_text" id="textboxplace" placeholder="Message..."></textarea>
+                <textarea type="text" style="border:none;width:100%;background-color:rgba(22,22,22,1);color:white;" name="message_content" placeholder="Message..."></textarea>
             </div>
-            <input type="hidden" name="comment_content_id" id="contentid" value="<?php echo $content_id; ?>">
-            <input type="hidden" name="comment_user_id" id="userid" value="<?php echo $sessionid; ?>">
-            <input type="hidden" name="comment_to_user" id="commenttouser" value="<?php echo $content_user_id; ?>">
-            <input type="hidden" name="comment_reply_user_id" id="commentreplyuserid" value="0">
-            <input type="hidden" name="comment_reply_id" id="commentreplyid" value="0">
+            <input type="hidden" name="message_to_user_id" value="<?php echo $user_id; ?>">
+            <input type="hidden" name="message_from_user_id" value="<?php echo $sessionid; ?>">
+            <input type="hidden" name="message_status"  value="Unchecked">
+            <input type="hidden" name="message_image" value="">
         </div>    
     </div>
-    <input class="btn btn-primary" style="width:100%;background-color:rgba(10,10,10,0.5);border:1px dashed rgba(49,98,97,0.7);" type="submit" name="create_comment" value="Submit">
+    <input class="btn btn-primary" style="width:100%;background-color:rgba(10,10,10,0.5);border:1px dashed rgba(49,98,97,0.7);" type="submit" name="create_message" value="Submit">
 
 </form>
 
             </div>
-            <script>
-                function replyform(id,name,content,comment) {
-                    var contentid = document.getElementById('contentid');
-                    var commenttouser = document.getElementById('commenttouser');
-                    var commentreplyid = document.getElementById('commentreplyid');
-                    var commentreplyuserid = document.getElementById('commentreplyuserid');
-                    var textboxplace = document.getElementById('textboxplace');
-                   
-                    contentid.value = content;
-                    commenttouser.value = id;
-                    commentreplyid.value = comment;
-                    commentreplyuserid.value = id;
-                    textboxplace.value = "@" + name + " ";
-                    console.log(id,name,content,comment);
-                }
-                var x = document.getElementsByClassName("allreplies");
-                var i;
-                for (i = 0; i < x.length; i++) {
-
-                    var str = x[i].innerText;
-                    var firstword = str.split(" ")[0];
-                    var username = firstword.substring(1,firstword.length);
-                    str = str.substring(firstword.length, str.length);
-                    x[i].innerHTML = "<span><a href='profile.php?username="+username+"' style='color:deepskyblue'>"+firstword+" </a>"+str+"</span>";
-                    console.log(firstword);
-//                    firstword.style.color = 'red';
-                }
-            </script>
+          
     </div>
     </div>
 
@@ -156,5 +155,11 @@ $image = $row['user_image'];
    <?php } ?>
 
     </div>
-
+<script>
+    var el1 = parseInt(document.body.scrollHeight) - screen.height - 100;
+    var el2 = parseInt(document.documentElement.scrollHeight) - screen.height - 100 ;
+    console.log(el1);
+    window.scrollTo(0, el1 || el2);
+    
+</script>
   

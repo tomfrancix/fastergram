@@ -1,7 +1,6 @@
 <?php 
 include "includes/db.php";
 include "includes/header.php";
-include "includes/navigation.php"; 
 if(!isset($_SESSION['role'])) {
    
         header("Location: login.php");
@@ -10,7 +9,7 @@ if(!isset($_SESSION['role'])) {
 ?>
 
     <!-- Page Content -->
-    <div class="container" style="padding:0;margin:0;height:100%;width:100%;overflow-x:hidden;">
+    <div class="container" style="padding:0;margin:0;margin-top:-45px;height:100%;width:100%;overflow-x:hidden;">
         <div class="row" style="text-align:center;padding:10px 20px 5px 20px;">
                             <span style="float:left;padding:5px 10px;"><a href="index.php"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
                             <span style="float:none;padding:8px 10px 2px 0;margin-left:-25px;margin-bottom:-5px;font-weight:bold;font-size:16pt;">Camera</span>
@@ -25,8 +24,10 @@ if(!isset($_SESSION['role'])) {
         <button class="btn btn-default" style="color:black;width:80%;padding:25px 10px 25px 0;" onclick="download()">Stop <i style="color:red" class="glyphicon glyphicon-stop"></i></button>
     </div>
  </div>
-        <div class="row" style="padding:20px;">
-            <a class="btn btn-info" href="admin/posts.php?source=add_post">Upload from device...</a>
+        <div class="row" style="padding:20px;margin:0;width:100%;text-align:center;">
+            <a class="btn btn-info" href="admin/posts.php?source=add_post" style="margin:0 auto;padding:20px 10px;">
+            <span class="fa fa-upload" style="font-size:20pt;color:white;"></span><br>
+                Upload from device...</a>
         </div>
 
                     </div>
@@ -92,44 +93,7 @@ if(!isset($_SESSION['role'])) {
         }
     };
 </script>
-<div class="bottom-navbar" style="width:100%;text-align:center;" style="position:fixed;bottom:0;width:100%;background-color:red;">
-           <a href="index.php" style="width:20%;text-align:center;float:left;padding:18px;">
-                <span class="glyphicon glyphicon-home"></span>
-            </a>
-            <a href="search.php" style="width:20%;text-align:center;float:left;padding:18px;">
-                <span class="glyphicon glyphicon-search"></span>
-            </a>
-            <a href="camera.php" style="width:20%;text-align:center;float:left;padding:18px;">
-               <span class="glyphicon glyphicon-camera"></span>
-            </a>
-    
-            <a href="notifications.php" style="width:20%;text-align:center;float:left;padding:18px;">
-              <?php if(isset($_SESSION['id'])) {
-                        $sessionid = $_SESSION['id'];
-                    $query = "SELECT * FROM notifications WHERE note_to_user_id = '{$sessionid}' ORDER BY note_id DESC";
-                    $select_all_notificationsa_query = mysqli_query($connection, $query);
-                    $countnotificationsa = 0;
-                    while($row = mysqli_fetch_assoc($select_all_notificationsa_query)) {
-                        $note_status = $row['note_status'];
-                    if($note_status == "Unchecked") {
-                        $countnotificationsa++;
-                    }
-                    }
-                    if($countnotificationsa > 0) { ?>
-                        <span class="glyphicon glyphicon-heart"></span><br>
-        <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -25px -1px;padding:0;"></span>
-                   <?php } else { ?>
-                  <span class="glyphicon glyphicon-heart"></span>
-                   <?php } } ?>
-            </a>
-    <?php if(isset($_SESSION['image'])) {
-    ?>
-    <a href="admin/index.php" style="width:20%;text-align:center;float:left;background-color:transparent;padding-top:13px;">
-               <span style="display:inline-block;border-radius:50%;border:1px solid white;"><img src="images/profile.jpg" style="width:30px;border-radius:50%;border:1px solid black;"></span><br>
-        <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -35px -2px;padding:0;"></span>
-            </a>
-    <?php } ?>
-</div> 
+
     <!-- /.container -->
 
     <!-- jQuery -->

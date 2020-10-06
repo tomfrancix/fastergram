@@ -1,7 +1,6 @@
 <?php 
 include "includes/db.php";
 include "includes/header.php";
-include "includes/navigation.php"; 
 if(!isset($_SESSION['role'])) {
    
         header("Location: login.php");
@@ -16,13 +15,13 @@ deletecomlike();
    create_comment();
 ?>
     <!-- Page Content -->
-    <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
+    <div class="container" style="padding:0 15px;margin-top:-38px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
 
         <div class="row">
 
             <!-- Blog Entries Column -->
             <div class="col-md-8" style="padding:0;">
-
+<!--GET THE SPECIFIC POST-->
                 <?php
                  if(isset($_SESSION['id'])) {
                         $sessionid = $_SESSION['id'];
@@ -45,14 +44,15 @@ deletecomlike();
                                         
 
                 
-                <!-- First Blog Post -->
+<!--DISPLAY THE POST-->
                 <div class="post" style="margin-bottom:10px;">
                     <div class="container">
-                        <div class="row" style="text-align:center;">
-                            <?php $urlq = htmlspecialchars($_SERVER['HTTP_REFERER']); ?>
-                            <span style="float:left;padding:5px 10px;"><a href="<?php echo $urlq; ?>#<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
-                            <span style="float:none;padding:8px 10px 2px 10px;margin-bottom:-5px;font-weight:bold;font-size:16pt;">Comments</span>
-                            <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
+                        <div class="row" style="text-align:center;position:fixed;top:0;background-color:white;width:100%;padding:8px 5px;">
+                           
+                            <span style="float:left;padding:5px 10px;"><a href="index.php#<?php echo $content_id; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <span style="position:fixed;left: 50%;font-family: 'Parisienne', cursive;font-size:18pt;
+    transform: translate(-50%, 0);padding:8px 10px 2px 10px;margin-top:-5px;font-weight:bold;font-size:16pt;">Comments</span>
+                            
                         </div>
                         <hr style="margin:0;">
                         <div class="row" style="padding:5px;padding-bottom:0;">
@@ -69,7 +69,7 @@ deletecomlike();
                             <div class="w-20" style="width:40px;float:left;">
                                 <img src="images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
-                            <div class="w-80" style="width:82%;float:left;padding:5px;">
+                            <div class="w-80" style="width:78%;float:left;padding:5px;">
                                 <span class="username"><a style="color:black;" href="profile.php?id=<?php echo $user_id ?>">
                                
                                     
@@ -120,7 +120,7 @@ deletecomlike();
                        <hr style="margin:0;margin-bottom:8px;">
                         
                         
-<!--                        COMMENT-->
+<!--DISPLAY THE COMMENTS-->
                          <?php
                     if($content_comment_count == 0) {
                         ?> <p style="text-align:center;padding:40px 0;">~No comments to show~</p> <?php
@@ -137,19 +137,11 @@ deletecomlike();
                         $comment_reply_user_id = $row['comment_reply_user_id'];
                         $comment_reply_id = $row['comment_reply_user_id'];
                         $comment_like_count = $row['com_like_count'];
-                        
-                      
-//                    $contentquery = "SELECT * FROM content WHERE hash_id = {$content_hash_id} ";
-//                    $select_all_hashcontent_query = mysqli_query($connection, $hashquery);
-//                    $hash_title = "";
-//                    while($row = mysqli_fetch_assoc($select_all_hashcontent_query)) {
-//                        $hash_title = $row['hash_title'];
-//                        
-//                    }
+                 
                         
                     ?>
                         <?php if($comment_content_id == $content_id && $comment_reply_user_id == 0) { ?>
-                        <div class="row" style="padding:5px;padding-bottom:0;background-color:white;">
+                        <div id="comment<?php echo $comment_id; ?>" class="row" style="padding:5px;padding-bottom:0;background-color:white;">
                             
                <?php
 
@@ -166,7 +158,7 @@ deletecomlike();
                                 <img src="images/<?php echo $cimage; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-80" style="width:85%;float:left;padding:5px;">
-                                <span class="username"><a style="color:black;" href="user.php?id=<?php echo $user_id ?>"><b><?php echo $cusername; ?></b></a></span><span style="font-size:10pt;"> <?php echo $comment_text; ?> </span><br>
+                                <span class="username"><a style="color:black;" href="profile.php?id=<?php echo $user_id ?>"><b><?php echo $cusername; ?></b></a></span><span style="font-size:10pt;"> <?php echo $comment_text; ?> </span><br>
                                 <span style="color:grey;font-size:7pt;">11 hours ago</span> |  
                                 <?php if($comment_like_count == 1 ) { ?>
                                 <span class="hashtag" style="font-size:8pt;"><a href="#">1 likes</a></span> | 
@@ -183,7 +175,7 @@ deletecomlike();
                       $comlike_id = $row['comlike_id'];
                       $comlike_user_id = $row['comlike_user_id'];
                       $comlike_comment_id = $row['comlike_comment_id'];
-                  if($comlike_user_id = $sessionid) { ?>
+                  if($comlike_user_id == $sessionid) { ?>
                         <span class="hashtag" style="font-size:8pt;"><a href="comments.php?deletecomlike=<?php echo $comlike_id; ?>&postcom=<?php echo $content_id; ?>&commentid=<?php echo $comment_id; ?>"><span class="glyphicon glyphicon-heart" style="width:18px;padding:0 0;color:orangered"></span></a></span>
                                
                   <?php 
@@ -214,16 +206,18 @@ deletecomlike();
                                 $secondquery = "SELECT * FROM comments WHERE comment_content_id = {$content_id}";
                                 $select_all_replies_query = mysqli_query($connection, $secondquery);                            
                                 while($row = mysqli_fetch_assoc($select_all_replies_query)) {
-                                    $reply_id = $row['comment_id'];
+                                    $replying_id = $row['comment_id'];
                                     $reply_text = $row['comment_text'];
                                     $reply_user_id = $row['comment_user_id'];
                                     $reply_uid = $row['comment_reply_user_id'];
                                     $reply_id = $row['comment_reply_id'];
+                                    $reply_like_count = $row['com_like_count'];
+                                    $reply_content_id = $row['comment_content_id'];
                                    
                                 if($reply_uid == $comment_user_id && $reply_id == $comment_id) {
                             ?>
 <!--                            NESTED COMMENTS-->
-                            <div class="container" style="padding-left:50px;">
+                            <div  id="comment<?php echo $replying_id; ?>" class="container" style="padding-left:50px;">
                                 <div class="container" style="border-left:1px solid lightgrey;">
                                 <div class="row" style="padding:5px;padding-bottom:0;border-left:2px solid lightgrey;">
                                     <?php
@@ -240,16 +234,50 @@ deletecomlike();
                                         <img src="images/<?php echo $rimage; ?>" style="width:100%;border-radius:50%;">
                                     </div>
                                     <div class="w-80" style="width:85%;float:left;padding:5px;PADDING-TOP:0;">
-                                        <span class="username"><a style="color:black;" href="user.php?id=<?php echo $user_id; ?>"><b><?php echo $rusername; ?></b></a></span>
+                                        <span class="username"><a style="color:black;" href="profile.php?id=<?php echo $user_id; ?>"><b><?php echo $rusername; ?></b></a></span>
                                         
                                         <span class="allreplies" style="font-size:10pt;">
                                         
                                         
                                         <?php echo $reply_text; ?> </span><br>
                                         <span style="color:grey;font-size:7pt;">11 hours ago</span> | 
-                                        <span class="hashtag" style="font-size:8pt;"><a href="#">5 likes</a></span> | 
-                                        <span class="hashtag" style="font-size:8pt;"><a href="#">Reply</a></span> | 
-                                        <span class="hashtag" style="font-size:8pt;"><a href="#"><img src="images/heart.svg" style="width:18px;padding:0 4px;"></a></span>
+                                        <?php if($reply_like_count == 1 ) { ?>
+                                        <span class="hashtag" style="font-size:8pt;"><a href="#">1 like</a></span> | 
+                                        <?php } else if($reply_like_count > 1) { ?> 
+                                        <span class="hashtag" style="font-size:8pt;"><a href="#"><?php echo $reply_like_count; ?> likes</a></span> | 
+                                        <?php } else { ?> 
+                                        <?php } ?> 
+                                        <span class="hashtag" style="font-size:8pt;"><a onclick="replyform(<?php echo $ruser_id; ?>,'<?php echo $rusername ?>',<?php echo $reply_content_id; ?>,<?php echo $reply_id; ?>)">Reply</a></span> | 
+                                        
+                                        <?php 
+                  $query_like = "SELECT * FROM comlikes WHERE comlike_comment_id = $replying_id";
+                  $rselect_users_like_query = mysqli_query($connection, $query_like);
+                  $did_users_like = false;
+                  while($row = mysqli_fetch_assoc($rselect_users_like_query)) {
+                      $rcomlike_id = $row['comlike_id'];
+                      $rcomlike_user_id = $row['comlike_user_id'];
+                      $rcomlike_comment_id = $row['comlike_comment_id'];
+                  if($rcomlike_user_id == $sessionid) { ?>
+                        <span class="hashtag" style="font-size:8pt;"><a href="comments.php?deletecomlike=<?php echo $rcomlike_id; ?>&postcom=<?php echo $reply_content_id; ?>&commentid=<?php echo $replying_id; ?>"><span class="glyphicon glyphicon-heart" style="width:18px;padding:0 0;color:orangered"></span></a></span>
+                                      
+                               
+                  <?php 
+                      $did_users_like = true;
+                      break; } else { 
+                      continue;
+                  }
+                  }
+                  if($did_users_like == false) { ?>
+                                <span class="hashtag" style="font-size:8pt;">|  
+                 <form method="post" action="" style="display:inline;">
+                    <input type="hidden" name="comlike_user_id" value="<?php echo $sessionid; ?>">
+                    <input type="hidden" name="comlike_comment_id" value="<?php echo $replying_id; ?>">
+                    <input type="hidden" name="comlike_content_id" value="<?php echo $content_id; ?>">
+                    <button type="submit" name="likecomment" style="padding:0;margin:0;margin-left:-10px;border:none;background-color:white"> <img src="images/heart.svg" style="width:18px;padding:0 4px;"></button>
+                                    </form></span>
+                 <?php }
+                    
+                ?>
                                     </div>
                                     <?php } ?>
                                 </div>

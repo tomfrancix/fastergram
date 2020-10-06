@@ -5,6 +5,7 @@ include "includes/navigation.php";
 delete_like();
 like();
 unfollow_hashtags();
+initial_follow_hashtags();
 ?>
 
 <!-- Page Content -->
@@ -75,7 +76,7 @@ $select_all_following_query = mysqli_query($connection, $query);
                 $passf = true;
             }
         }
-        if($pass == true || $passf == true) {
+        if($pass == true || $passf == true || $content_user_id == $thisid) {
             if($total < 27) {
             $total++;
        $query_user = "SELECT * FROM users WHERE user_id = {$content_user_id}";                     
@@ -104,7 +105,7 @@ $hash_id = $row['hash_id'];
 $hash_title = $row['hash_title'];
 ?>  <span class="hashtag" style="font-size:8pt;margin:-5px 0 5px 5px;"><a href="search.php?hashtag=<?php echo $hash_id; ?>" >#<?php echo $hash_title; ?></a></span> 
 <?php
-$query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id}";                     
+$query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id} AND sub_user_id = {$thisid}";                     
 
 $select_sub_query = mysqli_query($connection, $query_sub);
 $count = 0; 
@@ -119,14 +120,14 @@ if($sub_user_id == $thisid && $sub_status == "Subscribed") {
 } 
 else {
     ?>
-                                <span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
+                                <span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default" style="font-size:8pt;padding:0 5px;">Subscribe</a></span>   <?php
 }}
 if($count < 1) {
     
     ?>
     <form method="post" action="" style="display:inline;">
                 <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                
-                <input type="hidden" name="sub_user_id" value="<?php echo $sessionid; ?>"> 
+                <input type="hidden" name="sub_user_id" value="<?php echo $thisid; ?>"> 
              <span class="hashtag"><button type="submit" name="followinit" class="btn btn-default"  style="font-size:8pt;padding:0 5px;">Subscribe</button></span> 
     </form>     
                                
@@ -176,7 +177,7 @@ if($count < 1) {
                 </form>
               <?php }
                } else { ?>
-                    <a href="login.php"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></span></a>
+                    <a href="login.php"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></a>
               <?php }
                 ?>
 
@@ -227,7 +228,7 @@ if($count < 1) {
         } ?>
                         <span><a href="profile.php?id=<?php echo $cuser_id; ?>" style="color:deepskyblue">@<?php echo $cusername; ?> </a></span>
                         <?php } ?>
-                        <span style="font-size:10pt;"><?php echo $comment_text; ?> <span>more</span> </span></span>
+                        <span class="commentContent" style="font-size:10pt;"><?php echo $comment_text; ?> </span></span>
                 </div>    
             </div>
             </section>
@@ -250,7 +251,30 @@ if($count < 1) {
      ?>
 
 </div>
-
+<script>
+    window.onload = function() {
+        var arr = document.getElementsByClassName('commentContent');
+        
+        for (var z=0;z<arr.length;z++)
+        {
+            
+            var firstWord = "";
+            var firstLetter = "";
+            var str = arr[z].innerHTML.toString();
+              var words = str.split(" ");
+              firstWord = words[0];
+            firstLetter = firstWord.toString().substring(0,1);
+            if(firstLetter == "@") {
+                var newstr = str.replace(firstWord, "");
+                arr[z].innerHTML = newstr;
+            } else {
+                 arr[z].innerHTML = str;
+            }
+            
+        }
+    }
+   
+</script>
 <?php      
 include "includes/sidebar.php"; 
 ?>

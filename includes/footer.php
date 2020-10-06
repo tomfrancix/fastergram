@@ -2,7 +2,7 @@
 <hr>
 
         <!-- Footer -->
-        <footer>
+        <footer id="tobottom">
             <div class="row">
                 <div class="col-lg-12 ta-c">
                     <p style="text-align:center;opacity:0.2">Copyright &copy; Thomas Fahey 2014</p>
@@ -65,9 +65,11 @@
                     $query = "SELECT * FROM notifications WHERE note_to_user_id = '{$sessionid}' ORDER BY note_id DESC";
                     $select_all_notificationsa_query = mysqli_query($connection, $query);
                     $countnotificationsa = 0;
+                    
                     while($row = mysqli_fetch_assoc($select_all_notificationsa_query)) {
                         $note_status = $row['note_status'];
-                    if($note_status == "Unchecked") {
+                        $note_from_user_id = $row['note_from_user_id'];
+                    if($note_status == "Unchecked" && $note_from_user_id !== $sessionid) {
                         $countnotificationsa++;
                     }
                     }

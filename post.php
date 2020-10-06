@@ -1,7 +1,6 @@
 <?php 
 include "includes/db.php";
 include "includes/header.php";
-include "includes/navigation.php"; 
 if(!isset($_SESSION['role'])) {
    
         header("Location: login.php");
@@ -20,10 +19,11 @@ if(isset($_GET['id'])) {
 ?>
     <!-- Page Content -->
     <div class="container" style="padding:0 15px;height:100%;width:100%;overflow-x:hidden;background-color:white;">
-<div class="row" style="text-align:center;padding-top:3px;">
-                            <span style="float:left;padding:5px 10px;"><a href="javascript:history.back(1)"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
-                            <span style="float:none;display:inline-block;padding:3px 10px 2px 10px;margin-top:0;font-weight:bold;font-size:16pt;">View Post</span>
-                            <span style="float:right;padding:5px 10px;"><span style="font-size:16pt;"class="glyphicon glyphicon-retweet"></span></span>
+<div class="row" style="text-align:center;padding-top:5px;position:fixed;top:0;">
+                            <span style="float:left;padding:5px 10px;"><a href="index.php#<?php echo $pid; ?>"><span style="font-size:16pt;"class="glyphicon glyphicon-arrow-left"></span></a></span>
+                            <span style="position:fixed;left: 50%;font-family: 'Parisienne', cursive;font-size:18pt;
+    transform: translate(-50%, 0);padding:8px 10px 2px 10px;margin-top:-5px;font-weight:bold;font-size:16pt;">View Post</span>
+                            
                         </div>
         <hr style="margin:0;">
         <div class="row">
@@ -94,9 +94,9 @@ if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
    
                                 ?><span class="hashtag"><button class="btn btn-danger" style="display:inline-block;font-size:8pt;padding:0 5px;">Subscribed <span style="font-size:7pt;opacity:0.5;"><a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>">[Undo]</a></span></button></span> <?php
 } 
-else {
+else if($sub_user_id == $sessionid && $sub_status == "Unsubscribed") {
     ?>
-                                <span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default" style="font-size:8pt;padding:0 5px;">Subscribe </a></span>   <?php
+                                <span class="hashtag"><a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default" style="font-size:8pt;padding:0 5px;">Subscribe</a></span>   <?php
 }}
 if($count < 1) {
     
@@ -131,9 +131,8 @@ if($count < 1) {
             $like_content_id = $row['like_user_id'];
 
             if($like_user_id == $sessionid) { ?>
-
-                <a href="index.php?delete_like=<?php echo $likeid; ?>"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></a>
-
+            
+<a href="index.php?delete_like=<?php echo $likeid; ?>"><span class="glyphicon glyphicon-heart" style="font-size:16pt;float:left;padding:10px 12px;color:orangered;"></span></a>
                 <?php $count++; break; 
                 } 
 
@@ -148,6 +147,7 @@ if($count < 1) {
                 <form method="post" action="" style="display:inline;float:left;">
                     <input type="hidden" name="like_user_id" value="<?php echo $sessionid; ?>">
                     <input type="hidden" name="like_content_id" value="<?php echo $content_id; ?>">
+                    <input type="hidden" name="content_user_id" value="<?php echo $content_user_id; ?>">
                     <button type="submit" name="like" style="padding:0;margin:0;border:none;background-color:white"><img src="images/heart.svg"  style="width:45px;float:left;padding:10px 12px;"></button>
                 </form>
               <?php }
