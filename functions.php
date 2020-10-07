@@ -1,18 +1,21 @@
 <?php
-
+function escape($string) {
+    global $connection;
+    return mysqli_real_escape_string($connection, trim($string));
+}
 //Comments
 function create_comment() {
     global $connection;
 
 if(isset($_POST['create_comment'])) {
 
-    $comment_text = $_POST['comment_text'];
-    $comment_user_id = $_POST['comment_user_id'];
-    $comment_to_user = $_POST['comment_to_user'];
-    $comment_content_id = $_POST['comment_content_id'];
-    $comment_reply_user_id = $_POST['comment_reply_user_id'];       
-    $comment_reply_id = $_POST['comment_reply_id'];       
-    $comment_datetime = date('d-m-y H-i-s');
+    $comment_text = escape($_POST['comment_text']);
+    $comment_user_id = escape($_POST['comment_user_id']);
+    $comment_to_user = escape($_POST['comment_to_user']);
+    $comment_content_id = escape($_POST['comment_content_id']);
+    $comment_reply_user_id = escape($_POST['comment_reply_user_id']);       
+    $comment_reply_id = escape($_POST['comment_reply_id']);       
+    $comment_datetime = escape(date('d-m-y H-i-s'));
     
     
     
@@ -50,9 +53,9 @@ function like() {
 
 if(isset($_POST['like'])) {
 
-    $content_user_id = $_POST['content_user_id'];
-    $like_user_id = $_POST['like_user_id'];
-    $like_content_id = $_POST['like_content_id'];
+    $content_user_id = escape($_POST['content_user_id']);
+    $like_user_id = escape($_POST['like_user_id']);
+    $like_content_id = escape($_POST['like_content_id']);
     
     
     
@@ -88,9 +91,9 @@ function likecomment() {
 
 if(isset($_POST['likecomment'])) {
     
-    $like_user_id = $_POST['comlike_user_id'];
-    $like_content_id = $_POST['comlike_content_id'];
-    $like_comment_id = $_POST['comlike_comment_id'];
+    $like_user_id = escape($_POST['comlike_user_id']);
+    $like_content_id = escape($_POST['comlike_content_id']);
+    $like_comment_id = escape($_POST['comlike_comment_id']);
     
     
     
@@ -123,8 +126,8 @@ function follow() {
 
 if(isset($_POST['follow'])) {
 
-    $follow_user_id = $_POST['follow_user_id'];
-    $follow_to_user_id = $_POST['follow_to_user_id'];
+    $follow_user_id = escape($_POST['follow_user_id']);
+    $follow_to_user_id = escape($_POST['follow_to_user_id']);
     
         $query = "INSERT INTO following(follow_user_id, follow_to_user_id)";
     
@@ -152,14 +155,14 @@ function unfollow() {
     global $connection;
 
 if(isset($_GET['unfollow'])) {
-    $follow_id = $_GET['unfollow'];
+    $follow_id = escape($_GET['unfollow']);
 
     $query = "SELECT * FROM following WHERE follow_id = {$follow_id} ";
     $unfollow_query = mysqli_query($connection, $query);
     
     while($row = mysqli_fetch_assoc($unfollow_query) ) {
-    $follow_to_user_id = $row['follow_to_user_id'];
-    $follow_user_id = $row['follow_user_id'];
+    $follow_to_user_id = escape($row['follow_to_user_id']);
+    $follow_user_id = escape($row['follow_user_id']);
     }
     
     
@@ -184,8 +187,8 @@ function likeincomments() {
 
 if(isset($_POST['likeincomments'])) {
 
-    $like_user_id = $_POST['like_user_id'];
-    $like_content_id = $_POST['like_content_id'];
+    $like_user_id = escape($_POST['like_user_id']);
+    $like_content_id = escape($_POST['like_content_id']);
     
     
     
@@ -214,7 +217,7 @@ if(isset($_POST['likeincomments'])) {
 function delete_comment() {
     global $connection;
 if(isset($_GET['delete_comment'])) {
-    $the_comment_id = $_GET['delete_comment'];
+    $the_comment_id = escape($_GET['delete_comment']);
 
     $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id} ";
     $delete_comment_query = mysqli_query($connection, $query);
@@ -224,13 +227,13 @@ if(isset($_GET['delete_comment'])) {
 function delete_like() {
     global $connection;
 if(isset($_GET['delete_like'])) {
-    $the_like_id = $_GET['delete_like'];
+    $the_like_id = escape($_GET['delete_like']);
 
     $query = "SELECT * FROM likes WHERE like_id = {$the_like_id} ";
     $get_post_query = mysqli_query($connection, $query);
     
     while($row = mysqli_fetch_assoc($get_post_query) ) {
-    $like_content_id = $row['like_content_id'];
+    $like_content_id = escape($row['like_content_id']);
     }
     
     $queryc = "UPDATE content SET content_likes_count = content_likes_count - 1 ";
@@ -248,13 +251,13 @@ if(isset($_GET['delete_like'])) {
 function remove_like() {
     global $connection;
 if(isset($_GET['remove_like'])) {
-    $the_like_id = $_GET['remove_like'];
+    $the_like_id = escape($_GET['remove_like']);
    
     $query = "SELECT * FROM likes WHERE like_id = {$the_like_id} ";
     $get_post_query = mysqli_query($connection, $query);
     
     while($row = mysqli_fetch_assoc($get_post_query) ) {
-    $like_content_id = $row['like_content_id'];
+    $like_content_id = escape($row['like_content_id']);
     }
     
     $queryc = "UPDATE content SET content_likes_count = content_likes_count - 1 ";
@@ -272,13 +275,13 @@ if(isset($_GET['remove_like'])) {
 function deletecomlike() {
     global $connection;
 if(isset($_GET['deletecomlike'])) {
-    $the_like_id = $_GET['deletecomlike'];
+    $the_like_id = escape($_GET['deletecomlike']);
 
    if(isset($_GET['postcom'])) {
-    $like_content_id = $_GET['postcom'];
+    $like_content_id = escape($_GET['postcom']);
     
     if(isset($_GET['commentid'])) {
-    $like_comment_id = $_GET['commentid'];
+    $like_comment_id = escape($_GET['commentid']);
      $queryc = "UPDATE comments SET com_like_count = com_like_count - 1 ";
     $queryc .= "WHERE comment_id = $like_comment_id ";
     
@@ -296,8 +299,8 @@ if(isset($_GET['deletecomlike'])) {
 function edit_comment() {
     global $connection;
 if(isset($_POST['edit_comment'])) {
-     $comment_id = $_POST['$comment_id'];       
-     $comment_text = $_POST['$comment_text']; 
+     $comment_id = escape($_POST['$comment_id']);       
+     $comment_text = escape($_POST['$comment_text']); 
     
     $query = "UPDATE comments SET comment_text = '{$comment_text}' WHERE comment_id = {$comment_id} ";
     
@@ -313,8 +316,8 @@ if(isset($_POST['edit_comment'])) {
 function initial_follow_hashtags() {
     global $connection;
 if(isset($_POST['followinit'])) {
-  $sub_hash_id = $_POST['sub_hash_id'];
-  $sub_user_id = $_POST['sub_user_id'];
+  $sub_hash_id = escape($_POST['sub_hash_id']);
+  $sub_user_id = escape($_POST['sub_user_id']);
   $thestatus="Subscribed";
     
      $querys = "INSERT INTO subscriptions(sub_hash_id, sub_user_id, status)";
@@ -330,7 +333,7 @@ if(isset($_POST['followinit'])) {
 function follow_hashtags() {
     global $connection;
 if(isset($_GET['follow'])) {
-  $sub_id = $_GET['follow'];
+  $sub_id = escape($_GET['follow']);
     
     $query = "UPDATE subscriptions SET status='Subscribed' WHERE sub_id=$sub_id ";
 
@@ -340,9 +343,9 @@ if(isset($_GET['follow'])) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
     if(isset($_GET['postid'])) {
-  $postid = $_GET['postid']; 
+  $postid = escape($_GET['postid']); 
         if(isset($_GET['page'])) {
-        $page = $_GET['page']; 
+        $page = escape($_GET['page']); 
     header("Location:index.php#$postid");
          } else {
     header("Location:post.php?id=$postid");
@@ -355,7 +358,7 @@ if(isset($_GET['follow'])) {
 function unfollow_hashtags() {
     global $connection;
 if(isset($_GET['unfollow'])) {
-  $sub_id = $_GET['unfollow'];
+  $sub_id = escape($_GET['unfollow']);
     
     $query = "UPDATE subscriptions SET status='Unsubscribed' WHERE sub_id=$sub_id ";
 
@@ -365,9 +368,9 @@ if(isset($_GET['unfollow'])) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
     if(isset($_GET['postid'])) {
-  $postid = $_GET['postid']; 
+  $postid = escape($_GET['postid']); 
          if(isset($_GET['page'])) {
-        $page = $_GET['page']; 
+        $page = escape($_GET['page']); 
     header("Location:index.php#$postid");
          } else {
     header("Location:post.php?id=$postid");
@@ -381,7 +384,7 @@ if(isset($_GET['unfollow'])) {
 function check_notification() {
     global $connection;
 if(isset($_GET['check'])) {
-    $note_id = $_GET['check'];      
+    $note_id = escape($_GET['check']);      
     
     $query = "UPDATE notifications SET note_status = 'Checked' WHERE note_id = {$note_id} ";
     

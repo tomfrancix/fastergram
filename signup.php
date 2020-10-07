@@ -1,5 +1,7 @@
 <?php  include "includes/db.php"; ?>
-<?php include "functions.php"; ?>
+<?php include "functions.php"; 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,51 +33,28 @@
 
 <body style="height:100vh;overflow:hidden;width:100vw;overflow-x:hidden;margin-top:0;margin-bottom:0;background-image:url('images/loginbackground.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
      <div class="nav-wrapper" style="height:20px;width:100%;margin:0;">
-     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
-        <div class="container">
+<!--     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(20,20,20,1);">-->
+<!--        <div class="container">-->
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a type="button" onclick="location.href='login.php'" class="navbar-toggle" style="padding:6px 5px;border:none;color:grey">
-                    Login
-                    
-                </a>
+<!--
+            <div class="navbar-header"> 
+             
                 <a class="navbar-brand" href="index.php">Fastergram</a>
+                
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    
-                    <?php
-                    
-                    $query = "SELECT * FROM sections";
-                    $select_all_sections_query = mysqli_query($connection, $query);
-                    
-                    while($row = mysqli_fetch_assoc($select_all_sections_query)) {
-                        $section_title = $row['section_title'];
-                        
-                        echo "<li><a href='#'>{$section_title}</a></li>";
-                    }
-                    
-                    ?>
-                    
-                    <li>
-                        <a href="#">Profile</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+             Collect the nav links, forms, and other content for toggling 
+            
         </div>
-        <!-- /.container -->
     </nav>
+-->
          
 <?php 
          
 if(isset($_POST['submit'])) {
     
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
     
     if(!empty($username) && !empty($email) && !empty($password)) {
     
@@ -91,7 +70,7 @@ if(isset($_POST['submit'])) {
     } else {
     
     $row = mysqli_fetch_array($select_randsalt_query);  
-    $salt = $row['randSalt'];
+    $salt = escape($row['randSalt']);
     
     $password = crypt($password, $salt);
         
@@ -101,30 +80,40 @@ if(isset($_POST['submit'])) {
       if(!$register_user_query) {
           die("QUERY FAILED." . mysqli_error($connection) . ' ' . mysqli_errno($connection));
       }
+        $message = "";
+        $message2 = "<div style='padding:30px;background-color:rgba(10,10,10,1);border-radius:8px;'>Sign Up Successful!</div> <br><br><a href='login.php' class='btn btn-success' style='width:100%;padding:30px;'>Next...</a>";
+   
         
-    $message = "Your Registration has been submitted";
     }
         
     } else {
+        $message2 = "";
          $message = "You must enter your details to proceed";
     }
 } else {
-    $message = "";
+    $message = ""; $message2 = "";
 }
          
          ?>
 
     <div class="container" style="text-align:center;">
-         <div class="row" style="margin-top:10vh;margin-bottom:10vh;">
-            <h1 STYLE="COLOR:RGBA(09,58,57,1);"><b>VORTEX</b></h1>
+         <div class="row" style="margin-top:0;margin-bottom:10vh;">
+            <h1 style="font-family: 'Parisienne', cursive;color:white;"><b>Fastergram</b></h1>
         </div>
         <div class="row">
+            <?php if($message2 == "") { ?>
             <form role="form" action="signup.php" method="post" id="login-form" autocomplete="off" >
                 <fieldset class="fieldset" style="background-color:rgba(255,54,0,0.5);">
                     <legend>Register</legend>
                     <div class="panel panel-default" style="text-align:left;">
 						<div class="panel-body">
+                            <div><a type="button" href="login.php"  style="padding:6px 5px;border:none;color:darkgrey">
+                    <span class="glyphicon glyphicon-arrow-left fs-small" style="font-size:10pt;"> </span> Go to login
+                    
+                </a></div><br>
+                            
                             <div style="text-align:center;"><span style="color:orangered;font-weight:bold;font-size:10pt;"><?php echo $message; ?> </span></div>
+                             
                             
                             <fieldset class="fieldset" style="background-color:white;padding:0;">
                                 <legend style="border:none;width:auto;">Email</legend>
@@ -143,14 +132,16 @@ if(isset($_POST['submit'])) {
                                         <input type="password" id="key" name="password" style="border:none;max-width:100%;min-width:100%;margin:0;">
                             </fieldset>
                             <br>
-                            <input class="btn btn-primary" id="btn-login" name="submit" type="submit" value="Sign Up" style="float:right;background-color:rgba(09,58,57,1);">
+                            <input class="btn btn-success" id="btn-login" name="submit" type="submit" value="Sign Up" style="float:right;">
 						</div>
 					</div>
                     
                 </fieldset>
 				<div class="clearfix"></div>
             </form>
-                  
+               <?php } else { ?> 
+            <div style="text-align:center;width:80%;margin:0 auto;"><span style="color:chartreuse;font-weight:bold;font-size:10pt;"><?php echo $message2; ?> </span></div>
+ <?php } ?>   
                 
                        
         </div>

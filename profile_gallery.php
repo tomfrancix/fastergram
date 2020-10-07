@@ -1,6 +1,8 @@
 <?php 
 include "includes/db.php";
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: login.php");
+    }
 ?>
 
 <?php include "functions.php"; ?>
@@ -51,12 +53,12 @@ include "includes/db.php";
     delete_like();
 like();
 if(isset($_GET['id'])) {
-$uid = $_GET['id'];
+$uid = escape($_GET['id']);
     $query_user = "SELECT * FROM users WHERE user_id = {$uid}";                     
          $ausername = "";           
                     $select_user_query = mysqli_query($connection, $query_user);
                         while($row = mysqli_fetch_assoc($select_user_query)) {
-                        $ausername = $row['username'];
+                        $ausername = escape($row['username']);
                         }
  ?>
  <div class="nav-wrapper" style="height:20px;width:100%;margin:0;margin-bottom:-40px;">
@@ -140,25 +142,25 @@ $(document).ready(function() {
                     $select_all_content_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
-                        $content_id = $row['content_id'];
-                        $content_type = $row['content_type'];
-                        $content_text = $row['content_text'];
-                        $content_image = $row['content_image'];
-                        $content_datetime = $row['content_datetime'];
-                        $content_user_id = $row['content_user_id'];
-                        $content_hash_id = $row['content_hash_id'];
-                        $content_video = $row['content_video'];
-                        $content_comment_count = $row['content_comment_count'];
-                        $content_likes_count = $row['content_likes_count'];
+                        $content_id = escape($row['content_id']);
+                        $content_type = escape($row['content_type']);
+                        $content_text = escape($row['content_text']);
+                        $content_image = escape($row['content_image']);
+                        $content_datetime = escape($row['content_datetime']);
+                        $content_user_id = escape($row['content_user_id']);
+                        $content_hash_id = escape($row['content_hash_id']);
+                        $content_video = escape($row['content_video']);
+                        $content_comment_count = escape($row['content_comment_count']);
+                        $content_likes_count = escape($row['content_likes_count']);
                         
                     
                    $query_user = "SELECT * FROM users WHERE user_id = {$uid}";                     
                     
                     $select_user_query = mysqli_query($connection, $query_user);
                         while($row = mysqli_fetch_assoc($select_user_query)) {
-                        $auser_id = $row['user_id'];
-                        $ausername = $row['username'];
-                        $aimage = $row['user_image'];
+                        $auser_id = escape($row['user_id']);
+                        $ausername = escape($row['username']);
+                        $aimage = escape($row['user_image']);
                 ?>
                 <!-- First Blog Post -->
                 <div class="post" id="<?php echo $content_id; ?>" style="margin-bottom:10px;">
@@ -186,9 +188,9 @@ $(document).ready(function() {
                $count = 0; 
 
             while($row = mysqli_fetch_assoc($like_query)) {
-            $likeid = $row['like_id'];
-            $like_user_id = $row['like_user_id'];
-            $like_content_id = $row['like_user_id'];
+            $likeid = escape($row['like_id']);
+            $like_user_id = escape($row['like_user_id']);
+            $like_content_id = escape($row['like_user_id']);
 
             if($like_user_id == $thisid) { ?>
 
@@ -235,17 +237,17 @@ $(document).ready(function() {
                     
                     $select_comment_query = mysqli_query($connection, $query_comment);
                         while($row = mysqli_fetch_assoc($select_comment_query)) {
-                        $comment_id = $row['comment_id'];
-                        $comment_text = $row['comment_text'];
-                        $comment_user_id = $row['comment_user_id'];
-                        $comment_reply_user_id = $row['comment_reply_user_id'];
+                        $comment_id = escape($row['comment_id']);
+                        $comment_text = escape($row['comment_text']);
+                        $comment_user_id = escape($row['comment_user_id']);
+                        $comment_reply_user_id = escape($row['comment_reply_user_id']);
                     
                     $query_comment_user = "SELECT * FROM users WHERE user_id = {$comment_user_id} ";                     
                     
                     $select_comment_user_query = mysqli_query($connection, $query_comment_user);
                         while($row = mysqli_fetch_assoc($select_comment_user_query)) {
-                        $buser_id = $row['user_id'];
-                        $busername = $row['username'];
+                        $buser_id = escape($row['user_id']);
+                        $busername = escape($row['username']);
                    
                 ?>
                 
@@ -258,8 +260,8 @@ $(document).ready(function() {
                          $query_rcomment_user = "SELECT * FROM users WHERE user_id = {$comment_reply_user_id} ";                    
                             $select_rcomment_user_query = mysqli_query($connection, $query_rcomment_user);
                                 while($row = mysqli_fetch_assoc($select_rcomment_user_query)) {
-                                $cuser_id = $row['user_id'];
-                                $cusername = $row['username'];
+                                $cuser_id = escape($row['user_id']);
+                                $cusername = escape($row['username']);
                     } ?>
                                     <span><a href="profile.php?id=<?php echo $cuser_id; ?>" style="color:deepskyblue">@<?php echo $cusername; ?> </a></span>
                                     <?php } ?>

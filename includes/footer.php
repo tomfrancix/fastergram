@@ -5,7 +5,7 @@
         <footer id="tobottom">
             <div class="row">
                 <div class="col-lg-12 ta-c">
-                    <p style="text-align:center;opacity:0.2">Copyright &copy; Thomas Fahey 2014</p>
+                    <p style="text-align:center;opacity:1; color:200,200,200,1);">Copyright &copy; Thomas Fahey 2014</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -15,7 +15,20 @@
     
     function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
-
+//        console.log("This is the original number of seconds:");
+//        console.log(seconds);
+//        console.log("This is the original date of seconds:");
+//        console.log(date);
+//        console.log("This is the seconds:");
+//        console.log(Date.parse(date));
+//    if(!isNaN(seconds)) {
+//        dateq = new Date(date.toString().replace(/\s/, 'T')+'Z');
+//        console.log("This is the new date:");
+//        console.log(dateq);
+//        seconds = Math.floor((new Date() - dateq) / 1000);
+//        console.log("This is the number of Seconds:");
+//        console.log(seconds);
+//    }
   var interval = seconds / 31536000;
 
   if (interval > 1) {
@@ -55,7 +68,7 @@
             <a href="search.php" style="width:20%;text-align:center;float:left;padding:18px;">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
-            <a href="camera.php" style="width:20%;text-align:center;float:left;padding:18px;">
+            <a href="admin/posts.php?source=add_post" style="width:20%;text-align:center;float:left;padding:18px;">
                <span class="glyphicon glyphicon-camera"></span>
             </a>
     

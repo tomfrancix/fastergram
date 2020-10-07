@@ -6,6 +6,11 @@ $db['db_user'] = 'root';
 $db['db_pass'] = '';
 $db['db_name'] = 'Vortex';
 
+//$db['db_host'] = 'mysql6003.site4now.net';
+//$db['db_user'] = 'a663af_fastdb';
+//$db['db_pass'] = 'Manage3software4';
+//$db['db_name'] = 'db_a663af_fastdb';
+
 //Saving connection variables as constants
 foreach($db as $key => $value) {
     

@@ -11,6 +11,7 @@ body {
     margin-top: 50px;
     background-color: rgba(22,22,22,1);
     color:grey;
+     max-width:560px;
     font-family: 'Montserrat', sans-serif;
 }
 .bottom-navbar {
@@ -19,6 +20,7 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+     max-width:560px;
 }
 .ta-c {
     text-align:center;
@@ -58,6 +60,7 @@ body {
     padding: 0;
     color:rgba(22,22,22,1);
     color:white;
+     max-width:560px;
 }
 a { color:white;}
 hr {
@@ -154,7 +157,7 @@ ul.alert-dropdown {
 
 /* Side Navigation */
 
-@media(min-width:768px) {
+@media(min-width:1768px) {
     .side-nav {
         position: fixed;
         top: 0;

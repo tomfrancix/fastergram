@@ -11,8 +11,8 @@ $dbusername = $_SESSION['username']; ?>
 } ?>
               
                  
-                <a type="button" href="index.php" class="navbar-toggle" style="float:right;padding:3px 3px 0 3px;border:none;">
-                    <span class="glyphicon glyphicon-comment" style="font-size:15pt; color:lightgrey;"></span>
+                <a type="button" href="#" class="navbar-toggle" style="float:right;padding:3px 3px 0 3px;border:none;">
+                    <span class="glyphicon glyphicon-comment" style="font-size:15pt; color:rgba(40,40,40,1);"></span>
                 </a>
             </div>
         </nav>    

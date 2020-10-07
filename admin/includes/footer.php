@@ -36,15 +36,15 @@
     x[i].innerHTML = jsdate;
     }
 </script>
-<div class="bottom-navbar" style="width:100%;text-align:center;" style="position:fixed;bottom:0;width:100%;background-color:rgba(10,10,10,1);">
-            <div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(10,10,10,1);padding-top:5px;">
+<div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(10,10,10,1);padding-top:0;padding-bottom:0;z-index:200;">
+         
           <a href="../index.php" style="width:20%;text-align:center;float:left;padding:18px;">
                 <span class="glyphicon glyphicon-home"></span>
             </a>
             <a href="../search.php" style="width:20%;text-align:center;float:left;padding:18px;">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
-            <a href="../camera.php" style="width:20%;text-align:center;float:left;padding:18px;">
+            <a href="posts.php?source=add_post" style="width:20%;text-align:center;float:left;padding:18px;">
                <span class="glyphicon glyphicon-camera"></span>
             </a>
     
@@ -77,7 +77,7 @@
     <?php
 } ?>
 </div> 
-</div> 
+ 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 

@@ -1,4 +1,4 @@
-<a href="?source=add_post">New Post</a> 
+<br><br><a href="?source=add_post">New Post</a> 
 <table class="table table-condensed">
                             <thead>
                                 <tr>
@@ -11,7 +11,7 @@
                             <tbody>
                     <?php
                     $sessionid = $_SESSION['id'];
-                    $query = "SELECT * FROM content WHERE content_user_id = {$sessionid} ";
+                    $query = "SELECT * FROM content WHERE content_user_id = {$sessionid} ORDER BY content_id DESC";
                     $select_all_content_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {

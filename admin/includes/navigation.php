@@ -1,7 +1,7 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:transparent;">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color:transparent;max-width:560px;">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="text-align:center;padding:0 0 0 10px;background-color:rgba(10,10,10,1);">
-                <button type="button" onclick="location.href='../camera.php'" class="navbar-toggle" style="float:left;padding:5px;border:none;">
+                <button type="button" onclick="location.href='../camera.php'" class="navbar-toggle" style="float:left;padding:5px;border:none;visibility:hidden;">
                     <span class="glyphicon glyphicon-camera" style="font-size:15pt; color:lightgrey;"></span>
                 </button>
 <?php if(isset($_SESSION['username'])) {

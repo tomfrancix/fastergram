@@ -2,7 +2,9 @@
 //include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: ../login.php");
+    }
 ?>
     
 
@@ -15,9 +17,7 @@ include "includes/navigation.php";
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header" style="font-size:12pt;margin-top:15px;">
-                            Your Posts
-                        </h1>
+                       
                         
                         <?php
                         

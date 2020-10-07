@@ -1,7 +1,9 @@
 <?php 
 //include "includes/db.php";
 include "includes/header.php";
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: ../login.php");
+    }
 
 ?>
 

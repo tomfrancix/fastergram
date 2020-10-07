@@ -6,20 +6,22 @@ delete_like();
 unfollow();
 follow();
 like();
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: login.php");
+    }
  if(isset($_GET['id']) || isset($_GET['username'])) {
     
      if(isset($_GET['id'])) {
-$uid = $_GET['id'];
+$uid = escape($_GET['id']);
      $user= "";
      }
      else if(isset($_GET['username'])) {
          $uid = 0;
-        $user = $_GET['username'];
+        $user = escape($_GET['username']);
           $qquery = "SELECT * FROM users WHERE username = '$user'";
                     $select_quser_query = mysqli_query($connection, $qquery);
           while($row = mysqli_fetch_assoc($select_quser_query)) {
-                        $uid = $row['user_id'];
+                        $uid = escape($row['user_id']);
           }
      }
  ?>
@@ -31,26 +33,26 @@ $uid = $_GET['id'];
 <?php
                     if(isset($_GET['id']) || isset($_GET['username'])) {
                         if(isset($_GET['id'])) {
-                        $uid = $_GET['id'];
+                        $uid = escape($_GET['id']);
                              
                     
                       $queryu = "SELECT * FROM users WHERE user_id = {$uid}";
                     $select_user_query = mysqli_query($connection, $queryu);
                    }
                              else if(isset($_GET['username'])){
-                                $user = $_GET['username']; 
+                                $user = escape($_GET['username']); 
                       $queryu = "SELECT * FROM users WHERE username = '$user'";
                     $select_user_query = mysqli_query($connection, $queryu);
                              }
                     while($row = mysqli_fetch_assoc($select_user_query)) {
-                        $user_id = $row['user_id'];
-                        $user_image = $row['user_image'];  
-                        $username = $row['username'];  
-                        $user_bio = $row['user_bio'];  
-                        $user_followers = $row['user_follower_count'];  
-                        $user_following = $row['user_following_count'];  
-                        $first_name = $row['first_name'];  
-                        $last_name = $row['last_name'];  
+                        $user_id = escape($row['user_id']);
+                        $user_image = escape($row['user_image']);  
+                        $username = escape($row['username']);  
+                        $user_bio = escape($row['user_bio']);  
+                        $user_followers = escape($row['user_follower_count']);  
+                        $user_following = escape($row['user_following_count']);  
+                        $first_name = escape($row['first_name']);  
+                        $last_name = escape($row['last_name']);  
                     ?>
           
             <div class="container-fluid">
@@ -106,8 +108,8 @@ $dbuserid = $_SESSION['id'];
                 $follow_to_user_id = 0;
            
             while($row = mysqli_fetch_assoc($follow_query)) {
-            $follow_id = $row['follow_id'];
-            $follow_to_user_id = $row['follow_to_user_id'];
+            $follow_id = escape($row['follow_id']);
+            $follow_to_user_id = escape($row['follow_to_user_id']);
             
             }
         if($follow_to_user_id > 0) {
@@ -161,8 +163,8 @@ $dbuserid = $_SESSION['id'];
                     $select_all_content_query = mysqli_query($connection, $query);
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
-                        $content_id = $row['content_id'];
-                        $content_image = $row['content_image'];
+                        $content_id = escape($row['content_id']);
+                        $content_image = escape($row['content_image']);
                     
                     ?>
                             <a href="profile_gallery.php?id=<?php echo $uid; ?>#<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;background-image:url('images/<?php echo $content_image; ?>');background-size:cover;">

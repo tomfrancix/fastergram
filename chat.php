@@ -32,9 +32,9 @@ $query_user = "SELECT * FROM users WHERE user_id = $otheruser ";
 
 $select_user_query = mysqli_query($connection, $query_user);
 while($row = mysqli_fetch_assoc($select_user_query)) {
-$user_id = $row['user_id'];
-$username = $row['username'];
-$image = $row['user_image'];
+$user_id = escape($row['user_id']);
+$username = escape($row['username']);
+$image = escape($row['user_image']);
 }
                 ?>
 <!-- Blog Entries Column -->

@@ -2,9 +2,11 @@
 include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: login.php");
+    }
 if(isset($_GET['hashtag'])) { 
-$hashtag_id = $_GET['hashtag']; ?>
+$hashtag_id = escape($_GET['hashtag']); ?>
     <script>
         window.onload = function() {
         chooseaValue(<?php echo $hashtag_id; ?>);
@@ -31,9 +33,9 @@ $hashtag_id = $_GET['hashtag']; ?>
                     $select_all_hashtag_query = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_all_hashtag_query)) {
                         
-                        $hash_id = $row['hash_id'];
-                        $hash_title = $row['hash_title'];
-                        $content_count = $row['content_count'];
+                        $hash_id = escape($row['hash_id']);
+                        $hash_title = escape($row['hash_title']);
+                        $content_count = escape($row['content_count']);
                         if($content_count > -1) {
                     ?>
                     <li>
@@ -70,16 +72,16 @@ $hashtag_id = $_GET['hashtag']; ?>
                     $totalno = 0;
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
                         $counter++;
-                        $content_id = $row['content_id'];
-                        $content_type = $row['content_type'];
-                        $content_text = $row['content_text'];
-                        $content_image = $row['content_image'];
-                        $content_datetime = $row['content_datetime'];
-                        $content_user_id = $row['content_user_id'];
-                        $content_hash_id = $row['content_hash_id'];
-                        $content_video = $row['content_video'];
-                        $content_comment_count = $row['content_comment_count'];
-                        $content_likes_count = $row['content_likes_count'];
+                        $content_id = escape($row['content_id']);
+                        $content_type = escape($row['content_type']);
+                        $content_text = escape($row['content_text']);
+                        $content_image = escape($row['content_image']);
+                        $content_datetime = escape($row['content_datetime']);
+                        $content_user_id = escape($row['content_user_id']);
+                        $content_hash_id = escape($row['content_hash_id']);
+                        $content_video = escape($row['content_video']);
+                        $content_comment_count = escape($row['content_comment_count']);
+                        $content_likes_count = escape($row['content_likes_count']);
                         
                     ?>
                 <?php if($counter == 1 || $counter == 28) {

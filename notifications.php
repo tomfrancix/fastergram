@@ -29,12 +29,12 @@ if(!isset($_SESSION['role'])) {
                     $select_all_notifications_query = mysqli_query($connection, $query);
                     $countnotifications = 0;
                     while($row = mysqli_fetch_assoc($select_all_notifications_query)) {
-                        $note_id = $row['note_id'];
-                        $note_to_user_id = $row['note_to_user_id'];
-                        $note_from_user_id = $row['note_from_user_id'];
-                        $note_content = $row['note_content'];
-                        $note_content_id = $row['note_content_id'];
-                        $note_status = $row['note_status'];
+                        $note_id = escape($row['note_id']);
+                        $note_to_user_id = escape($row['note_to_user_id']);
+                        $note_from_user_id = escape($row['note_from_user_id']);
+                        $note_content = escape($row['note_content']);
+                        $note_content_id = escape($row['note_content_id']);
+                        $note_status = escape($row['note_status']);
                      if($note_from_user_id !== $sessionid) {
                         if($note_status == "Unchecked") {
                     ?>
@@ -47,9 +47,9 @@ if(!isset($_SESSION['role'])) {
                 
                 $select_user_query = mysqli_query($connection, $query_user);
                 while($row = mysqli_fetch_assoc($select_user_query)) {
-                $user_id = $row['user_id'];
-                $username = $row['username'];
-                $image = $row['user_image'];
+                $user_id = escape($row['user_id']);
+                $username = escape($row['username']);
+                $image = escape($row['user_image']);
                    
                 ?>    
                             <div class="row" style="padding:8px; border-bottom:1px solid lightgrey;">
@@ -73,7 +73,7 @@ if(!isset($_SESSION['role'])) {
                            <?php } ?>
                 
                 </div>
-            <?php } else if($note_status == "Checked" && $countnotifications < 10 ) {
+            <?php } else if($note_status == "Checked" && $countnotifications < 5 ) {
                     ?>
                 <!-- First Blog Post -->
                 <div class="post">
@@ -84,9 +84,9 @@ if(!isset($_SESSION['role'])) {
                 
                 $select_user_query = mysqli_query($connection, $query_user);
                 while($row = mysqli_fetch_assoc($select_user_query)) {
-                $user_id = $row['user_id'];
-                $username = $row['username'];
-                $image = $row['user_image'];
+                $user_id = escape($row['user_id']);
+                $username = escape($row['username']);
+                $image = escape($row['user_image']);
                    
                 ?>    
                             <div class="row" style="padding:8px; border-bottom:1px solid lightgrey;">

@@ -3,7 +3,9 @@
 //include "includes/db.php";
 include "includes/header.php";
 include "includes/navigation.php"; 
-
+ if(!isset($_SESSION['id'])) {
+       Header("Location: ../login.php");
+    }
 ?>
         <div id="page-wrapper">
 

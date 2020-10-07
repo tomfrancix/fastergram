@@ -4,8 +4,14 @@ ul.breadcrumb li {
     width:25%;
     border:1px solid grey;
 }
-
+html {
+    max-width:560px;
+}
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+     max-width:560px;
+    padding-top: 20px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     font-family: 'Montserrat', sans-serif;
+}
+div {
+     max-width:560px;
 }

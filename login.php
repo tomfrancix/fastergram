@@ -31,25 +31,11 @@
 
 <body style="height:100vh;width:100vw;overflow-x:hidden;margin-top:0;background-image:url('images/loginbackground.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;">
      <div class="nav-wrapper" style="height:10px;width:100%;margin:0;">
-     <nav class="navbar navbar-inverse navbar-fixed-top" style="position:fixed;top:0;width:100%;margin:0;background-color:rgba(09,58,57,1);">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a type="button" onclick="location.href='signup.php'" class="navbar-toggle" style="padding:6px 5px;border:none;color:grey">
-                    Sign Up
-                    
-                </a>
-                <a class="navbar-brand" href="index.php">Fastergram</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+     
     <div class="container" style="text-align:center;">
-         <div class="row" style="margin-top:10vh;margin-bottom:10vh;">
-            <h1 STYLE="COLOR:RGBA(09,58,57,1);font-family: 'Montserrat', sans-serif;"><b>Fastergram</b></h1>
+         <div class="row" style="margin-top:-40px;margin-bottom:5px;">
+            <h1 style="font-family: 'Parisienne', cursive;color:white;padding-bottom:10px;"><b>Fastergram</b></h1>
+             <p style="color:white;padding:5px 10px;background-color:rgba(20,20,20,0.7);">This is meant for mobile. If you are using a computer, right click, press 'Inspect', then click the small mobile icon in the top corner.</p>
         </div>
         <div class="row">
             <form action="includes/login.php" method="post" >
@@ -57,6 +43,9 @@
                     <legend>Login</legend>
                     <div class="panel panel-default" style="text-align:left;">
 						<div class="panel-body">
+                    <div style="text-align:right;">
+                        <a type="button" href="signup.php"  style="padding:6px 5px;border:none;color:grey">Sign up <span class="glyphicon glyphicon-arrow-right fs-small" style="font-size:10pt;"> </span></a>
+                            </div><br>
                             <fieldset class="fieldset" style="background-color:white;padding:0;">
                                 <legend style="border:none;width:auto;">Username</legend>
                                         <input type="text" id="username" name="username" style="border:none;max-width:100%;min-width:100%;margin:0;">
