@@ -8,7 +8,7 @@ $thisid = $_SESSION['id']; ?>
     <label for="content_text">Upload an image...</label>
     <input id="upload-Image" type="file" class="form-control" name="content_image" onchange="loadImageFile();">
     <br>
-    <img id="upload-Preview" style="width:100%;"/>
+     <img src="<?php echo $imagePath; ?>" id="cropbox" class="img" /><br />
     <br>
     <label for="content_text">Say something:</label>
     <textarea type="text" class="form-control" name="content_text" style="background-color:rgba(10,10,10,1);color:white;border:none;" rows="5"></textarea>

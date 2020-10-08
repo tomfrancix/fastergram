@@ -183,12 +183,30 @@ if($like_user_id == $thisid) { ?>
 if($count == 0) { ?>
 <?php
 ?>
-    <form method="post" action="" class="post-submit-like-form">
-        <input type="hidden" name="content_user_id" value="<?php echo $auser_id; ?>">
-        <input type="hidden" name="like_user_id" value="<?php echo $thisid; ?>">
-        <input type="hidden" name="like_content_id" value="<?php echo $content_id; ?>">
-        <button type="submit" name="like" class="post-submit-like-button"><img src="images/heart.svg" class="post-button-img"></button>
-    </form>
+                
+                
+        <button id="refresh" onclick="likepost(<?php echo $content_id; ?>, <?php echo $thisid; ?>)" name="like" class="post-submit-like-button" ><img src="images/heart.svg" class="post-button-img"></button>   
+                
+    <script>
+        function likepost(post,user) {
+        
+            $.ajax({
+                
+                url:"/VortexPHPVersion/VortexApp2/index.php?content_id="+post,
+                type: 'post',
+                data: {
+                    liked: 1,
+                    'content_id': post,
+                    'user_id': user
+                }
+                
+            });
+        
+            
+        }
+        </script>
+
+   
 <?php }
 } else { ?>
         <a href="login.php">

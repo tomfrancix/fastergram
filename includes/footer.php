@@ -93,6 +93,15 @@
                   <span class="glyphicon glyphicon-heart"></span>
                    <?php } } ?>
             </a>
+     <?php if(isset($_SESSION['image'])) {
+    ?>
+    <a href="index.php" style="width:20%;text-align:center;float:left;background-color:transparent;padding-top:10px;">
+               <span style="display:inline-block;border-radius:50%;border:1px solid white;"><img src="images/<?php echo $_SESSION['image']; ?>" style="width:30px;height:30px;border-radius:50%;border:1px solid black;"></span><br>
+        <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -35px -2px;padding:0;"></span>
+            </a>
+    <?php
+} ?>
+<!--
     <?php 
             $sessionid = $_SESSION['id'];
         $query = "SELECT * FROM users WHERE user_id = '{$sessionid}'";
@@ -106,6 +115,7 @@
             </a>
     <?php }
  ?>
+-->
             
 </div> 
     <!-- /.container -->
