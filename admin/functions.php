@@ -55,11 +55,14 @@ if(isset($_POST['submit'])) {
 function delete_hashtags() {
     global $connection;
 if(isset($_GET['delete'])) {
+    if(isset($_SESSION['id'])) {
+      
     $the_sub_id = escape($_GET['delete']);
 
     $query = "DELETE FROM subscriptions WHERE sub_id = {$the_sub_id} ";
     $delete_query = mysqli_query($connection, $query);
     header("Location:hashtags.php");
+}
 }
 }
 
@@ -128,11 +131,13 @@ if(isset($_POST['create_post'])) {
 function delete_post() {
     global $connection;
 if(isset($_GET['delete'])) {
+    if(isset($_SESSION['id'])) {
     $the_post_id = escape($_GET['delete']);
 
     $query = "DELETE FROM content WHERE content_id = {$the_post_id} ";
     $delete_query = mysqli_query($connection, $query);
     header("Location:posts.php");
+}
 }
 }
 
@@ -193,11 +198,13 @@ if(isset($_POST['edit_comment'])) {
 function delete_comment() {
     global $connection;
 if(isset($_GET['delete'])) {
+    if(isset($_SESSION['id'])) {
     $the_comment_id = escape($_GET['delete']);
 
     $query = "DELETE FROM comments WHERE comment_id = {$the_comment_id} ";
     $delete_comment_query = mysqli_query($connection, $query);
     header("Location:comments.php?source=view_your_comments");
+}
 }
 }
 
@@ -236,11 +243,15 @@ if(isset($_POST['create_user'])) {
 function delete_user() {
     global $connection;
 if(isset($_GET['delete'])) {
+    if(isset($_SESSION['id'])) {
+        if($_SESSION['role'] == "Administrator") {
     $the_user_id = escape($_GET['delete']);
 
     $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
     $delete_query = mysqli_query($connection, $query);
     header("Location:users.php");
+}
+}
 }
 }
 
@@ -319,8 +330,11 @@ if(isset($_POST['edit_user'])) {
 function edit_profile() {
     global $connection;
 if(isset($_GET['edit_profile'])) {
-    
+    if(isset($_SESSION['id'])) {
+        
     $user_id = escape($_GET['edit_profile']);
+        
+    if($_SESSION['id'] == $user_id) {
     
 if(isset($_POST['edit_profile'])) {
     
@@ -373,6 +387,8 @@ if(isset($_POST['edit_profile'])) {
     
     header("Location:index.php");
     }
+}
+}
 }
 }
 }

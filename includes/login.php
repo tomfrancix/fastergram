@@ -30,7 +30,6 @@ if(isset($_POST['login'])) {
        $db_bio = $row['user_bio'];
        $db_password = $row['password'];
        $db_image = $row['user_image'];
-       $db_password = $row['password'];
        $db_following = $row['user_following_count'];
        $db_follower = $row['user_follower_count'];
        $db_role = $row['role'];
@@ -49,7 +48,7 @@ if(isset($_POST['login'])) {
         $_SESSION['id'] = $db_id;
         $_SESSION['username'] = $db_username;
         
-        if (db_email) {
+        if ($db_email) {
         $_SESSION['email'] = $db_email;
         }
         $_SESSION['bio'] = $db_bio;

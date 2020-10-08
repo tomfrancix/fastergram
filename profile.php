@@ -167,7 +167,9 @@ $dbuserid = $_SESSION['id'];
                         $content_image = escape($row['content_image']);
                     
                     ?>
-                            <a href="profile_gallery.php?id=<?php echo $uid; ?>#<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;background-image:url('images/<?php echo $content_image; ?>');background-size:cover;">
+                            <a href="profile_gallery.php?id=<?php echo $uid; ?>#<?php echo $content_id; ?>">
+<!--                 <a href="post.php?id=<?php echo $content_id; ?>">-->
+                                <div class="pictures" style="float:left;width:25%;border:1px solid lightgrey;background-image:url('images/<?php echo $content_image; ?>');background-size:cover;">
                                
                             </div></a>
                 
