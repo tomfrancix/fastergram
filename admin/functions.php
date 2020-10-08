@@ -346,8 +346,10 @@ if(isset($_POST['edit_profile'])) {
     $user_bio = escape($_POST['user_bio']);
     $user_mobile = escape($_POST['user_mobile']);
     
+    if(empty($user_image) || $user_image == null) {
+    } else {
     move_uploaded_file($user_image_temp, "../images/$user_image" );
-    
+    }
         
     $query = "SELECT randSalt FROM users";
     $select_randsalt_query = mysqli_query($connection, $query);
@@ -361,6 +363,19 @@ if(isset($_POST['edit_profile'])) {
     $password = crypt($password, $salt);
     
     
+    if(empty($user_image) || $user_image == null) {
+          
+    $query = "UPDATE users SET ";
+    $query .= "username = '{$username}', ";
+    $query .= "email = '{$email}', ";
+    $query .= "password = '{$password}', ";
+    $query .= "user_bio = '{$user_bio}', ";
+    $query .= "user_mobile = '{$user_mobile}' ";
+    $query .= "WHERE user_id = '{$user_id}' ";
+       
+    
+    } else {
+      
     $query = "UPDATE users SET ";
     $query .= "username = '{$username}', ";
     $query .= "email = '{$email}', ";
@@ -369,12 +384,11 @@ if(isset($_POST['edit_profile'])) {
     $query .= "user_bio = '{$user_bio}', ";
     $query .= "user_mobile = '{$user_mobile}' ";
     $query .= "WHERE user_id = '{$user_id}' ";
+    $_SESSION['image'] = $user_image;
+        
+    }
     
-//    if(empty($user_image)) {
-//        
-//        $query = "SELECT * FROM users WHERE user_id = $user_id ";
-//        $select_user_image = mysqli_query($connection, $query);
-//    }
+   
 
     $update_user_query = mysqli_query($connection, $query);
     confirmQuery($update_user_query);
@@ -383,7 +397,6 @@ if(isset($_POST['edit_profile'])) {
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
         $_SESSION['bio'] = $user_bio;
-        $_SESSION['image'] = $user_image;
     
     header("Location:index.php");
     }

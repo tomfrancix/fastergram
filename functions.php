@@ -86,6 +86,44 @@ if(isset($_POST['like'])) {
 }
    
 }
+function likeinpost() {
+    global $connection;
+
+if(isset($_POST['likeinpost'])) {
+
+    $content_user_id = escape($_POST['content_user_id']);
+    $like_user_id = escape($_POST['like_user_id']);
+    $like_content_id = escape($_POST['like_content_id']);
+    
+    
+    
+        $query = "INSERT INTO likes(like_user_id, like_content_id)";
+    
+        $query .= "VALUES('{$like_user_id}','{$like_content_id}' )";
+
+        $create_like_query = mysqli_query($connection, $query);
+
+        if(!$create_like_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+             $queryc = "UPDATE content SET content_likes_count = content_likes_count + 1 ";
+    $queryc .= "WHERE content_id = $like_content_id ";
+    $update_like_count = mysqli_query($connection, $queryc);
+    
+        $queryn = "INSERT INTO notifications(note_to_user_id, note_from_user_id, note_content, note_content_id, note_status)";
+        $queryn .= "VALUES('{$content_user_id}','{$like_user_id}','liked your post','{$like_content_id}', 'Unchecked' )";
+            
+    $update_note_count = mysqli_query($connection, $queryn);
+    
+            header("Location: post.php?id={$like_content_id}");
+        }
+    
+   
+    
+    
+}
+   
+}
 function likecomment() {
     global $connection;
 
@@ -224,6 +262,7 @@ if(isset($_GET['delete_comment'])) {
     header("Location:index.php");
 }
 }
+
 function delete_like() {
     global $connection;
 if(isset($_GET['delete_like'])) {
@@ -246,6 +285,30 @@ if(isset($_GET['delete_like'])) {
     
     
     header("Location:index.php#{$like_content_id}");
+}
+}
+function delete_post_like() {
+    global $connection;
+if(isset($_GET['delete_post_like'])) {
+    $the_like_id = escape($_GET['delete_post_like']);
+
+    $query = "SELECT * FROM likes WHERE like_id = {$the_like_id} ";
+    $get_post_query = mysqli_query($connection, $query);
+    
+    while($row = mysqli_fetch_assoc($get_post_query) ) {
+    $like_content_id = escape($row['like_content_id']);
+    }
+    
+    $queryc = "UPDATE content SET content_likes_count = content_likes_count - 1 ";
+    $queryc .= "WHERE content_id = $like_content_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc);
+    
+    $query = "DELETE FROM likes WHERE like_id = {$the_like_id} ";
+    $delete_like_query = mysqli_query($connection, $query);
+    
+    
+    header("Location:post.php?id={$like_content_id}");
 }
 }
 function remove_like() {

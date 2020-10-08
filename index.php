@@ -312,6 +312,13 @@ $cusername = escape($row['username']);
 <?php      
 include "includes/sidebar.php"; 
 ?>
+<div style="padding:30px;text-align:center;">
+    No posts to show...<br><br><br><br>
+    Try following more friends! <br><br><br><br>
+    Maybe subscribe to a few hashtags in the search area... <br><br>
+    
+    <a href="search.php?hashtag=2" style="color:darkblue;text-decoration:underline;">#catsofvortex</a><br><br>
+</div>
 </div>
 <?php      
 include "includes/footer.php"; 

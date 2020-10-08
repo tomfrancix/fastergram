@@ -57,7 +57,8 @@ if(isset($_POST['login'])) {
         $_SESSION['following'] = $db_following;
         $_SESSION['follower'] = $db_follower;
         
-        header("Location: ../admin");
+        
+        header("Location: ../admin/edit_profile={$_SESSION['id']}");
     } else {
         header("Location: ../login.php");
     }

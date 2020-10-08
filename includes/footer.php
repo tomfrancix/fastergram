@@ -13,22 +13,9 @@
         </footer>
 <script>
     
-    function timeSince(date) {
+function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
-//        console.log("This is the original number of seconds:");
-//        console.log(seconds);
-//        console.log("This is the original date of seconds:");
-//        console.log(date);
-//        console.log("This is the seconds:");
-//        console.log(Date.parse(date));
-//    if(!isNaN(seconds)) {
-//        dateq = new Date(date.toString().replace(/\s/, 'T')+'Z');
-//        console.log("This is the new date:");
-//        console.log(dateq);
-//        seconds = Math.floor((new Date() - dateq) / 1000);
-//        console.log("This is the number of Seconds:");
-//        console.log(seconds);
-//    }
+
   var interval = seconds / 31536000;
 
   if (interval > 1) {
@@ -60,6 +47,8 @@
     x[i].innerHTML = jsdate;
     }
 </script>
+
+
     </div>
 <div class="bottom-navbar" style="width:100%;text-align:center;position:fixed;bottom:0;background-color:rgba(09,58,57,1);padding-top:0;padding-bottom:0;z-index:200;">
             <a href="index.php" style="width:20%;text-align:center;float:left;padding:18px;">
@@ -93,6 +82,15 @@
                   <span class="glyphicon glyphicon-heart"></span>
                    <?php } } ?>
             </a>
+     <?php if(isset($_SESSION['image'])) {
+    ?>
+    <a href="admin/index.php" style="width:20%;text-align:center;float:left;background-color:transparent;padding-top:10px;">
+               <span style="display:inline-block;border-radius:50%;border:1px solid white;"><img src="images/<?php echo $_SESSION['image']; ?>" style="width:30px;height:30px;border-radius:50%;border:1px solid black;"></span><br>
+        <span style="display:inline-block;position:fixed;width:5px;height:5px;border-radius:50%;background-color:red;margin:0 2px -35px -2px;padding:0;"></span>
+            </a>
+    <?php
+} ?>
+<!--
     <?php 
             $sessionid = $_SESSION['id'];
         $query = "SELECT * FROM users WHERE user_id = '{$sessionid}'";
@@ -106,6 +104,7 @@
             </a>
     <?php }
  ?>
+-->
             
 </div> 
     <!-- /.container -->

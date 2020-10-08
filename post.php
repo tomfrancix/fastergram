@@ -8,7 +8,8 @@ if(!isset($_SESSION['role'])) {
 }
 ?>
  <?php
-like();
+likeinpost();
+delete_post_like();
 follow_hashtags();
 initial_follow_hashtags();
 unfollow_hashtags();
@@ -105,8 +106,10 @@ else if($sub_user_id == $sessionid && $sub_status == "Unsubscribed") {
                                     <a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default subscribe-button">Subscribe</a>
                                 </span>   
 <?php
-}}
-if($count < 1) {
+}
+   
+}
+if($count < 2) {
     
     ?>
     <form method="post" action="" class="subscribe-form">
@@ -138,7 +141,7 @@ if($count < 1) {
 
             if($like_user_id == $sessionid) { ?>
             
-<a href="index.php?delete_like=<?php echo $likeid; ?>"><span class="glyphicon glyphicon-heart post-delete-like"></span></a>
+<a href="post.php?delete_post_like=<?php echo $likeid; ?>"><span class="glyphicon glyphicon-heart post-delete-like"></span></a>
                 <?php $count++; break; 
                 } 
 
@@ -150,11 +153,12 @@ if($count < 1) {
                  <?php
 
 ?>
+                            
                 <form method="post" action="" class="post-submit-like-form">
                     <input type="hidden" name="like_user_id" value="<?php echo $sessionid; ?>">
                     <input type="hidden" name="like_content_id" value="<?php echo $content_id; ?>">
                     <input type="hidden" name="content_user_id" value="<?php echo $content_user_id; ?>">
-                    <button type="submit" name="like" class="post-submit-like-button"><img src="images/heart.svg"  class="post-button-img"></button>
+                    <button type="submit" name="likeinpost" class="post-submit-like-button"><img src="images/heart.svg"  class="post-button-img"></button>
                 </form>
               <?php }
                } else { ?>
@@ -180,11 +184,14 @@ if($count < 1) {
                             </span>
                         </div>
                     <div class="row post-dater-row" >
-                            <span class="dater post-dater-span" id="<?php echo $content_datetime; ?>">asdfa</span>
+                        
+                        <span class="dater post-dater-span" id="<?php echo $content_datetime; ?>"></span>
                         
                         <div class="row post-view-comments-div">
                             <span class="likes post-view-comments-span">
-                                <a href="comments.php?id=<?php echo $content_id ?>">~View comments~</a>
+                                <a href="comments.php?id=<?php echo $content_id ?>">
+                                    ~View comments~
+                                </a>
                             </span>
                         </div>
                     </div>  

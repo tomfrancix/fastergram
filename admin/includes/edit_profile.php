@@ -25,20 +25,28 @@ while($row = mysqli_fetch_assoc($select_users_by_id)) {
     $user_mobile = $row['user_mobile'];
     $role = $row['role'];
     $salt = $row['randSalt'];
+    
+    if($user_image == null || $user_image == "") { ?>
+        <div class="row" style="margin-top:-5px;padding:0 0 10px 0;">
+<img id="output" src="../images/load.gif" style="width:100%;margin-bottom:8px;margin-top:10px;">
+</div>
+   <?php } else { ?>
+        <div class="row" style="margin-top:-5px;padding:0 0 10px 0;">
+<img id="output" src="../images/<?php echo $user_image; ?>" style="width:100%;margin-bottom:8px;margin-top:10px;">
+</div>                
+<?php }
 }
 $password = crypt($salt, $password)                     
     
 ?>
 
-<div class="row" style="padding:10px 50px;">
-<img src="../images/<?php echo $user_image ?>" style="width:100%;margin-bottom:8px;border-radius:50%;margin-top:10px;">
-</div>
+
 
 
 <form action="" method="POST" enctype="multipart/form-data">
 <div class="form-group">
     <label for="user_image">Profile Picture</label>
-    <input type="file" name="user_image">
+    <input type="file" name="user_image"  onchange="loadFile(event)" style="background-color:transparent;">
 </div>
 <div class="form-group">
     <label for="email">Email</label>
@@ -72,3 +80,23 @@ $password = crypt($salt, $password)
 </div>
 </div>
 </div>
+<script>
+   
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+
+//    var loadFileC = function (event) {
+//        document.getElementById('Cimageuploaderbutton').style.display = 'none';
+//        document.getElementById('Cimageviewer').style.display = 'block';
+//        var output = document.getElementById('Coutput');
+//        output.src = URL.createObjectURL(event.target.files[0]);
+//        output.onload = function () {
+//            URL.revokeObjectURL(output.src) // free memory
+//        }
+//    };
+</script>
