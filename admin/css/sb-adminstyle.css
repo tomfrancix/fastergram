@@ -15,3 +15,36 @@ body {
 div {
      max-width:560px;
 }
+
+.list-picture-div {
+    width:15%;float:left;height:100%;
+}
+.list-picture-box {
+    width:40px;height:40px;
+}
+.list-picture-box img {
+    width:100%;height:100%;
+}
+.list-info-div {
+    width:40%;height:100%;float:left;
+}
+.list-message-div {
+    width:18%;text-align:center;padding:3px 0 5px 0;height:100%;float:left;font-size:12pt;
+}
+.list-message-box {
+    width:30px;height:30px;padding:4px 0 0 0;
+}
+.list-follow-div {
+    width:25%;height:100%;float:left;padding:4px 0 0 0;
+}
+.list-follow-div form button {
+    width:100%;
+    padding:3px 5px;
+}
+.btn-default.dark {
+    font-size:10pt;padding:3px 5px;background-color:transparent;border:1px solid rgba(100,100,100,0.6);color:grey;
+}
+
+
+
+

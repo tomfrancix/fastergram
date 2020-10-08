@@ -7,7 +7,7 @@
 <?php if(isset($_SESSION['username'])) {
 
 $dbusername = $_SESSION['username']; ?>
-<a   class="navbar-brand" href="index.php" style="font-family: 'Parisienne', cursive;font-size:18pt;text-align:center;color:white;display:inline-block;float:none;">@<?php echo $dbusername; ?></a> <?php
+<a   class="navbar-brand" id="navbar-header" href="index.php" style="font-family: 'Parisienne', cursive;font-size:18pt;text-align:center;color:white;display:inline-block;float:none;">@<?php echo $dbusername; ?></a> <?php
 } ?>
               
                  

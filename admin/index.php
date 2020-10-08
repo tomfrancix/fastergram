@@ -6,6 +6,7 @@ include "includes/navigation.php";
  if(!isset($_SESSION['id'])) {
        Header("Location: ../login.php");
     }
+
 ?>
         <div id="page-wrapper">
 
@@ -23,6 +24,12 @@ switch($source) {
         
         case 'edit_profile';
         include "includes/edit_profile.php";
+        break;
+        case 'followers';
+        include "includes/followers.php";
+        break;
+        case 'following';
+        include "includes/following.php";
         break;
 
         default:

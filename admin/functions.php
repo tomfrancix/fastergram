@@ -121,6 +121,11 @@ if(isset($_POST['create_post'])) {
     $query .= "WHERE hash_id = $content_hash_id ";
     
     $update_count = mysqli_query($connection, $query);
+    
+    $queryu = "UPDATE users SET upload_count = upload_count + 1 ";
+    $queryu .= "WHERE user_id = $content_user_id ";
+    
+    $update_countu = mysqli_query($connection, $queryu);
             
             header("Location:posts.php");
         }
@@ -133,7 +138,14 @@ function delete_post() {
 if(isset($_GET['delete'])) {
     if(isset($_SESSION['id'])) {
     $the_post_id = escape($_GET['delete']);
-
+       
+    if(isset($_GET['uid'])) {
+    $content_user_id = escape($_GET['uid']);
+    $queryu = "UPDATE users SET upload_count = upload_count - 1 ";
+    $queryu .= "WHERE user_id = $content_user_id ";
+    
+    $update_countu = mysqli_query($connection, $queryu);
+    }
     $query = "DELETE FROM content WHERE content_id = {$the_post_id} ";
     $delete_query = mysqli_query($connection, $query);
     header("Location:posts.php");
@@ -435,5 +447,128 @@ if(isset($_POST['create_message'])) {
         }
     
 }
+}
+function followinguser() {
+    global $connection;
+
+if(isset($_POST['followinguser'])) {
+
+    $follow_user_id = escape($_POST['follow_user_id']);
+    $follow_to_user_id = escape($_POST['follow_to_user_id']);
+    
+        $query = "INSERT INTO following(follow_user_id, follow_to_user_id)";
+    
+        $query .= "VALUES('{$follow_user_id}','{$follow_to_user_id}' )";
+
+        $create_follow_query = mysqli_query($connection, $query);
+
+        if(!$create_follow_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+    $queryc = "UPDATE users SET user_follower_count = user_follower_count + 1 ";
+    $queryc .= "WHERE user_id = $follow_to_user_id ";
+    $update_follower_count = mysqli_query($connection, $queryc);
+            
+    
+            
+    $queryd = "UPDATE users SET user_following_count = user_following_count + 1 ";
+    $queryd .= "WHERE user_id = $follow_user_id ";
+    $update_followerd_count = mysqli_query($connection, $queryd);
+    
+    $_SESSION['follower'] = $db_follower;        
+    $_SESSION['following'] = $db_following;
+            
+            header("Location: index.php?source=following");
+        }
+}
+   
+}
+function unfollowinguser() {
+    global $connection;
+
+if(isset($_GET['unfollowinguser'])) {
+    $follow_id = escape($_GET['unfollowinguser']);
+
+    $query = "SELECT * FROM following WHERE follow_id = {$follow_id} ";
+    $unfollow_query = mysqli_query($connection, $query);
+    
+    while($row = mysqli_fetch_assoc($unfollow_query) ) {
+    $follow_to_user_id = escape($row['follow_to_user_id']);
+    $follow_user_id = escape($row['follow_user_id']);
+    }
+    
+    
+    $queryc = "UPDATE users SET user_follower_count = user_follower_count - 1 ";
+    $queryc .= "WHERE user_id = $follow_to_user_id ";
+    $update_follower_count = mysqli_query($connection, $queryc);
+            
+    $queryd = "UPDATE users SET user_following_count = user_following_count - 1 ";
+    $queryd .= "WHERE user_id = $follow_user_id ";
+    $update_followerd_count = mysqli_query($connection, $queryd);
+    
+     $queryf = "DELETE FROM following WHERE follow_id = {$follow_id} ";
+    $delete_follow_query = mysqli_query($connection, $queryf);
+            
+            header("Location: index.php?source=following");
+        }
+}
+function followuser() {
+    global $connection;
+
+if(isset($_POST['followuser'])) {
+
+    $follow_user_id = escape($_POST['follow_user_id']);
+    $follow_to_user_id = escape($_POST['follow_to_user_id']);
+    
+        $query = "INSERT INTO following(follow_user_id, follow_to_user_id)";
+    
+        $query .= "VALUES('{$follow_user_id}','{$follow_to_user_id}' )";
+
+        $create_follow_query = mysqli_query($connection, $query);
+
+        if(!$create_follow_query) {
+            die('QUERY FAILED' . mysqli_error($connection));
+        } else {
+    $queryc = "UPDATE users SET user_follower_count = user_follower_count + 1 ";
+    $queryc .= "WHERE user_id = $follow_to_user_id ";
+    $update_follower_count = mysqli_query($connection, $queryc);
+            
+    $queryd = "UPDATE users SET user_following_count = user_following_count + 1 ";
+    $queryd .= "WHERE user_id = $follow_user_id ";
+    $update_followerd_count = mysqli_query($connection, $queryd);
+            
+            header("Location: index.php?source=followers");
+        }
+}
+   
+}
+function unfollowuser() {
+    global $connection;
+
+if(isset($_GET['unfollowuser'])) {
+    $follow_id = escape($_GET['unfollowuser']);
+
+    $query = "SELECT * FROM following WHERE follow_id = {$follow_id} ";
+    $unfollow_query = mysqli_query($connection, $query);
+    
+    while($row = mysqli_fetch_assoc($unfollow_query) ) {
+    $follow_to_user_id = escape($row['follow_to_user_id']);
+    $follow_user_id = escape($row['follow_user_id']);
+    }
+    
+    
+    $queryc = "UPDATE users SET user_follower_count = user_follower_count - 1 ";
+    $queryc .= "WHERE user_id = $follow_to_user_id ";
+    $update_follower_count = mysqli_query($connection, $queryc);
+            
+    $queryd = "UPDATE users SET user_following_count = user_following_count - 1 ";
+    $queryd .= "WHERE user_id = $follow_user_id ";
+    $update_followerd_count = mysqli_query($connection, $queryd);
+    
+     $queryf = "DELETE FROM following WHERE follow_id = {$follow_id} ";
+    $delete_follow_query = mysqli_query($connection, $queryf);
+            
+            header("Location: index.php?source=followers");
+        }
 }
 ?>

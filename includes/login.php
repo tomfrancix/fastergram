@@ -33,6 +33,7 @@ if(isset($_POST['login'])) {
        $db_following = $row['user_following_count'];
        $db_follower = $row['user_follower_count'];
        $db_role = $row['role'];
+       $db_uploads = $row['upload_count'];
         
         
     }
@@ -56,9 +57,10 @@ if(isset($_POST['login'])) {
         $_SESSION['role'] = $db_role;
         $_SESSION['following'] = $db_following;
         $_SESSION['follower'] = $db_follower;
+        $_SESSION['uploads'] = $db_uploads;
         
         
-        header("Location: ../admin/edit_profile={$_SESSION['id']}");
+        header("Location: ../admin/index.php?source=edit_profile&edit_profile={$_SESSION['id']}");
     } else {
         header("Location: ../login.php");
     }

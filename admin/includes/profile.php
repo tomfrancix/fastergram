@@ -13,13 +13,14 @@
                                 
                             </li>
                             <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
-                                <span>27</span><br><i class="fa fa-camera"></i>  <br><a href="index.html" style="font-size:8pt;">Uploads</a>
+                                <span><?php echo $_SESSION['uploads']; ?></span><br><i class="fa fa-camera"></i>  <br><a href="index.html" style="font-size:8pt;">Uploads</a>
+                            </li>
+                         
+                            <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
+                                <span><?php echo $_SESSION['follower']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.php?source=followers" style="font-size:8pt;">Followers</a>
                             </li>
                             <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
-                                <span><?php echo $_SESSION['follower']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="#" style="font-size:8pt;">Followers</a>
-                            </li>
-                            <li style="float:left;width:24%;margin:1px;padding:10px 10px 10px 20px;border-radius:7px;">
-                                <span><?php echo $_SESSION['following']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="#" style="font-size:8pt;">Following</a>
+                                <span><?php echo $_SESSION['following']; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.php?source=following" style="font-size:8pt;">Following</a>
                             </li>
                         </ol>
                        

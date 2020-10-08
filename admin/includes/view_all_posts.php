@@ -16,6 +16,7 @@
                    
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {
                         $content_id = escape($row['content_id']);
+                        $content_user_id = escape($row['content_user_id']);
                         $content_text = escape($row['content_text']);
                         $content_image = escape($row['content_image']);
                         $content_hash_id = escape($row['content_hash_id']);
@@ -32,7 +33,7 @@
                     ?>
                     
                                 <tr>
-                                    <td><a href="posts.php?delete=<?php echo $content_id; ?>" class="btn btn-danger" style="padding:0 2px;opacity:0.3;"><span class="fa fa-close"></span></a></td>
+                                    <td><a href="posts.php?delete=<?php echo $content_id; ?>&uid=<?php echo $content_user_id; ?>" class="btn btn-danger" style="padding:0 2px;opacity:0.3;"><span class="fa fa-close"></span></a></td>
                                     <td class="colspan-2"><a href="../post.php?id=<?php echo $content_id; ?>"><img style="width:25%;" class="pictures" src="../images/<?php echo $content_image; ?>"></a></td>
                                     
                                     <td>

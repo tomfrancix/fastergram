@@ -36,63 +36,34 @@ if(!isset($_SESSION['role'])) {
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <link href="/admin/css/sb-adminstyle.css" rel="stylesheet">
+    <link href="css/sb-adminstyle.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-<!--
-<script type="text/javascript">
-var fileReader = new FileReader();
-var filterType = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-
-fileReader.onload = function (event) {
-  var image = new Image();
-  
-  image.onload=function(){
-      document.getElementById("original-Img").src=image.src;
-      var canvas=document.createElement("canvas");
-      var context=canvas.getContext("2d");
-      canvas.width=image.width/4;
-      canvas.height=image.height/4;
-      context.drawImage(image,
-          0,
-          0,
-          image.width,
-          image.height,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-      );
-      
-      document.getElementById("upload-Preview").src = canvas.toDataURL();
-  }
-  image.src=event.target.result;
-};
-
-var loadImageFile = function () {
-  var uploadImage = document.getElementById("upload-Image");
-  
-  //check and retuns the length of uploded file.
-  if (uploadImage.files.length === 0) { 
-    return; 
-  }
-  
-  //Is Used for validate a valid file.
-  var uploadFile = document.getElementById("upload-Image").files[0];
-  if (!filterType.test(uploadFile.type)) {
-    alert("Please select a valid image."); 
-    return;
-  }
-  
-  fileReader.readAsDataURL(uploadFile);
-}
-</script>
--->
 </head>
 
 <body>
     <div id="wrapper" style="max-width:560px;">
+          <?php  
+    
+    $query = "SELECT * FROM users WHERE username = '{$_SESSION['username']}' ";
+    $select_user_query = mysqli_query($connection, $query);
+    
+    if(!$select_user_query) {
+        die("QUERY FAILED ." . mysqli_error($connection));
+    }
+    
+    while($row = mysqli_fetch_array($select_user_query)) {
+       $db_bio = $row['user_bio'];
+       $db_image = $row['user_image'];
+       $db_following = $row['user_following_count'];
+       $db_follower = $row['user_follower_count'];
+       $db_uploads = $row['upload_count'];
+    }
+        $_SESSION['bio'] = $db_bio;
+        $_SESSION['image'] = $db_image;
+        $_SESSION['following'] = $db_following;
+        $_SESSION['follower'] = $db_follower;
+        $_SESSION['uploads'] = $db_uploads;
+    ?>
         

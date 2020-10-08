@@ -182,7 +182,7 @@ if(isset($_POST['follow'])) {
             
     $queryd = "UPDATE users SET user_following_count = user_following_count + 1 ";
     $queryd .= "WHERE user_id = $follow_user_id ";
-    $update_followerd_count = mysqli_query($connection, $queryd);
+    $update_following_count = mysqli_query($connection, $queryd);
             
             header("Location: profile.php?id={$follow_to_user_id}");
         }

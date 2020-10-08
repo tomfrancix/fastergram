@@ -103,13 +103,18 @@ $select_all_following_query = mysqli_query($connection, $query);
                     <br>
 
 <?php 
-$query_hash = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id}";                     
-
+$query_hash = "SELECT * FROM hashtags WHERE hash_id = {$content_hash_id}";       
 $select_hash_query = mysqli_query($connection, $query_hash);
+                
 while($row = mysqli_fetch_assoc($select_hash_query)) {
 $hash_id = escape($row['hash_id']);
 $hash_title = escape($row['hash_title']);
-?>  <span class="hashtag" style="font-size:8pt;margin:-5px 0 5px 5px;"><a href="search.php?hashtag=<?php echo $hash_id; ?>" >#<?php echo $hash_title; ?></a></span> 
+?>  
+        <span class="hashtag" style="font-size:8pt;margin:-5px 0 5px 5px;">
+            <a href="search.php?hashtag=<?php echo $hash_id; ?>" >
+                #<?php echo $hash_title; ?>
+            </a>
+        </span> 
 <?php
 $query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id} AND sub_user_id = {$thisid}";                     
 

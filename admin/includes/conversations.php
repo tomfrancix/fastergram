@@ -61,7 +61,7 @@ $dbusername = $_SESSION['username']; ?>
                                 <img src="../images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-75" style="width:75%;float:left;padding:5px;">
-                                <span class="username"><a style="color:white;" href="profile.php?id=<?php echo $user_id ?>">
+                                <span class="username"><a style="color:white;" href="../profile.php?id=<?php echo $user_id ?>">
                                
                                     
                                 <b><?php echo $username; ?>  </b>  </a><br></span>
@@ -102,7 +102,7 @@ $dbusername = $_SESSION['username']; ?>
                                 <img src="../images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-75" style="width:75%;float:left;padding:5px;">
-                                <span class="username"><a style="color:white;" href="profile.php?id=<?php echo $user_id ?>">
+                                <span class="username"><a style="color:white;" href="../profile.php?id=<?php echo $user_id ?>">
                                
                                     
                                 <b><?php echo $username; ?>  </b>  </a><br></span>
@@ -145,7 +145,7 @@ $dbusername = $_SESSION['username']; ?>
                                 <img src="../images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-75" style="width:75%;float:left;padding:5px;">
-                                <span class="username"><a style="color:white;" href="profile.php?id=<?php echo $user_id ?>">
+                                <span class="username"><a style="color:white;" href="../profile.php?id=<?php echo $user_id ?>">
                                
                                     
                                 <b><?php echo $username; ?>  </b>  </a><br></span>
@@ -186,7 +186,7 @@ $dbusername = $_SESSION['username']; ?>
                                 <img src="../images/<?php echo $image; ?>" style="width:100%;border-radius:50%;">
                             </div>
                             <div class="w-75" style="width:75%;float:left;padding:5px;">
-                                <span class="username"><a style="color:white;" href="profile.php?id=<?php echo $user_id ?>">
+                                <span class="username"><a style="color:white;" href="../profile.php?id=<?php echo $user_id ?>">
                                
                                     
                                 <b><?php echo $username; ?>  </b>  </a><br></span>
