@@ -183,6 +183,11 @@ if($like_user_id == $thisid) { ?>
 if($count == 0) { ?>
 <?php
 ?>
+                
+                
+                
+                
+                
     <form method="post" action="" class="post-submit-like-form">
         <input type="hidden" name="content_user_id" value="<?php echo $auser_id; ?>">
         <input type="hidden" name="like_user_id" value="<?php echo $thisid; ?>">
