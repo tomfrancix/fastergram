@@ -12,10 +12,12 @@ $sessionid = $_SESSION['id'];
                     <span class="glyphicon glyphicon-camera nb-icon"></span>
                 </button>
 -->
+                <span id="top-left-button">
                 <button type="button" onclick="location.href='admin/posts.php?source=add_post'" class="navbar-toggle nb-l">
                     <span class="glyphicon glyphicon-camera nb-icon"></span>
                 </button>
-                <a   class="navbar-brand" href="index.php">Fastergram</a>
+                    </span>
+                <a   class="navbar-brand" id="navbar-header" href="index.php">Fastergram</a>
              <?php $query = "SELECT * FROM messages WHERE message_to_user_id = '{$sessionid}' AND message_status = 'Unchecked' ";
                 $select_all_messages_query = mysqli_query($connection, $query);
                 $countmessages = 0; 

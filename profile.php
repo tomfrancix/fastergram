@@ -77,10 +77,10 @@ $uid = escape($_GET['id']);
                                 <span style="font-size:10pt;">27</span><br><i class="glyphicon glyphicon-camera"></i>  <br><a href="index.html">Uploads</a>
                             </li>
                             <li style="float:left;width:24%;margin:1px;padding:10px;border-radius:7px;">
-                                <span style="font-size:10pt;color:black;"><?php echo $user_followers; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html">Followers</a>
+                                <span style="font-size:10pt;color:black;"><?php echo $user_followers; ?></span><br><i class="fa fa-users"></i>  <br> <a href="connections.php?source=followers&id=<?php echo $user_id; ?>">Followers</a>
                             </li>
                             <li style="float:left;width:24%;margin:1px;padding:10px;border-radius:7px;">
-                                <span style="font-size:10pt;"><?php echo $user_following; ?></span><br><i class="fa fa-users"></i>  <br> <a href="index.html">Following</a>
+                                <span style="font-size:10pt;"><?php echo $user_following; ?></span><br><i class="fa fa-users"></i>  <br> <a href="connections.php?source=following&id=<?php echo $user_id; ?>">Following</a>
                             </li>
                         </ol>
                        
@@ -105,15 +105,19 @@ $dbuserid = $_SESSION['id'];
                  $query_follow = "SELECT * FROM following WHERE follow_user_id = {$dbuserid}";                     
 
         $follow_query = mysqli_query($connection, $query_follow);
-                $follow_to_user_id = 0;
-           
+            $follow = false;
+           $followc = 0;
             while($row = mysqli_fetch_assoc($follow_query)) {
             $follow_id = escape($row['follow_id']);
             $follow_to_user_id = escape($row['follow_to_user_id']);
-            
+            $followc++;
+            if($follow_to_user_id == $user_id) {
+                $follow = true;
             }
-        if($follow_to_user_id > 0) {
-            if($follow_to_user_id == $user_id) {  ?>
+            }
+        if ($followc > 0) {
+        if ($follow == true) {
+          ?>
               
                     <a href="profile.php?unfollow=<?php echo $follow_id; ?>" type="submit" name="unfollow"  style="text-align:center;width:100%;" class="btn btn-warning">Unfollow</a>
                
@@ -125,7 +129,7 @@ $dbuserid = $_SESSION['id'];
                     <button type="submit" name="follow"  style="text-align:center;width:100%;" class="btn btn-primary">Follow</button>
                 </form>
             <?php
-            }
+            }  
         } else { ?>
                 <form method="post" action="" >
                     <input type="hidden" name="follow_user_id" value="<?php echo $dbuserid; ?>">

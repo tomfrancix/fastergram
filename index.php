@@ -124,7 +124,9 @@ while($row = mysqli_fetch_assoc($select_sub_query)) {
 $sub_id = escape($row['sub_id']);
 $sub_status = escape($row['status']);
 $sub_user_id = escape($row['sub_user_id']);
-    $count = true;
+    
+$count = true;
+    
 if($sub_user_id == $thisid && $sub_status == "Subscribed") {
    
 ?>
@@ -146,7 +148,7 @@ else
             </span>   
 <?php
 }}
-if($count = false) {
+if($count == false) {
     ?>
     <form method="post" action="" class="subscribe-form">
         <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                

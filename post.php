@@ -109,7 +109,7 @@ else if($sub_user_id == $sessionid && $sub_status == "Unsubscribed") {
 }
    
 }
-if($count = false) {
+if($count == false) {
     
     ?>
     <form method="post" action="" class="subscribe-form">

@@ -26,8 +26,8 @@ while($row = mysqli_fetch_assoc($select_users_by_id)) {
     $role = $row['role'];
     $salt = $row['randSalt'];
     
-    if($user_image == null || $user_image == "") { ?>
-        <div class="row" style="margin-top:-5px;padding:0 0 10px 0;">
+    if($user_image == null || $user_image == "default.jpg") { ?>
+        <div class="row" style="margin-top:-25px;padding:0 0 10px 0;">
 <img id="output" src="../images/load.gif" style="width:100%;margin-bottom:8px;margin-top:10px;">
 </div>
    <?php } else { ?>
