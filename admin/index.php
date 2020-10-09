@@ -31,6 +31,7 @@ switch($source) {
         case 'following';
         include "includes/following.php";
         break;
+     
 
         default:
         include "includes/profile.php";

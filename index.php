@@ -119,12 +119,12 @@ $hash_title = escape($row['hash_title']);
 $query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id} AND sub_user_id = {$thisid}";                     
 
 $select_sub_query = mysqli_query($connection, $query_sub);
-$count = 0; 
+$count = false; 
 while($row = mysqli_fetch_assoc($select_sub_query)) {
 $sub_id = escape($row['sub_id']);
 $sub_status = escape($row['status']);
 $sub_user_id = escape($row['sub_user_id']);
-    $count++;
+    $count = true;
 if($sub_user_id == $thisid && $sub_status == "Subscribed") {
    
 ?>
@@ -138,7 +138,7 @@ if($sub_user_id == $thisid && $sub_status == "Subscribed") {
 <?php
 } 
 else 
-{
+{  $count++;
 ?>
             <span class="hashtag">
                 <a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default subscribe-button">Subscribe
@@ -146,7 +146,7 @@ else
             </span>   
 <?php
 }}
-if($count < 1) {
+if($count = false) {
     ?>
     <form method="post" action="" class="subscribe-form">
         <input type="hidden" name="sub_hash_id" value="<?php echo $content_hash_id; ?>">                

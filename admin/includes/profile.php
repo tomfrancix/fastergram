@@ -42,7 +42,7 @@
                     </div>
                     <div style="width:33%;float:left;padding:0 3px;">
                         <div style="margin-top:5px;text-align:center;width:100%;background-color:rgba(10,10,10,1);border:1px solid rgba(100,100,100,0.3);" class="btn btn-default">
-                            <a href="?source=edit_profile&edit_profile=<?php echo $_SESSION['id']; ?>" style="color:grey;font-size:10pt;">Insights</a>
+                            <a href="insights.php?id=<?php echo $_SESSION['id']; ?>" style="color:grey;font-size:10pt;">Insights</a>
                         </div>
                     </div>
                     <div style="width:33%;float:left;padding:0 3px;">
@@ -72,7 +72,7 @@
                            
                 <?php
                     $loggedin = $_SESSION['id']; 
-                    $query = "SELECT * FROM content WHERE content_user_id = '{$loggedin}'";
+                    $query = "SELECT * FROM content WHERE content_user_id = '{$loggedin}' ORDER BY content_id DESC";
                     $select_all_content_query = mysqli_query($connection, $query);
                     
                     while($row = mysqli_fetch_assoc($select_all_content_query)) {

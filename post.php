@@ -83,12 +83,12 @@ $hash_title = escape($row['hash_title']);
 $query_sub = "SELECT * FROM subscriptions WHERE sub_hash_id = {$content_hash_id}";                     
 
 $select_sub_query = mysqli_query($connection, $query_sub);
-$count = 0; 
+$count = false; 
 while($row = mysqli_fetch_assoc($select_sub_query)) {
 $sub_id = escape($row['sub_id']);
 $sub_status = escape($row['status']);
 $sub_user_id = escape($row['sub_user_id']);
-    $count++;
+    $count = true;
 if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
    
                                 ?><span class="hashtag">
@@ -109,7 +109,7 @@ else if($sub_user_id == $sessionid && $sub_status == "Unsubscribed") {
 }
    
 }
-if($count < 2) {
+if($count = false) {
     
     ?>
     <form method="post" action="" class="subscribe-form">

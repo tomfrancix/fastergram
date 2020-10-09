@@ -45,6 +45,66 @@ div {
     font-size:10pt;padding:3px 5px;background-color:transparent;border:1px solid rgba(100,100,100,0.6);color:grey;
 }
 
-
-
-
+/*HELPERS*/
+.c-white {
+    color:white;
+}
+.fs-large {
+    font-size:16px;
+}
+.fs-medium {
+    font-size:12px;
+}
+.fs-small {
+    font-size:8px;
+}
+.fs-tiny {
+    font-size:7px;
+}
+.text-fade {
+    color:darkgrey;
+}
+.hrm0 {
+    margin:0;
+    opacity:0.2;
+    margin-bottom:8px;
+}
+.m0 {
+    margin:0;
+}
+.mt5 {
+    margin-top:5px;
+}
+.p0 {
+    padding:0;
+}
+.ps10 {
+    padding-left:10px; padding-right:10px;
+}
+.w15 {
+    width:15%;
+}
+.w50 {
+    width:50%;
+}
+.w85 {
+    width:85%;
+}
+.w100 {
+    width:100%;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.tl {
+    text-align:left;
+}
+.tr {
+    text-align:right;
+}
+.pt8 {
+    padding-top:8px;
+}
