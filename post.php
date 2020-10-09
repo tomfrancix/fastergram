@@ -88,13 +88,14 @@ while($row = mysqli_fetch_assoc($select_sub_query)) {
 $sub_id = escape($row['sub_id']);
 $sub_status = escape($row['status']);
 $sub_user_id = escape($row['sub_user_id']);
+$sub_hash_id = escape($row['sub_hash_id']);
     $count = true;
 if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
    
                                 ?><span class="hashtag">
                                     <button class="btn btn-danger subscribed-button">Subscribed 
                                         <span class="undo-subscription">
-                                            <a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>">[Undo]</a>
+                                            <a href="post.php?unfollow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>&hash_id=<?php echo $sub_hash_id; ?>">[Undo]</a>
                                         </span>
                                     </button>
                                 </span> 
@@ -103,7 +104,7 @@ if($sub_user_id == $sessionid && $sub_status == "Subscribed") {
 else if($sub_user_id == $sessionid && $sub_status == "Unsubscribed") {
 ?>
                                 <span class="hashtag">
-                                    <a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>" class="btn btn-default subscribe-button">Subscribe</a>
+                                    <a href="post.php?follow=<?php echo $sub_id; ?>&postid=<?php echo $content_id; ?>&hash_id=<?php echo $sub_hash_id; ?>" class="btn btn-default subscribe-button">Subscribe</a>
                                 </span>   
 <?php
 }

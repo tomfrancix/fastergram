@@ -80,7 +80,7 @@
                         $content_image = escape($row['content_image']);
                         
                     ?>
-                            <a href="../post.php?id=<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:25%;border:1px solid rgba(20,20,20,0.7);background-image:url('../images/<?php echo $content_image; ?>');background-size:cover;">
+                            <a href="../post.php?id=<?php echo $content_id; ?>"><div class="pictures" style="float:left;width:33.33333%;border:1px solid rgba(20,20,20,0.7);background-image:url('../images/<?php echo $content_image; ?>');background-size:cover;">
                                
                             </div></a>
                 
@@ -96,6 +96,6 @@
                 var x = document.getElementsByClassName("pictures");
                 var i;
                 for (i = 0; i < x.length; i++) {
-                  x[i].style.height = ""+(window.screen.width)/4+"px";
+                  x[i].style.height = ""+(window.screen.width)/3+"px";
                 }
             </script>

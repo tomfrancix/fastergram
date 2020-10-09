@@ -384,7 +384,11 @@ if(isset($_POST['followinit'])) {
         $querys .= "VALUE('{$sub_hash_id}','{$sub_user_id}','{$thestatus}')";
         
         $create_sub_query = mysqli_query($connection, $querys);
+   
+    $queryc = "UPDATE hashtags SET subscription_count = subscription_count + 1 ";
+    $queryc .= "WHERE hash_id = $sub_hash_id ";
     
+    $update_like_count = mysqli_query($connection, $queryc); 
     
    header("Location:post.php?id=11");
 }
@@ -394,6 +398,13 @@ function follow_hashtags() {
     global $connection;
 if(isset($_GET['follow'])) {
   $sub_id = escape($_GET['follow']);
+     if(isset($_GET['hash_id'])) {
+    $hash_id = escape($_GET['hash_id']);
+    $queryc = "UPDATE hashtags SET subscription_count = subscription_count + 1 ";
+    $queryc .= "WHERE hash_id = $hash_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc); 
+     }
     
     $query = "UPDATE subscriptions SET status='Subscribed' WHERE sub_id=$sub_id ";
 
@@ -419,6 +430,13 @@ function unfollow_hashtags() {
     global $connection;
 if(isset($_GET['unfollow'])) {
   $sub_id = escape($_GET['unfollow']);
+    if(isset($_GET['hash_id'])) {
+  $hash_id = escape($_GET['hash_id']);
+    $queryc = "UPDATE hashtags SET subscription_count = subscription_count - 1 ";
+    $queryc .= "WHERE hash_id = $hash_id ";
+    
+    $update_like_count = mysqli_query($connection, $queryc); 
+    }
     
     $query = "UPDATE subscriptions SET status='Unsubscribed' WHERE sub_id=$sub_id ";
 
